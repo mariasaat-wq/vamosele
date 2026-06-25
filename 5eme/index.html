@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mi español · 5ème · Español LVB</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A6B4A;--green-light:#E8F5EE;--green-mid:#2E9B6E;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-dark:#4A2880;--purple-mid:#9B72C8;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --teal:#0E7C7B;--teal-light:#E0F4F4;
+  --pink:#D63B6E;--pink-light:#FCE8EF;
+  --gray-50:#F7F8F6;--gray-100:#EAEDE8;--gray-200:#D4D9D2;
+  --gray-400:#8FA08E;--gray-500:#6E7D6D;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'Nunito',sans-serif;
+  --radius:16px;--radius-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 45%,var(--sage) 100%);
+  padding:3rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content{position:relative;z-index:1;}
+.hero-logo{font-family:var(--serif);font-size:52px;color:white;letter-spacing:-0.02em;margin-bottom:6px;}
+.hero-logo span{color:#C8F5E8;font-style:italic;}
+.hero-school{font-size:14px;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;}
+.hero-flags{font-size:28px;margin-bottom:20px;display:flex;gap:10px;justify-content:center;align-items:center;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);
+  border-radius:99px;padding:8px 20px;color:white;font-size:14px;font-weight:700;
+}
+
+/* ── MAIN ── */
+.main{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem;}
+
+/* ── SECTION TITLE ── */
+.section-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:800;color:var(--gray-400);
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:1.25rem;margin-top:0.5rem;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+
+/* ── UNIT CARDS ── */
+.units-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-bottom:2.5rem;}
+
+.unit-card{
+  background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);
+  overflow:hidden;transition:all 0.2s;cursor:pointer;text-decoration:none;
+  display:flex;flex-direction:column;
+}
+.unit-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,0.1);border-color:var(--gray-200);}
+
+.unit-header{
+  padding:1.5rem 1.5rem 1.25rem;
+  display:flex;flex-direction:column;gap:8px;flex:1;
+}
+.unit-num{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;
+  padding:4px 12px;border-radius:99px;width:fit-content;
+}
+.unit-title{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.2;margin-top:4px;}
+.unit-question{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--gray-500);margin-top:2px;}
+.unit-desc{font-size:12.5px;color:var(--gray-600);line-height:1.6;margin-top:6px;}
+
+.unit-modules{
+  padding:10px 1.5rem;border-top:1px solid var(--gray-100);
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.mod-tag{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px;
+}
+
+.unit-footer{
+  padding:12px 1.5rem;border-top:1px solid var(--gray-100);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.unit-level{font-size:11px;font-weight:700;color:var(--gray-400);}
+.unit-arrow{font-size:18px;color:var(--gray-300);transition:transform 0.15s;}
+.unit-card:hover .unit-arrow{transform:translateX(5px);}
+
+/* Unidad 1 — sage */
+.unit-1 .unit-num{background:var(--sage-light);color:var(--sage-dark);}
+.unit-1 .unit-title{color:var(--sage-dark);}
+.unit-1 .unit-footer{background:var(--sage-light);}
+.unit-1:hover{border-color:var(--sage-mid);}
+.unit-1 .unit-arrow{color:var(--sage-mid);}
+
+/* Unidad 2 — purple */
+.unit-2 .unit-num{background:var(--purple-light);color:var(--purple-dark);}
+.unit-2 .unit-title{color:var(--purple-dark);}
+.unit-2 .unit-footer{background:var(--purple-light);}
+.unit-2:hover{border-color:var(--purple-mid);}
+.unit-2 .unit-arrow{color:var(--purple-mid);}
+
+/* Tags por destreza */
+.tag-co{background:#E6EEF9;color:var(--blue);}
+.tag-ce{background:var(--teal-light);color:var(--teal);}
+.tag-vocab{background:var(--green-light);color:var(--green);}
+.tag-gram{background:var(--purple-light);color:var(--purple);}
+.tag-ee{background:var(--amber-light);color:var(--amber);}
+.tag-eo{background:var(--pink-light);color:var(--pink);}
+
+/* ── INFO BANNER ── */
+.info-banner{
+  background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);
+  padding:1.25rem 1.5rem;display:flex;align-items:center;gap:14px;margin-bottom:2rem;
+}
+.info-icon{font-size:28px;flex-shrink:0;}
+.info-text{font-size:13px;color:var(--gray-600);line-height:1.6;}
+.info-text strong{color:var(--gray-900);}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:2rem 1.5rem;
+  font-size:12px;color:var(--gray-400);border-top:1px solid var(--gray-100);
+  margin-top:1rem;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-logo">mi <span>español</span></div>
+    <div class="hero-school">Lycée Français Jean Mermoz · Español LVB</div>
+    <div class="hero-flags">🇪🇸 🇲🇽 🇨🇴 🇦🇷</div>
+    <div class="hero-badge">📚 5ème · Nivel A1</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="info-banner">
+    <div class="info-icon">👋</div>
+    <div class="info-text">
+      <strong>Bienvenido a tu plataforma de español.</strong> Aquí encontrarás todos los módulos interactivos del curso — comprensión oral, vocabulario, gramática, expresión escrita y oral. Haz clic en una unidad para empezar.
+    </div>
+  </div>
+
+  <div class="section-title">📖 Secuencias del curso</div>
+
+  <div class="units-grid">
+
+    <!-- UNIDAD 1 -->
+    <a class="unit-card unit-1" href="Unidad1/index.html">
+      <div class="unit-header">
+        <div class="unit-num">Secuencia 1</div>
+        <div class="unit-title">¡Hola! Me llamo…</div>
+        <div class="unit-question">¿Cómo te llamas? ¿De dónde eres?</div>
+        <div class="unit-desc">Presentaciones, saludos, nacionalidades y los primeros pasos en español. Aprende a presentarte y a conocer a tus compañeros.</div>
+      </div>
+      <div class="unit-modules">
+        <span class="mod-tag tag-co">🎧 CO</span>
+        <span class="mod-tag tag-ce">📖 CE</span>
+        <span class="mod-tag tag-vocab">📝 Vocabulario</span>
+        <span class="mod-tag tag-gram">⚙️ Gramática</span>
+        <span class="mod-tag tag-ee">✍️ EE</span>
+        <span class="mod-tag tag-eo">🗣️ EO</span>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-level">A1 · Initiation</span>
+        <span class="unit-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- UNIDAD 2 -->
+    <a class="unit-card unit-2" href="Unidad 2/index-u2.html">
+      <div class="unit-header">
+        <div class="unit-num">Secuencia 2</div>
+        <div class="unit-title">¿Quién soy? ¿Cómo soy?</div>
+        <div class="unit-question">¿Cómo te describes? ¿Qué te gusta?</div>
+        <div class="unit-desc">Descripción física y de carácter, la ropa, las emociones y el autorretrato. Aprende a describir personas con ser, estar, tener y llevar.</div>
+      </div>
+      <div class="unit-modules">
+        <span class="mod-tag tag-co">🎧 CO</span>
+        <span class="mod-tag tag-ce">📖 CE</span>
+        <span class="mod-tag tag-vocab">📝 Vocabulario</span>
+        <span class="mod-tag tag-gram">⚙️ Gramática</span>
+        <span class="mod-tag tag-ee">✍️ EE</span>
+        <span class="mod-tag tag-eo">🗣️ EO</span>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-level">A1 · Élémentaire</span>
+        <span class="unit-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>mi español</strong> · Lycée Français Jean Mermoz · 5ème · Español LVB<br>
+  <span style="font-size:11px;margin-top:4px;display:block;">Cada módulo se abre directamente · Funciona en móvil y tablet</span>
+</div>
+
+</body>
+</html>
