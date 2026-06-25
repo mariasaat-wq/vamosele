@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluations · 5ème · LFJM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A6B4A;--green-light:#E8F5EE;--green-mid:#2E9B6E;
+  --pink:#D63B6E;--pink-light:#FCE8EF;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --purple:#6B3FA0;--purple-light:#F0EAF8;
+  --red:#B83232;--red-light:#FDEAEA;
+  --gray-50:#F7F8F6;--gray-100:#EAEDE8;--gray-200:#D4D9D2;--gray-300:#C4CAC1;
+  --gray-400:#8FA08E;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'Nunito',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;}
+
+/* ── LOCK SCREEN ── */
+#lock-screen{
+  position:fixed;inset:0;background:linear-gradient(135deg,#1A1F19,#2A3828);
+  display:flex;align-items:center;justify-content:center;z-index:1000;
+}
+.lock-card{
+  background:white;border-radius:20px;padding:2.5rem 2rem;width:340px;
+  text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+.lock-logo{font-family:var(--serif);font-size:28px;color:var(--gray-900);margin-bottom:6px;}
+.lock-logo span{color:var(--green);font-style:italic;}
+.lock-sub{font-size:13px;color:var(--gray-400);margin-bottom:24px;}
+.lock-badge{
+  background:var(--red-light);border:1.5px solid var(--red);border-radius:var(--radius-sm);
+  padding:10px 14px;margin-bottom:20px;font-size:13px;color:var(--red);font-weight:700;
+  display:flex;align-items:center;gap:8px;
+}
+.lock-input{
+  width:100%;border:2px solid var(--gray-200);border-radius:var(--radius-sm);
+  font-family:var(--sans);font-size:16px;padding:12px 14px;outline:none;
+  text-align:center;letter-spacing:0.2em;color:var(--gray-900);transition:border-color 0.15s;
+  margin-bottom:12px;
+}
+.lock-input:focus{border-color:var(--blue);}
+.lock-input.error{border-color:var(--red);animation:shake 0.35s ease;}
+.lock-btn{
+  width:100%;padding:12px;background:linear-gradient(135deg,var(--blue),var(--green-mid));
+  color:white;border:none;border-radius:var(--radius-sm);font-family:var(--sans);
+  font-size:15px;font-weight:700;cursor:pointer;transition:all 0.15s;
+}
+.lock-btn:hover{opacity:0.9;}
+.lock-hint{font-size:11px;color:var(--gray-300);margin-top:12px;font-style:italic;}
+.lock-error{font-size:12px;color:var(--red);margin-top:8px;display:none;font-weight:600;}
+
+/* ── TEACHER TOOLBAR ── */
+#teacher-bar{
+  background:linear-gradient(135deg,#1A1F19,#2A3828);
+  padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.tb-left{display:flex;align-items:center;gap:12px;}
+.tb-badge{background:var(--amber);color:white;font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:0.05em;}
+.tb-mode{font-size:13px;color:rgba(255,255,255,0.7);}
+.tb-right{display:flex;gap:8px;}
+.tb-btn{padding:6px 14px;border-radius:99px;font-family:var(--sans);font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all 0.15s;}
+.tb-correct{background:var(--green);color:white;}
+.tb-reset{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+.tb-exit{background:var(--red);color:white;}
+.tb-print{background:var(--blue);color:white;}
+
+/* ── MAIN LAYOUT ── */
+.page-wrap{padding:1.5rem;max-width:900px;margin:0 auto;}
+
+/* ── EVAL HEADER ── */
+.eval-header{
+  background:linear-gradient(135deg,#1A6B4A,#2E9B6E);
+  border-radius:var(--radius);padding:1.5rem 2rem;margin-bottom:1.5rem;
+}
+.eval-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.eval-title{font-family:var(--serif);font-size:26px;color:white;font-style:italic;margin-bottom:4px;}
+.eval-meta{font-size:13px;color:rgba(255,255,255,0.7);}
+.eval-nota{background:white;border-radius:var(--radius-sm);padding:8px 16px;text-align:center;}
+.eval-nota-label{font-size:10px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:2px;}
+.eval-nota-val{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--green);}
+
+/* STUDENT INFO ROW */
+.student-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;
+  background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);
+  padding:1rem 1.25rem;margin-bottom:1.5rem;
+}
+.stu-field{display:flex;flex-direction:column;gap:4px;}
+.stu-label{font-size:10px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.08em;}
+.stu-inp{border:none;border-bottom:2px solid var(--gray-200);font-family:var(--sans);font-size:14px;color:var(--gray-900);background:transparent;outline:none;padding:3px 0;width:100%;}
+.stu-inp:focus{border-bottom-color:var(--blue);}
+
+/* ── EXERCISE SECTIONS ── */
+.ex-section{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.ex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+.ex-title-wrap{display:flex;align-items:center;gap:10px;}
+.ex-num{
+  width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-mid));
+  color:white;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.ex-title{font-size:15px;font-weight:800;color:var(--gray-900);}
+.ex-pts{font-size:12px;font-weight:700;color:var(--gray-400);background:var(--gray-100);padding:3px 10px;border-radius:99px;}
+.ex-score{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--green);}
+
+/* TRANSLATION GRID */
+.trans-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.trans-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--gray-50);border-radius:var(--radius-sm);border:1.5px solid var(--gray-100);}
+.trans-num{font-size:11px;font-weight:800;color:var(--gray-300);min-width:18px;}
+.trans-fr{font-size:14px;font-weight:700;color:var(--blue);min-width:80px;}
+.trans-arrow{color:var(--gray-300);}
+.ans-inp{
+  flex:1;border:none;border-bottom:2px solid var(--gray-200);
+  font-family:var(--sans);font-size:14px;font-weight:600;color:var(--gray-900);
+  background:transparent;outline:none;padding:3px 4px;transition:border-color 0.15s;min-width:80px;
+}
+.ans-inp:focus{border-bottom-color:var(--purple);}
+.ans-inp.ok{border-bottom-color:var(--green);color:var(--green);background:var(--green-light);border-radius:4px 4px 0 0;padding:3px 6px;}
+.ans-inp.ko{border-bottom-color:var(--red);color:var(--red);background:var(--red-light);border-radius:4px 4px 0 0;padding:3px 6px;}
+.ans-correct{font-size:11px;color:var(--green);font-weight:700;display:none;margin-top:2px;}
+.ans-correct.show{display:block;}
+
+/* MATCH EXERCISE */
+.match-layout{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;}
+.match-col{display:flex;flex-direction:column;gap:8px;}
+.match-left-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--gray-900);}
+.match-left-item .flag{font-size:18px;}
+.match-right-col{display:flex;flex-direction:column;gap:8px;flex:1;}
+.match-right-item{
+  padding:8px 14px;border-radius:99px;font-size:13.5px;font-weight:700;
+  background:var(--gray-100);color:var(--gray-600);cursor:pointer;
+  transition:all 0.15s;border:2px solid transparent;user-select:none;text-align:center;
+}
+.match-right-item:hover{background:var(--blue-light);border-color:var(--blue);color:var(--blue);}
+.match-right-item.selected{background:var(--blue);color:white;border-color:var(--blue);}
+.match-right-item.matched-ok{background:var(--green-light);border-color:var(--green);color:var(--green);cursor:default;}
+.match-right-item.matched-ko{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.match-left-item.done-ok{color:var(--green);}
+.match-left-item.done-ko{color:var(--red);}
+.match-connector{width:40px;display:flex;align-items:center;justify-content:center;color:var(--gray-200);font-size:20px;flex-shrink:0;}
+.match-sel-label{display:flex;align-items:center;gap:8px;}
+.match-sel-item{
+  padding:7px 16px;border-radius:99px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;user-select:none;transition:all 0.15s;
+}
+.msel-selected{box-shadow:0 0 0 3px rgba(30,95,168,0.25);}
+
+/* FILL BLANKS */
+.fill-list{display:flex;flex-direction:column;gap:10px;}
+.fill-item{display:flex;align-items:center;gap:8px;font-size:15px;line-height:1.8;}
+.fill-num{font-size:11px;font-weight:800;color:var(--gray-300);min-width:20px;flex-shrink:0;}
+.fill-blank{
+  border:none;border-bottom:2.5px solid var(--gray-200);
+  font-family:var(--sans);font-size:15px;font-weight:700;color:var(--gray-900);
+  background:transparent;outline:none;padding:2px 6px;min-width:100px;text-align:center;
+  transition:border-color 0.15s;
+}
+.fill-blank:focus{border-bottom-color:var(--purple);}
+.fill-blank.ok{border-bottom-color:var(--green);color:var(--green);background:var(--green-light);border-radius:4px 4px 0 0;}
+.fill-blank.ko{border-bottom-color:var(--red);color:var(--red);background:var(--red-light);border-radius:4px 4px 0 0;}
+.word-bank{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;padding:10px;background:var(--amber-light);border-radius:var(--radius-sm);border:1.5px solid #F5C26E;}
+.wb-chip{font-size:13px;font-weight:700;color:var(--amber);background:white;border:1.5px solid #F5C26E;padding:4px 12px;border-radius:99px;}
+
+/* FICHA SECTION */
+.ficha-text{font-size:14px;color:var(--gray-600);line-height:1.8;margin-bottom:14px;background:var(--blue-light);border-radius:var(--radius-sm);padding:10px 14px;border-left:4px solid var(--blue);}
+.ficha-text strong{color:var(--blue);}
+.complete-list{display:flex;flex-direction:column;gap:12px;}
+.complete-item{font-size:15px;line-height:1.9;display:flex;align-items:center;flex-wrap:wrap;gap:4px;}
+
+/* COMPREHENSION */
+.reading-box{font-size:15px;line-height:1.9;background:var(--gray-50);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:4px solid var(--blue);font-family:var(--serif);}
+.comp-list{display:flex;flex-direction:column;gap:14px;}
+.comp-item{}
+.comp-q{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px;}
+.comp-q span{color:var(--green);margin-right:5px;}
+.comp-inp{
+  width:100%;border:none;border-bottom:2px solid var(--gray-200);
+  font-family:var(--sans);font-size:14px;color:var(--gray-900);
+  background:transparent;outline:none;padding:4px 3px;transition:border-color 0.15s;
+}
+.comp-inp:focus{border-bottom-color:var(--purple);}
+.comp-inp.ok{border-bottom-color:var(--green);color:var(--green);}
+.comp-inp.ko{border-bottom-color:var(--red);color:var(--red);}
+.comp-fb{font-size:11.5px;font-weight:700;display:none;margin-top:3px;}
+.comp-fb.ok{display:block;color:var(--green);}
+.comp-fb.ko{display:block;color:var(--red);}
+
+/* SCORE SUMMARY */
+.score-summary{
+  background:white;border-radius:var(--radius);border:2px solid var(--green);
+  padding:1.5rem;margin-bottom:1.5rem;display:none;
+}
+.score-summary.show{display:block;}
+.score-title{font-family:var(--serif);font-size:22px;color:var(--gray-900);margin-bottom:1rem;text-align:center;}
+.score-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1rem;}
+.score-cell{text-align:center;background:var(--gray-50);border-radius:var(--radius-sm);padding:10px 6px;border:1.5px solid var(--gray-100);}
+.score-cell-label{font-size:10px;color:var(--gray-400);font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.score-cell-val{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--blue);}
+.score-cell-val.perfect{color:var(--green);}
+.score-total{text-align:center;padding:16px;background:linear-gradient(135deg,var(--green-light),var(--blue-light));border-radius:var(--radius-sm);}
+.score-total-num{font-family:var(--serif);font-size:48px;font-weight:700;color:var(--green);line-height:1;}
+.score-total-label{font-size:13px;color:var(--gray-600);margin-top:4px;}
+.score-mention{font-size:15px;font-weight:800;margin-top:8px;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.btn-p{padding:10px 22px;background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-p:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-g{padding:10px 22px;background:white;color:var(--green);border:2px solid var(--green-mid);border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-g:hover{background:var(--green-light);}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:9999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@keyframes shake{0%,100%{transform:translateX(0)}30%{transform:translateX(-6px)}70%{transform:translateX(6px)}}
+@media(max-width:640px){.trans-grid{grid-template-columns:1fr;}.score-grid{grid-template-columns:repeat(3,1fr);}.student-row{grid-template-columns:1fr;}}
+
+/* ── EVAL TABS ── */
+.eval-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.eval-tab{padding:10px 22px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid var(--gray-200);background:white;color:var(--gray-600);transition:all 0.15s;}
+.eval-tab:hover{border-color:var(--green-mid);color:var(--green);}
+.eval-tab.active{background:linear-gradient(135deg,var(--green),var(--green-mid));border-color:transparent;color:white;box-shadow:0 3px 10px rgba(26,107,74,0.25);}
+.eval-page{display:none;}.eval-page.active{display:block;}
+
+/* VERB CONJ */
+.verb-section{margin-bottom:1.1rem;}
+.verb-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;padding:3px 10px;border-radius:99px;margin-bottom:10px;}
+.vl-ser{background:#F0EAF8;color:var(--purple);}
+.vl-tener{background:var(--amber-light);color:var(--amber);}
+.vl-vivir{background:#E0F2FE;color:#0369A1;}
+.vl-llamarse{background:var(--green-light);color:var(--green);}
+.conj-list{display:flex;flex-direction:column;gap:10px;}
+.conj-item{display:flex;align-items:center;gap:8px;font-size:15px;font-style:italic;color:var(--gray-900);}
+.conj-subj{font-weight:700;min-width:90px;font-style:normal;}
+.conj-inp{border:none;border-bottom:2.5px solid var(--gray-200);background:transparent;font-family:var(--sans);font-size:15px;font-weight:700;color:var(--gray-900);outline:none;padding:3px 7px;min-width:90px;text-align:center;transition:border-color 0.15s;}
+.conj-inp:focus{border-bottom-color:var(--purple);}
+.conj-inp.ok{border-bottom-color:var(--green);color:var(--green);background:var(--green-light);border-radius:4px 4px 0 0;}
+.conj-inp.ko{border-bottom-color:var(--red);color:var(--red);background:var(--red-light);border-radius:4px 4px 0 0;}
+
+/* ERROR CORRECTION */
+.error-list{display:flex;flex-direction:column;gap:14px;}
+.error-item{background:var(--gray-50);border-radius:var(--radius-sm);padding:12px 14px;border:1.5px solid var(--gray-100);}
+.error-wrong{font-size:14px;color:var(--red);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.error-wrong::before{content:"✗";background:var(--red-light);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.error-arrow{font-size:13px;color:var(--gray-400);margin-bottom:4px;}
+.error-inp{width:100%;border:none;border-bottom:2px solid var(--gray-200);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--gray-900);background:transparent;outline:none;padding:3px 3px;transition:border-color 0.15s;}
+.error-inp:focus{border-bottom-color:var(--purple);}
+.error-inp.ok{border-bottom-color:var(--green);color:var(--green);}
+.error-inp.ko{border-bottom-color:var(--red);color:var(--red);}
+.error-hint{font-size:11.5px;font-weight:700;display:none;margin-top:4px;}
+.error-hint.ok{display:block;color:var(--green);}
+.error-hint.ko{display:block;color:var(--red);}
+
+/* PRODUCTION EX5B */
+.persona-card{background:var(--blue-light);border-radius:var(--radius-sm);border:1.5px solid #C0D4F0;padding:1rem 1.25rem;margin-bottom:1rem;}
+.persona-title{font-size:11px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.persona-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;}
+.persona-item{font-size:13px;color:var(--blue);display:flex;gap:5px;}
+.persona-item::before{content:"•";opacity:0.5;}
+.verb-chips-req{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.vchip{font-size:12px;padding:3px 12px;border-radius:99px;font-weight:700;border:1.5px solid;}
+.vchip.llamarse{background:#E4F5EE;border-color:var(--green-mid);color:var(--green);}
+.vchip.ser{background:#F0EAF8;border-color:var(--purple);color:var(--purple);}
+.vchip.tener{background:var(--amber-light);border-color:var(--amber);color:var(--amber);}
+.vchip.vivir{background:#E0F2FE;border-color:#0369A1;color:#0369A1;}
+.vchip.used{opacity:0.35;}
+.prod-frase-list{display:flex;flex-direction:column;gap:10px;}
+.prod-frase{display:flex;align-items:center;gap:8px;}
+.prod-frase-num{font-size:11px;font-weight:800;color:var(--gray-300);min-width:18px;}
+.prod-frase-inp{flex:1;border:none;border-bottom:2px solid var(--gray-200);font-family:var(--sans);font-size:14px;color:var(--gray-900);background:transparent;outline:none;padding:4px 3px;transition:border-color 0.15s;}
+.prod-frase-inp:focus{border-bottom-color:var(--purple);}
+.prod-frase-inp.ok{border-bottom-color:var(--green);color:var(--green);}
+.prod-frase-inp.ko{border-bottom-color:var(--red);color:var(--red);}
+
+</style>
+</head>
+<body>
+
+<!-- ── LOCK SCREEN ── -->
+<div id="lock-screen">
+  <div class="lock-card">
+    <div class="lock-logo">mi <span>español</span></div>
+    <div class="lock-sub">Lycée Français Jean Mermoz · 5ème</div>
+    <div class="lock-badge">🔒 Accès réservé aux enseignants</div>
+    <input class="lock-input" id="lock-pwd" type="password" placeholder="Code professeur" maxlength="20"
+      onkeydown="if(event.key==='Enter')tryUnlock()">
+    <button class="lock-btn" onclick="tryUnlock()">→ Accéder aux évaluations</button>
+    <div class="lock-error" id="lock-error">❌ Code incorrect. Réessaie.</div>
+    <div class="lock-hint">Code par défaut : <strong>lfjm2025</strong><br>Triple clic sur le logo pour verrouiller</div>
+  </div>
+</div>
+
+<!-- ── TEACHER BAR ── -->
+<div id="teacher-bar" style="display:none;">
+  <div class="tb-left">
+    <span class="tb-badge">👨‍🏫 MODE PROFESSEUR</span>
+    <span class="tb-mode" id="tb-eval-name">Évaluation active</span>
+  </div>
+  <div class="tb-right">
+    <button class="tb-btn tb-correct" onclick="correctAll()">✓ Corriger tout</button>
+    <button class="tb-btn tb-reset" onclick="resetAll()">↺ Nouvelle copie</button>
+    <button class="tb-btn tb-print" onclick="window.print()">🖨️ Imprimer</button>
+    <button class="tb-btn tb-exit" onclick="lock()">🔒 Verrouiller</button>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="page-wrap" id="main-content" style="display:none;">
+
+<div class="eval-tabs">
+  <div class="eval-tab active" onclick="switchEval(this,'eval1')">📝 Éval. 1 · Vocabulaire</div>
+  <div class="eval-tab" onclick="switchEval(this,'eval2')">✏️ Éval. 2 · Grammaire</div>
+</div>
+
+<div class="eval-page active" id="eval1">
+  <!-- EVAL HEADER -->
+  <div class="eval-header">
+    <div class="eval-title-row">
+      <div>
+        <div class="eval-meta">5ème · Séquence 1 · Espagnol · LFJM</div>
+        <div class="eval-title">Évaluation 1 – Vocabulaire et compréhension</div>
+        <div class="eval-meta" style="margin-top:4px;">Date : _________________________</div>
+      </div>
+      <div class="eval-nota">
+        <div class="eval-nota-label">Note</div>
+        <div class="eval-nota-val" id="total-display">— /20</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT INFO -->
+  <div class="student-row">
+    <div class="stu-field">
+      <div class="stu-label">👤 Nom</div>
+      <input class="stu-inp" id="stu-nom" placeholder="Nom de l'élève..." autocomplete="off">
+    </div>
+    <div class="stu-field">
+      <div class="stu-label">👤 Prénom</div>
+      <input class="stu-inp" id="stu-prenom" placeholder="Prénom..." autocomplete="off">
+    </div>
+    <div class="stu-field">
+      <div class="stu-label">🏫 Classe</div>
+      <input class="stu-inp" id="stu-classe" placeholder="5ème..." autocomplete="off">
+    </div>
+  </div>
+
+  <!-- ═══ EX 1 — TRADUIT ═══ -->
+  <div class="ex-section" id="ex1-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num">1</div>
+        <div>
+          <div class="ex-title">Traduis en espagnol</div>
+          <div style="font-size:12px;color:var(--gray-400);">Traduis les mots suivants en espagnol.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="ex-pts">4 pts</span>
+        <span class="ex-score" id="ex1-score" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="trans-grid" id="ex1-grid">
+      <!-- built by JS -->
+    </div>
+  </div>
+
+  <!-- ═══ EX 2 — RELACIONA ═══ -->
+  <div class="ex-section" id="ex2-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num">2</div>
+        <div>
+          <div class="ex-title">Relaciona</div>
+          <div style="font-size:12px;color:var(--gray-400);">Associe chaque pays à sa nationalité.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="ex-pts">4 pts</span>
+        <span class="ex-score" id="ex2-score" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="match-layout">
+      <div class="match-col" id="match-countries">
+        <div class="match-sel-label match-left-item" data-country="españa" onclick="matchSelectCountry(this)">
+          <span class="flag">🇪🇸</span> <span>España</span>
+        </div>
+        <div class="match-sel-label match-left-item" data-country="francia" onclick="matchSelectCountry(this)">
+          <span class="flag">🇫🇷</span> <span>Francia</span>
+        </div>
+        <div class="match-sel-label match-left-item" data-country="mexico" onclick="matchSelectCountry(this)">
+          <span class="flag">🇲🇽</span> <span>México</span>
+        </div>
+        <div class="match-sel-label match-left-item" data-country="argentina" onclick="matchSelectCountry(this)">
+          <span class="flag">🇦🇷</span> <span>Argentina</span>
+        </div>
+      </div>
+      <div class="match-connector">⟷</div>
+      <div class="match-right-col" id="match-nats">
+        <div class="match-right-item" data-nat="argentina" onclick="matchSelectNat(this)">argentino/a</div>
+        <div class="match-right-item" data-nat="francia" onclick="matchSelectNat(this)">francés/francesa</div>
+        <div class="match-right-item" data-nat="españa" onclick="matchSelectNat(this)">español/a</div>
+        <div class="match-right-item" data-nat="mexico" onclick="matchSelectNat(this)">mexicano/a</div>
+      </div>
+    </div>
+    <div id="match-hint" style="font-size:12px;color:var(--gray-400);font-style:italic;margin-top:10px;">
+      Haz clic en un país, luego en la nacionalidad correspondiente.
+    </div>
+  </div>
+
+  <!-- ═══ EX 3 — COMPLETA COLORES ═══ -->
+  <div class="ex-section" id="ex3-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num">3</div>
+        <div>
+          <div class="ex-title">Completa con el color correcto</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="ex-pts">4 pts</span>
+        <span class="ex-score" id="ex3-score" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="word-bank">
+      <span class="wb-chip" style="border-left:4px solid #C41E3A;">🔴 rojo</span>
+      <span class="wb-chip" style="border-left:4px solid #1E5FA8;">🔵 azul</span>
+      <span class="wb-chip" style="border-left:4px solid #1A6B4A;">🟢 verde</span>
+      <span class="wb-chip" style="border-left:4px solid #C47B1A;">🟡 amarillo</span>
+    </div>
+    <div class="fill-list">
+      <div class="fill-item">
+        <span class="fill-num">1.</span>
+        <span>El sol es</span>
+        <input class="fill-blank" id="ex3-1" placeholder="________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+      <div class="fill-item">
+        <span class="fill-num">2.</span>
+        <span>El cielo es</span>
+        <input class="fill-blank" id="ex3-2" placeholder="________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+      <div class="fill-item">
+        <span class="fill-num">3.</span>
+        <span>La hierba es</span>
+        <input class="fill-blank" id="ex3-3" placeholder="________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+      <div class="fill-item">
+        <span class="fill-num">4.</span>
+        <span>Una manzana puede ser</span>
+        <input class="fill-blank" id="ex3-4" placeholder="________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EX 4 — FICHA SOFÍA ═══ -->
+  <div class="ex-section" id="ex4-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num">4</div>
+        <div>
+          <div class="ex-title">Completa las frases sobre Sofía</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="ex-pts">4 pts</span>
+        <span class="ex-score" id="ex4-score" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="ficha-text">
+      <strong>Ficha de Sofía:</strong> Nombre: Sofía · Edad: 11 años · País: España · Ciudad: Madrid · Color favorito: azul
+    </div>
+    <div class="complete-list">
+      <div class="complete-item">
+        <span class="fill-num">1.</span>
+        <span>Sofía es</span>
+        <input class="fill-blank" id="ex4-1" placeholder="__________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+      <div class="complete-item">
+        <span class="fill-num">2.</span>
+        <span>Vive en</span>
+        <input class="fill-blank" id="ex4-2" placeholder="__________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+      <div class="complete-item">
+        <span class="fill-num">3.</span>
+        <span>Tiene</span>
+        <input class="fill-blank" id="ex4-3" placeholder="__________" autocomplete="off" spellcheck="false">
+        <span>años.</span>
+      </div>
+      <div class="complete-item">
+        <span class="fill-num">4.</span>
+        <span>Su color favorito es</span>
+        <input class="fill-blank" id="ex4-4" placeholder="__________" autocomplete="off" spellcheck="false">
+        <span>.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EX 5 — COMPRENSIÓN ═══ -->
+  <div class="ex-section" id="ex5-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num">5</div>
+        <div>
+          <div class="ex-title">Comprensión escrita</div>
+          <div style="font-size:12px;color:var(--gray-400);">Lee el texto y responde las preguntas.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="ex-pts">4 pts</span>
+        <span class="ex-score" id="ex5-score" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="reading-box">
+      Hola. Me llamo Lucas. Tengo doce años. Soy mexicano y vivo en Guadalajara. Mi color favorito es el verde.
+    </div>
+    <div class="comp-list">
+      <div class="comp-item">
+        <div class="comp-q"><span>1.</span>¿Cómo se llama?</div>
+        <input class="comp-inp" id="ex5-1" placeholder="Se llama..." autocomplete="off" spellcheck="false">
+        <div class="comp-fb" id="ex5-1-fb"></div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-q"><span>2.</span>¿Cuántos años tiene?</div>
+        <input class="comp-inp" id="ex5-2" placeholder="Tiene..." autocomplete="off" spellcheck="false">
+        <div class="comp-fb" id="ex5-2-fb"></div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-q"><span>3.</span>¿De dónde es?</div>
+        <input class="comp-inp" id="ex5-3" placeholder="Es de..." autocomplete="off" spellcheck="false">
+        <div class="comp-fb" id="ex5-3-fb"></div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-q"><span>4.</span>¿Cuál es su color favorito?</div>
+        <input class="comp-inp" id="ex5-4" placeholder="Su color favorito es..." autocomplete="off" spellcheck="false">
+        <div class="comp-fb" id="ex5-4-fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORE SUMMARY -->
+  <div class="score-summary" id="score-summary">
+    <div class="score-title">📊 Résultats de l'évaluation</div>
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-cell-label">Ex. 1<br>Traduc.</div><div class="score-cell-val" id="sum-1">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 2<br>Relaciona</div><div class="score-cell-val" id="sum-2">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 3<br>Colores</div><div class="score-cell-val" id="sum-3">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 4<br>Ficha</div><div class="score-cell-val" id="sum-4">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 5<br>Compréh.</div><div class="score-cell-val" id="sum-5">—</div></div>
+    </div>
+    <div class="score-total">
+      <div class="score-total-num" id="sum-total">—</div>
+      <div class="score-total-label">points sur 20</div>
+      <div class="score-mention" id="sum-mention"></div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="justify-content:center;margin-bottom:2rem;">
+    <button class="btn-p" onclick="correctAll()">✓ Corriger toute l'évaluation</button>
+    <button class="btn-g" onclick="resetAll()">↺ Nouvelle copie</button>
+  </div>
+</div><!-- end eval1 -->
+
+<!-- ══ EVAL 2 ══ -->
+<div class="eval-page" id="eval2">
+
+  <!-- EVAL 2 HEADER -->
+  <div class="eval-header" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">
+    <div class="eval-title-row">
+      <div>
+        <div class="eval-meta">5ème · Séquence 1 · Espagnol · LFJM</div>
+        <div class="eval-title">Évaluation 2 – Grammaire</div>
+        <div class="eval-meta" style="margin-top:4px;">Date : _________________________</div>
+      </div>
+      <div class="eval-nota">
+        <div class="eval-nota-label">Note</div>
+        <div class="eval-nota-val" id="g-total-display" style="color:var(--purple);">— /20</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT INFO -->
+  <div class="student-row">
+    <div class="stu-field"><div class="stu-label">👤 Nom</div><input class="stu-inp" id="g-stu-nom" placeholder="Nom de l'élève..." autocomplete="off"></div>
+    <div class="stu-field"><div class="stu-label">👤 Prénom</div><input class="stu-inp" id="g-stu-prenom" placeholder="Prénom..." autocomplete="off"></div>
+    <div class="stu-field"><div class="stu-label">🏫 Classe</div><input class="stu-inp" id="g-stu-classe" placeholder="5ème..." autocomplete="off"></div>
+  </div>
+
+  <!-- EX G1 — ARTÍCULOS DEFINIDOS -->
+  <div class="ex-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">1</div>
+        <div><div class="ex-title">Completa con el artículo definido</div><div style="font-size:12px;color:var(--gray-400);">el – la – los – las</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="ex-pts">4 pts</span><span class="ex-score" id="g1-score" style="display:none;"></span></div>
+    </div>
+    <div class="trans-grid">
+      <div class="trans-item"><span class="trans-num">1.</span><input class="ans-inp" id="g1-1" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:60px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">chico</span></div>
+      <div class="trans-item"><span class="trans-num">2.</span><input class="ans-inp" id="g1-2" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:60px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">chica</span></div>
+      <div class="trans-item"><span class="trans-num">3.</span><input class="ans-inp" id="g1-3" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:60px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">estudiantes</span></div>
+      <div class="trans-item"><span class="trans-num">4.</span><input class="ans-inp" id="g1-4" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:60px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">colores</span></div>
+    </div>
+  </div>
+
+  <!-- EX G2 — ARTÍCULOS INDEFINIDOS -->
+  <div class="ex-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">2</div>
+        <div><div class="ex-title">Completa con el artículo indefinido</div><div style="font-size:12px;color:var(--gray-400);">un – una – unos – unas</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="ex-pts">4 pts</span><span class="ex-score" id="g2-score" style="display:none;"></span></div>
+    </div>
+    <div class="trans-grid">
+      <div class="trans-item"><span class="trans-num">1.</span><input class="ans-inp" id="g2-1" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:65px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">amigo</span></div>
+      <div class="trans-item"><span class="trans-num">2.</span><input class="ans-inp" id="g2-2" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:65px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">casa</span></div>
+      <div class="trans-item"><span class="trans-num">3.</span><input class="ans-inp" id="g2-3" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:65px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">libros</span></div>
+      <div class="trans-item"><span class="trans-num">4.</span><input class="ans-inp" id="g2-4" placeholder="___" autocomplete="off" spellcheck="false" style="max-width:65px;"><span style="font-size:14px;color:var(--gray-900);font-weight:600;margin-left:6px;">alumnas</span></div>
+    </div>
+  </div>
+
+  <!-- EX G3 — CONJUGACIÓN -->
+  <div class="ex-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">3</div>
+        <div><div class="ex-title">Conjuga los verbos</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="ex-pts">4 pts</span><span class="ex-score" id="g3-score" style="display:none;"></span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div class="verb-section">
+          <div class="verb-label vl-ser">SER</div>
+          <div class="conj-list">
+            <div class="conj-item"><span class="conj-subj">Yo</span><input class="conj-inp" id="g3-1" placeholder="___" autocomplete="off" spellcheck="false"><span>español.</span></div>
+            <div class="conj-item"><span class="conj-subj">Ella</span><input class="conj-inp" id="g3-2" placeholder="___" autocomplete="off" spellcheck="false"><span>francesa.</span></div>
+            <div class="conj-item"><span class="conj-subj">Nosotros</span><input class="conj-inp" id="g3-3" placeholder="___" autocomplete="off" spellcheck="false"><span>estudiantes.</span></div>
+          </div>
+        </div>
+        <div class="verb-section" style="margin-top:14px;">
+          <div class="verb-label vl-tener">TENER</div>
+          <div class="conj-list">
+            <div class="conj-item"><span class="conj-subj">Tú</span><input class="conj-inp" id="g3-4" placeholder="___" autocomplete="off" spellcheck="false"><span>doce años.</span></div>
+            <div class="conj-item"><span class="conj-subj">Ellos</span><input class="conj-inp" id="g3-5" placeholder="___" autocomplete="off" spellcheck="false"><span>una mascota.</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="verb-section">
+          <div class="verb-label vl-vivir">VIVIR</div>
+          <div class="conj-list">
+            <div class="conj-item"><span class="conj-subj">Yo</span><input class="conj-inp" id="g3-6" placeholder="___" autocomplete="off" spellcheck="false"><span>en Madrid.</span></div>
+          </div>
+        </div>
+        <div class="verb-section" style="margin-top:14px;">
+          <div class="verb-label vl-llamarse">LLAMARSE</div>
+          <div class="conj-list">
+            <div class="conj-item"><span class="conj-subj">Él</span><input class="conj-inp" id="g3-7" placeholder="___" autocomplete="off" spellcheck="false"><span>Diego.</span></div>
+          </div>
+        </div>
+        <div style="background:var(--purple-light);border-radius:var(--radius-sm);padding:10px 12px;margin-top:16px;font-size:12px;color:var(--purple);">
+          <div style="font-weight:800;margin-bottom:6px;">💡 Rappel conjugaisons</div>
+          <div><strong>SER:</strong> soy · eres · es · somos · sois · son</div>
+          <div><strong>TENER:</strong> tengo · tienes · tiene · tenemos · tenéis · tienen</div>
+          <div><strong>VIVIR:</strong> vivo · vives · vive · vivimos · vivís · viven</div>
+          <div><strong>LLAMARSE:</strong> me llamo · te llamas · se llama…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX G4 — CORRECCIÓN ERRORES -->
+  <div class="ex-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">4</div>
+        <div><div class="ex-title">Encuentra y corrige el error</div><div style="font-size:12px;color:var(--gray-400);">Chaque phrase contient une erreur de conjugaison.</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="ex-pts">4 pts</span><span class="ex-score" id="g4-score" style="display:none;"></span></div>
+    </div>
+    <div class="error-list">
+      <div class="error-item">
+        <div class="error-wrong">Yo eres mexicano.</div>
+        <div class="error-arrow">→ Corrección:</div>
+        <input class="error-inp" id="g4-1" placeholder="Escribe la frase correcta..." autocomplete="off" spellcheck="false">
+        <div class="error-hint" id="g4-1-h"></div>
+      </div>
+      <div class="error-item">
+        <div class="error-wrong">Ella vivo en París.</div>
+        <div class="error-arrow">→ Corrección:</div>
+        <input class="error-inp" id="g4-2" placeholder="Escribe la frase correcta..." autocomplete="off" spellcheck="false">
+        <div class="error-hint" id="g4-2-h"></div>
+      </div>
+      <div class="error-item">
+        <div class="error-wrong">Nosotros tiene doce años.</div>
+        <div class="error-arrow">→ Corrección:</div>
+        <input class="error-inp" id="g4-3" placeholder="Escribe la frase correcta..." autocomplete="off" spellcheck="false">
+        <div class="error-hint" id="g4-3-h"></div>
+      </div>
+      <div class="error-item">
+        <div class="error-wrong">Me llamo Ana y tú se llamas Lucas.</div>
+        <div class="error-arrow">→ Corrección:</div>
+        <input class="error-inp" id="g4-4" placeholder="Escribe la frase correcta..." autocomplete="off" spellcheck="false">
+        <div class="error-hint" id="g4-4-h"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX G5 — PRODUCCIÓN -->
+  <div class="ex-section">
+    <div class="ex-header">
+      <div class="ex-title-wrap">
+        <div class="ex-num" style="background:linear-gradient(135deg,#4A2880,#6B3FA0);">5</div>
+        <div><div class="ex-title">Producción escrita</div><div style="font-size:12px;color:var(--gray-400);">Présente Emma Martin en 4 phrases.</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="ex-pts">4 pts</span><span class="ex-score" id="g5-score" style="display:none;"></span></div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-title">📋 Ficha de Emma Martin</div>
+      <div class="persona-grid">
+        <div class="persona-item"><strong>Nombre:</strong> Emma Martin</div>
+        <div class="persona-item"><strong>Edad:</strong> 13 años</div>
+        <div class="persona-item"><strong>Nacionalidad:</strong> francesa</div>
+        <div class="persona-item"><strong>Ciudad:</strong> Lyon</div>
+      </div>
+    </div>
+    <div style="font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Debes usar estos verbos:</div>
+    <div class="verb-chips-req">
+      <span class="vchip llamarse" id="gc-llamarse">llamarse</span>
+      <span class="vchip ser" id="gc-ser">ser</span>
+      <span class="vchip tener" id="gc-tener">tener</span>
+      <span class="vchip vivir" id="gc-vivir">vivir</span>
+    </div>
+    <div class="prod-frase-list">
+      <div class="prod-frase"><span class="prod-frase-num">1.</span><input class="prod-frase-inp" id="g5-1" placeholder="Se llama..." autocomplete="off" spellcheck="false" oninput="liveCheckVerbs()"></div>
+      <div class="prod-frase"><span class="prod-frase-num">2.</span><input class="prod-frase-inp" id="g5-2" placeholder="Tiene..." autocomplete="off" spellcheck="false" oninput="liveCheckVerbs()"></div>
+      <div class="prod-frase"><span class="prod-frase-num">3.</span><input class="prod-frase-inp" id="g5-3" placeholder="Es..." autocomplete="off" spellcheck="false" oninput="liveCheckVerbs()"></div>
+      <div class="prod-frase"><span class="prod-frase-num">4.</span><input class="prod-frase-inp" id="g5-4" placeholder="Vive en..." autocomplete="off" spellcheck="false" oninput="liveCheckVerbs()"></div>
+    </div>
+  </div>
+
+  <!-- SCORE SUMMARY G -->
+  <div class="score-summary" id="g-score-summary">
+    <div class="score-title">📊 Résultats — Évaluation 2 · Grammaire</div>
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-cell-label">Ex. 1<br>Art. déf.</div><div class="score-cell-val" id="gsum-1">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 2<br>Art. indéf.</div><div class="score-cell-val" id="gsum-2">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 3<br>Conjugaison</div><div class="score-cell-val" id="gsum-3">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 4<br>Erreurs</div><div class="score-cell-val" id="gsum-4">—</div></div>
+      <div class="score-cell"><div class="score-cell-label">Ex. 5<br>Production</div><div class="score-cell-val" id="gsum-5">—</div></div>
+    </div>
+    <div class="score-total">
+      <div class="score-total-num" id="gsum-total">—</div>
+      <div class="score-total-label">points sur 20</div>
+      <div class="score-mention" id="gsum-mention"></div>
+    </div>
+  </div>
+  <div class="btn-row" style="justify-content:center;margin-bottom:2rem;">
+    <button class="btn-p" onclick="correctAllGram()">✓ Corriger toute l'évaluation</button>
+    <button class="btn-g" onclick="resetAllGram()">↺ Nouvelle copie</button>
+  </div>
+
+</div><!-- end eval2 -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════ UTILS ════
+function N(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim();}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2500);}
+
+// ════ LOCK / UNLOCK ════
+const PASSWORD = "lfjm2025";
+function tryUnlock(){
+  const val = document.getElementById("lock-pwd").value;
+  if(val === PASSWORD){
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("teacher-bar").style.display = "flex";
+    document.getElementById("main-content").style.display = "block";
+    buildEx1();
+    toast("Bienvenue, mode professeur activé !");
+  } else {
+    const inp = document.getElementById("lock-pwd");
+    inp.className = "lock-input error";
+    document.getElementById("lock-error").style.display = "block";
+    setTimeout(()=>{inp.className="lock-input";inp.value="";},800);
+  }
+}
+function lock(){
+  document.getElementById("lock-screen").style.display = "flex";
+  document.getElementById("teacher-bar").style.display = "none";
+  document.getElementById("main-content").style.display = "none";
+  document.getElementById("lock-pwd").value = "";
+  document.getElementById("lock-error").style.display = "none";
+}
+
+// ════ EX1 — TRANSLATION ════
+const EX1_DATA = [
+  {fr:"bleu",        es:["azul"]},
+  {fr:"France",      es:["francia"]},
+  {fr:"onze",        es:["11","once"]},
+  {fr:"anglais",     es:["ingles","inglés"]},
+  {fr:"vert",        es:["verde"]},
+  {fr:"Mexique",     es:["mexico","méxico"]},
+  {fr:"rouge",       es:["rojo"]},
+  {fr:"Colombie",    es:["colombia"]},
+];
+function buildEx1(){
+  const grid = document.getElementById("ex1-grid");
+  grid.innerHTML = "";
+  EX1_DATA.forEach((item,i)=>{
+    const div = document.createElement("div");
+    div.className = "trans-item";
+    div.id = "ti"+i;
+    div.innerHTML = `
+      <span class="trans-num">${i+1}.</span>
+      <span class="trans-fr">${item.fr}</span>
+      <span class="trans-arrow">→</span>
+      <div style="flex:1;">
+        <input class="ans-inp" id="ex1-${i}" placeholder="..." autocomplete="off" spellcheck="false"
+          onkeydown="if(event.key==='Enter')checkSingle('ex1',${i})">
+        <div class="ans-correct" id="ex1-${i}-ok"></div>
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+function checkEx1(){
+  let sc=0;
+  EX1_DATA.forEach((item,i)=>{
+    const inp = document.getElementById("ex1-"+i);
+    if(!inp) return;
+    const ok = item.es.some(a=>N(a)===N(inp.value));
+    inp.className = "ans-inp "+(ok?"ok":"ko");
+    if(!ok && inp.value.trim()){
+      const hint = document.getElementById("ex1-"+i+"-ok");
+      hint.textContent = "✓ " + item.es[0];
+      hint.className = "ans-correct show";
+    }
+    if(ok) sc += 0.5;
+  });
+  const pts = Math.round(sc*2)/2;
+  document.getElementById("ex1-score").textContent = pts+"/4";
+  document.getElementById("ex1-score").style.display = "inline";
+  document.getElementById("sum-1").textContent = pts;
+  return pts;
+}
+
+// ════ EX2 — MATCH ════
+const MATCH_ANS = {españa:"españa",francia:"francia",mexico:"mexico",argentina:"argentina"};
+let matchSelected = null;
+const matchState = {};
+
+function matchSelectCountry(el){
+  if(el.classList.contains("done-ok")) return;
+  document.querySelectorAll(".match-left-item").forEach(e=>e.style.fontWeight="");
+  matchSelected = el;
+  el.style.fontWeight = "900";
+  toast("Ahora haz clic en la nacionalidad de "+el.querySelector("span:last-child").textContent);
+}
+function matchSelectNat(el){
+  if(!matchSelected){toast("Primero selecciona un país.");return;}
+  if(el.classList.contains("matched-ok")||el.classList.contains("matched-ko"))return;
+  const country = matchSelected.dataset.country;
+  const nat = el.dataset.nat;
+  const ok = nat === country;
+  if(ok){
+    el.className = "match-right-item matched-ok";
+    matchSelected.classList.add("done-ok");
+    matchSelected.style.fontWeight = "";
+    matchState[country] = "ok";
+    toast("✓ ¡Correcto!");
+  } else {
+    el.className = "match-right-item matched-ko";
+    toast("✗ Inténtalo de nuevo.");
+    setTimeout(()=>{el.className="match-right-item";},600);
+  }
+  matchSelected = null;
+}
+function checkEx2(){
+  // Force-check: verify each country has correct match
+  let sc = 0;
+  ["españa","francia","mexico","argentina"].forEach(c=>{
+    // Find if the correct nat chip is matched-ok
+    const natEl = document.querySelector(`.match-right-item[data-nat="${c}"]`);
+    if(natEl && natEl.classList.contains("matched-ok")) sc++;
+    // Color the country label
+    const cEl = document.querySelector(`.match-left-item[data-country="${c}"]`);
+    if(cEl){
+      const isOk = natEl && natEl.classList.contains("matched-ok");
+      cEl.classList.toggle("done-ok", isOk);
+      cEl.classList.toggle("done-ko", !isOk);
+    }
+  });
+  const pts = sc;
+  document.getElementById("ex2-score").textContent = pts+"/4";
+  document.getElementById("ex2-score").style.display = "inline";
+  document.getElementById("sum-2").textContent = pts;
+  return pts;
+}
+function resetEx2(){
+  matchSelected = null;
+  document.querySelectorAll(".match-left-item").forEach(el=>{
+    el.classList.remove("done-ok","done-ko");el.style.fontWeight="";
+  });
+  document.querySelectorAll(".match-right-item").forEach(el=>{
+    el.className="match-right-item";
+  });
+}
+
+// ════ EX3 — COLORES ════
+const EX3_ANS = {
+  "ex3-1": ["amarillo"],
+  "ex3-2": ["azul"],
+  "ex3-3": ["verde"],
+  "ex3-4": ["rojo","verde"],
+};
+function checkEx3(){
+  let sc = 0;
+  Object.entries(EX3_ANS).forEach(([id,answers])=>{
+    const inp = document.getElementById(id);
+    if(!inp) return;
+    const ok = answers.some(a=>N(a)===N(inp.value));
+    inp.className = "fill-blank "+(ok?"ok":"ko");
+    if(ok) sc++;
+  });
+  const pts = sc;
+  document.getElementById("ex3-score").textContent = pts+"/4";
+  document.getElementById("ex3-score").style.display = "inline";
+  document.getElementById("sum-3").textContent = pts;
+  return pts;
+}
+
+// ════ EX4 — FICHA ════
+const EX4_ANS = {
+  "ex4-1": ["española","espanola"],
+  "ex4-2": ["madrid"],
+  "ex4-3": ["11","once"],
+  "ex4-4": ["azul","el azul"],
+};
+function checkEx4(){
+  let sc = 0;
+  Object.entries(EX4_ANS).forEach(([id,answers])=>{
+    const inp = document.getElementById(id);
+    if(!inp) return;
+    const ok = answers.some(a=>N(a)===N(inp.value));
+    inp.className = "fill-blank "+(ok?"ok":"ko");
+    if(ok) sc++;
+  });
+  const pts = sc;
+  document.getElementById("ex4-score").textContent = pts+"/4";
+  document.getElementById("ex4-score").style.display = "inline";
+  document.getElementById("sum-4").textContent = pts;
+  return pts;
+}
+
+// ════ EX5 — COMPRENSIÓN ════
+const EX5_ANS = [
+  {id:"ex5-1", a:["lucas","se llama lucas","llama lucas"]},
+  {id:"ex5-2", a:["doce","12","doce años","12 años","tiene doce"]},
+  {id:"ex5-3", a:["mexicano","mexico","méxico","es de mexico","es mexicano","guadalajara"]},
+  {id:"ex5-4", a:["verde","el verde"]},
+];
+function checkEx5(){
+  let sc = 0;
+  EX5_ANS.forEach(r=>{
+    const inp = document.getElementById(r.id);
+    const fb = document.getElementById(r.id+"-fb");
+    if(!inp) return;
+    const ok = r.a.some(a=>N(inp.value).includes(N(a)));
+    inp.className = "comp-inp "+(ok?"ok":"ko");
+    if(fb){
+      fb.className = "comp-fb "+(ok?"ok":"ko");
+      fb.textContent = ok?"✓ Correct !":"✗ Revoir.";
+    }
+    if(ok) sc++;
+  });
+  const pts = sc;
+  document.getElementById("ex5-score").textContent = pts+"/4";
+  document.getElementById("ex5-score").style.display = "inline";
+  document.getElementById("sum-5").textContent = pts;
+  return pts;
+}
+
+// ════ CORRECT ALL ════
+function correctAll(){
+  const s1 = checkEx1();
+  const s2 = checkEx2();
+  const s3 = checkEx3();
+  const s4 = checkEx4();
+  const s5 = checkEx5();
+  const total = s1+s2+s3+s4+s5;
+  // Show total
+  document.getElementById("total-display").textContent = total+"/20";
+  // Score summary
+  const sum = document.getElementById("score-summary");
+  sum.classList.add("show");
+  document.getElementById("sum-total").textContent = total;
+  // Mention
+  let mention="",color="";
+  if(total>=18){mention="Excellent ! ⭐⭐⭐";color=var_green;}
+  else if(total>=15){mention="Très bien ! ⭐⭐";color=var_green;}
+  else if(total>=12){mention="Bien ⭐";color=var_green;}
+  else if(total>=10){mention="Passable";color=var_amber;}
+  else{mention="À retravailler";color=var_red;}
+  const mentionEl=document.getElementById("sum-mention");
+  mentionEl.textContent=mention;
+  mentionEl.style.color=total>=10?"var(--green)":total>=8?"var(--amber)":"var(--red)";
+  // Color score cells
+  [s1,s2,s3,s4,s5].forEach((s,i)=>{
+    const el=document.getElementById("sum-"+(i+1));
+    if(el){el.className="score-cell-val"+(s===4?" perfect":"");el.style.color=s===4?"var(--green)":s>=3?"var(--blue)":s>=2?"var(--amber)":"var(--red)";}
+  });
+  sum.scrollIntoView({behavior:"smooth"});
+  toast("✓ Correction terminée — "+total+"/20");
+}
+const var_green="var(--green)";const var_amber="var(--amber)";const var_red="var(--red)";
+
+// ════ RESET ════
+function resetAll(){
+  if(!confirm("Nouvelle copie ? Toutes les réponses seront effacées.")) return;
+  // Clear student info
+  ["stu-nom","stu-prenom","stu-classe"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  // Ex1
+  buildEx1();
+  // Ex2
+  resetEx2();
+  // Ex3
+  ["ex3-1","ex3-2","ex3-3","ex3-4"].forEach(id=>{const inp=document.getElementById(id);if(inp){inp.value="";inp.className="fill-blank";}});
+  // Ex4
+  ["ex4-1","ex4-2","ex4-3","ex4-4"].forEach(id=>{const inp=document.getElementById(id);if(inp){inp.value="";inp.className="fill-blank";}});
+  // Ex5
+  EX5_ANS.forEach(r=>{
+    const inp=document.getElementById(r.id);const fb=document.getElementById(r.id+"-fb");
+    if(inp){inp.value="";inp.className="comp-inp";}
+    if(fb)fb.className="comp-fb";
+  });
+  // Scores
+  ["ex1-score","ex2-score","ex3-score","ex4-score","ex5-score"].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.style.display="none";el.textContent="";}
+  });
+  document.getElementById("total-display").textContent="— /20";
+  document.getElementById("score-summary").classList.remove("show");
+  toast("↺ Nouvelle copie prête !");
+}
+
+// ════ TAB SWITCHING ════
+function switchEval(tabEl, id){
+  document.querySelectorAll(".eval-page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".eval-tab").forEach(t=>t.classList.remove("active"));
+  if(tabEl) tabEl.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// Override correctAll to check which eval is active
+const _origCorrectAll = correctAll;
+window.correctAll = function(){
+  const active = document.querySelector(".eval-page.active");
+  if(active && active.id === "eval2") correctAllGram();
+  else _origCorrectAll();
+};
+const _origResetAll = resetAll;
+window.resetAll = function(){
+  const active = document.querySelector(".eval-page.active");
+  if(active && active.id === "eval2") resetAllGram();
+  else _origResetAll();
+};
+
+// ════ G1 — ARTÍCULOS DEFINIDOS ════
+const G1_ANS = {"g1-1":"el","g1-2":"la","g1-3":"los","g1-4":"los"};
+function checkG1(){
+  let sc=0;
+  Object.entries(G1_ANS).forEach(([id,ans])=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    const ok=N(inp.value)===N(ans);
+    inp.className="ans-inp "+(ok?"ok":"ko");
+    if(ok) sc++;
+  });
+  const pts=sc;
+  document.getElementById("g1-score").textContent=pts+"/4";
+  document.getElementById("g1-score").style.display="inline";
+  document.getElementById("gsum-1").textContent=pts;
+  return pts;
+}
+
+// ════ G2 — ARTÍCULOS INDEFINIDOS ════
+const G2_ANS = {"g2-1":"un","g2-2":"una","g2-3":"unos","g2-4":"unas"};
+function checkG2(){
+  let sc=0;
+  Object.entries(G2_ANS).forEach(([id,ans])=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    const ok=N(inp.value)===N(ans);
+    inp.className="ans-inp "+(ok?"ok":"ko");
+    if(ok) sc++;
+  });
+  const pts=sc;
+  document.getElementById("g2-score").textContent=pts+"/4";
+  document.getElementById("g2-score").style.display="inline";
+  document.getElementById("gsum-2").textContent=pts;
+  return pts;
+}
+
+// ════ G3 — CONJUGACIÓN ════
+const G3_ANS = {
+  "g3-1":["soy"],
+  "g3-2":["es"],
+  "g3-3":["somos"],
+  "g3-4":["tienes"],
+  "g3-5":["tienen"],
+  "g3-6":["vivo"],
+  "g3-7":["se llama","llama"],
+};
+function checkG3(){
+  let sc=0;
+  Object.entries(G3_ANS).forEach(([id,answers])=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    const ok=answers.some(a=>N(inp.value)===N(a)||N(inp.value).includes(N(a)));
+    inp.className="conj-inp "+(ok?"ok":"ko");
+    if(ok) sc+=0.5;
+  });
+  const pts=Math.round(sc*2)/2;
+  document.getElementById("g3-score").textContent=pts+"/4";
+  document.getElementById("g3-score").style.display="inline";
+  document.getElementById("gsum-3").textContent=pts;
+  return pts;
+}
+
+// ════ G4 — ERROR CORRECTION ════
+const G4_ANS = [
+  {id:"g4-1", keywords:["soy","yo soy mexicano"]},
+  {id:"g4-2", keywords:["vive","ella vive en paris","ella vive en parís"]},
+  {id:"g4-3", keywords:["tenemos","nosotros tenemos"]},
+  {id:"g4-4", keywords:["te llamas","tu te llamas lucas","te llamas lucas"]},
+];
+function checkG4(){
+  let sc=0;
+  G4_ANS.forEach(r=>{
+    const inp=document.getElementById(r.id);
+    const hint=document.getElementById(r.id+"-h");
+    if(!inp)return;
+    if(!inp.value.trim()){
+      inp.className="error-inp ko";
+      if(hint){hint.className="error-hint ko";hint.textContent="✗ Réponse manquante.";}
+      return;
+    }
+    const ok=r.keywords.some(k=>N(inp.value).includes(N(k)));
+    inp.className="error-inp "+(ok?"ok":"ko");
+    if(hint){
+      hint.className="error-hint "+(ok?"ok":"ko");
+      hint.textContent=ok?"✓ Correct !":"✗ Vérifie le verbe conjugué.";
+    }
+    if(ok) sc++;
+  });
+  const pts=sc;
+  document.getElementById("g4-score").textContent=pts+"/4";
+  document.getElementById("g4-score").style.display="inline";
+  document.getElementById("gsum-4").textContent=pts;
+  return pts;
+}
+
+// ════ G5 — PRODUCTION ════
+const G5_ANS = {
+  "g5-1":{keywords:["llama","se llama","emma"],verb:"llamarse"},
+  "g5-2":{keywords:["tiene","13","trece"],verb:"tener"},
+  "g5-3":{keywords:["es","francesa","france"],verb:"ser"},
+  "g5-4":{keywords:["vive","lyon"],verb:"vivir"},
+};
+function liveCheckVerbs(){
+  const allText = [1,2,3,4].map(i=>{
+    const inp=document.getElementById("g5-"+i);return inp?N(inp.value):"";
+  }).join(" ");
+  const verbMap = {
+    "llamarse":["llama","llamo","llamas"],
+    "ser":["es","soy","eres","somos"],
+    "tener":["tiene","tengo","tienes","tienen"],
+    "vivir":["vive","vivo","vives","viven"]
+  };
+  Object.entries(verbMap).forEach(([verb,forms])=>{
+    const el=document.getElementById("gc-"+verb);
+    if(!el)return;
+    const used=forms.some(f=>allText.includes(N(f)));
+    el.classList.toggle("used",!used);
+  });
+}
+function checkG5(){
+  let sc=0;
+  Object.entries(G5_ANS).forEach(([id,data])=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    const val=N(inp.value);
+    const ok=data.keywords.some(k=>val.includes(N(k)));
+    inp.className="prod-frase-inp "+(ok?"ok":"ko");
+    if(ok) sc++;
+  });
+  const pts=sc;
+  document.getElementById("g5-score").textContent=pts+"/4";
+  document.getElementById("g5-score").style.display="inline";
+  document.getElementById("gsum-5").textContent=pts;
+  return pts;
+}
+
+// ════ CORRECT ALL GRAM ════
+function correctAllGram(){
+  const s1=checkG1();const s2=checkG2();const s3=checkG3();
+  const s4=checkG4();const s5=checkG5();
+  const total=s1+s2+s3+s4+s5;
+  document.getElementById("g-total-display").textContent=total+"/20";
+  const sum=document.getElementById("g-score-summary");
+  sum.classList.add("show");
+  document.getElementById("gsum-total").textContent=total;
+  let mention="";
+  if(total>=18) mention="Excellent ! ⭐⭐⭐";
+  else if(total>=15) mention="Très bien ! ⭐⭐";
+  else if(total>=12) mention="Bien ⭐";
+  else if(total>=10) mention="Passable";
+  else mention="À retravailler";
+  const mentionEl=document.getElementById("gsum-mention");
+  mentionEl.textContent=mention;
+  mentionEl.style.color=total>=10?"var(--green)":total>=8?"var(--amber)":"var(--red)";
+  [s1,s2,s3,s4,s5].forEach((s,i)=>{
+    const el=document.getElementById("gsum-"+(i+1));
+    if(el){el.style.color=s===4?"var(--green)":s>=3?"var(--blue)":s>=2?"var(--amber)":"var(--red)";}
+  });
+  sum.scrollIntoView({behavior:"smooth"});
+  toast("✓ Correction terminée — "+total+"/20");
+}
+
+// ════ RESET GRAM ════
+function resetAllGram(){
+  if(!confirm("Nouvelle copie ? Toutes les réponses seront effacées."))return;
+  ["g-stu-nom","g-stu-prenom","g-stu-classe"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  // G1
+  Object.keys(G1_ANS).forEach(id=>{const inp=document.getElementById(id);if(inp){inp.value="";inp.className="ans-inp";}});
+  // G2
+  Object.keys(G2_ANS).forEach(id=>{const inp=document.getElementById(id);if(inp){inp.value="";inp.className="ans-inp";}});
+  // G3
+  Object.keys(G3_ANS).forEach(id=>{const inp=document.getElementById(id);if(inp){inp.value="";inp.className="conj-inp";}});
+  // G4
+  G4_ANS.forEach(r=>{
+    const inp=document.getElementById(r.id);const hint=document.getElementById(r.id+"-h");
+    if(inp){inp.value="";inp.className="error-inp";}
+    if(hint)hint.className="error-hint";
+  });
+  // G5
+  [1,2,3,4].forEach(i=>{const inp=document.getElementById("g5-"+i);if(inp){inp.value="";inp.className="prod-frase-inp";}});
+  document.querySelectorAll(".vchip").forEach(el=>el.classList.remove("used"));
+  // Scores
+  ["g1-score","g2-score","g3-score","g4-score","g5-score"].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.style.display="none";el.textContent="";}
+  });
+  document.getElementById("g-total-display").textContent="— /20";
+  document.getElementById("g-score-summary").classList.remove("show");
+  toast("↺ Nouvelle copie prête !");
+}
+
+</script>
+</body>
+</html>
