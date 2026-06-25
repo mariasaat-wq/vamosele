@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi español — Grammaire · LFJM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-mid:#9B72C8;--purple-dark:#4A2880;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --blue:#0369A1;--blue-light:#E0F2FE;
+  --red:#B83232;--red-light:#FDEAEA;
+  --green:#1E7A3C;--green-light:#E4F5EB;
+  --gray-50:#F5F7F5;--gray-100:#E8EDE8;--gray-200:#CDD4CC;
+  --gray-400:#8FA08E;--gray-500:#6E7D6D;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;cursor:pointer;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+/* LEVEL BAR */
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 108px);}
+
+/* SIDEBAR */
+.sidebar{width:230px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;position:sticky;top:108px;height:calc(100vh - 108px);overflow-y:auto;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:6px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:9px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);border-left:3px solid transparent;transition:all 0.12s;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.4;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+.ex-sub{padding-left:1.8rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);border-left:2px solid transparent;transition:all 0.12s;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub2{padding:0 0 2px 1rem;}
+.ex-sub2-item{display:flex;align-items:center;gap:5px;padding:3px 0.5rem 3px 0;cursor:pointer;font-size:11px;color:var(--gray-400);transition:all 0.12s;}
+.ex-sub2-item:hover{color:var(--purple);}
+.ex-sub2-item.active{color:var(--sage-dark);font-weight:600;}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.sidebar-link{padding:1rem 1.1rem;border-top:1px solid var(--gray-100);}
+.sidebar-link a{font-size:13px;color:var(--sage-dark);font-weight:500;text-decoration:none;display:flex;align-items:center;gap:6px;}
+
+/* MAIN */
+.main{flex:1;padding:1.5rem;min-width:0;}
+
+/* PAGE HEADER */
+.page-hdr{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));border-radius:var(--radius);padding:1.1rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;}
+.page-hdr-title{font-family:var(--serif);font-size:18px;color:white;font-style:italic;}
+.page-hdr-sub{font-size:11px;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;}
+.page-hdr-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+/* CONJ TABLE */
+.conj-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;}
+.conj-card{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1rem 1.1rem;}
+.conj-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.conj-title span{font-family:var(--serif);font-size:15px;font-weight:600;}
+.conj-table{width:100%;border-collapse:collapse;font-size:13px;}
+.conj-table td{padding:4px 6px;}
+.conj-table td:first-child{color:var(--gray-400);width:50%;}
+.conj-table tr:nth-child(even) td{background:var(--gray-50);}
+.conj-note{margin-top:8px;font-size:12px;border-radius:var(--radius-sm);padding:7px 10px;line-height:1.5;}
+
+/* ART RULE TABLE */
+.art-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px;}
+.art-cell{text-align:center;padding:9px 6px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-100);}
+.art-cell.m{background:#F0EAF8;border-color:var(--purple-mid);}
+.art-cell.f{background:#E4F5EE;border-color:var(--sage-mid);}
+.art-big{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--purple);}
+.art-cell.f .art-big{color:var(--sage-dark);}
+.art-lbl{font-size:10px;color:var(--gray-400);margin-top:2px;}
+.art-ex{font-size:11px;color:var(--gray-600);font-style:italic;margin-top:2px;}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:99px;padding:4px;width:fit-content;margin-bottom:1.25rem;flex-wrap:wrap;}
+.tab{padding:6px 18px;border-radius:99px;font-size:13px;font-weight:500;color:var(--gray-600);cursor:pointer;transition:all 0.15s;}
+.tab.active{background:white;color:var(--purple);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.ex-panel{display:none;}.ex-panel.active{display:block;}
+
+/* INTRO */
+.intro{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1rem 1.25rem;margin-bottom:1.1rem;display:flex;gap:12px;align-items:flex-start;}
+.intro-text{font-size:13.5px;color:var(--gray-600);line-height:1.6;}
+.intro-text strong{color:var(--purple);}
+
+/* SCORE BAR */
+.score-bar{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:0.9rem 1.25rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:14px;}
+.score-num{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--purple);min-width:48px;}
+.score-lbl{font-size:12px;color:var(--gray-400);}
+.score-track{flex:1;height:7px;background:var(--gray-100);border-radius:99px;overflow:hidden;}
+.score-bar-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--sage));border-radius:99px;transition:width 0.5s;width:0%;}
+.score-msg{font-size:12px;color:var(--gray-600);min-width:110px;text-align:right;}
+
+/* SEC LABEL */
+.sec-lbl{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+
+/* WORD GRID — articles ex1 */
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-bottom:1rem;}
+.word-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:0.9rem 1rem;transition:all 0.2s;}
+.word-card.ok{border-color:var(--sage);background:var(--sage-light);}
+.word-card.ko{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.word-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.word-num{font-size:11px;font-weight:700;color:var(--gray-400);}
+.gbadge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;}
+.gbadge.m{background:#F0EAF8;color:#5A2D8A;}
+.gbadge.f{background:#E4F5EE;color:var(--sage-dark);}
+.gbadge.mp{background:#E8E4F4;color:#4A2880;}
+.gbadge.fp{background:#D8F0E8;color:#1A5C3A;}
+.word-es{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--gray-900);margin-bottom:2px;}
+.word-card.ok .word-es{color:var(--sage-dark);}
+.word-fr-lbl{font-size:11px;color:var(--gray-400);margin-bottom:8px;font-style:italic;}
+.irow{display:flex;align-items:center;gap:7px;}
+.art-inp{width:62px;border:none;border-bottom:2.5px solid var(--purple-mid);background:transparent;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--purple);text-align:center;outline:none;padding:3px 2px;}
+.art-inp:focus{border-bottom-color:var(--purple);}
+.art-inp.ok{border-bottom-color:var(--sage);color:var(--sage-dark);}
+.art-inp.ko{border-bottom-color:var(--red);color:var(--red);}
+.word-after{font-size:14px;color:var(--gray-900);font-weight:500;}
+.word-card.ok .word-after{color:var(--sage-dark);}
+
+/* TRANSFORM GRID — articles ex2 */
+.trans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:9px;margin-bottom:1rem;}
+.trans-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;transition:all 0.2s;}
+.trans-card.ok{border-color:var(--sage);background:var(--sage-light);}
+.trans-card.ko{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.given{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;background:var(--purple-light);border:1.5px solid var(--purple-mid);font-size:14px;font-weight:600;color:var(--purple);}
+.trans-inp{flex:1;border:none;border-bottom:2.5px solid var(--purple-mid);background:transparent;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--purple);outline:none;padding:3px 2px;min-width:120px;}
+.trans-inp.ok{border-bottom-color:var(--sage);color:var(--sage-dark);pointer-events:none;}
+.trans-inp.ko{border-bottom-color:var(--red);color:var(--red);}
+
+/* SENTENCE CARDS — verbs */
+.sent-list{display:flex;flex-direction:column;gap:9px;margin-bottom:1rem;}
+.sent-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:0.9rem 1.1rem;transition:all 0.2s;}
+.sent-card.ok{border-color:var(--sage);background:var(--sage-light);}
+.sent-card.ko{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.sent-top{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.sent-num{font-size:11px;font-weight:700;color:var(--gray-400);min-width:20px;}
+.vbadge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;}
+.vbadge.ser{background:#F0EAF8;color:#5A2D8A;}
+.vbadge.llamarse{background:var(--sage-light);color:var(--sage-dark);}
+.vbadge.vivir{background:#E0F2FE;color:#0369A1;}
+.vbadge.tener{background:var(--amber-light);color:var(--amber);}
+.stag{font-size:11px;color:var(--gray-500);background:var(--gray-100);padding:2px 7px;border-radius:99px;}
+.sent-body{font-size:15px;color:var(--gray-900);line-height:1.9;display:flex;align-items:center;flex-wrap:wrap;gap:4px;}
+.sent-card.ok .sent-body{color:var(--sage-dark);}
+.verb-inp{border:none;border-bottom:2.5px solid var(--purple-mid);background:var(--purple-light);border-radius:4px 4px 0 0;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--purple);text-align:center;outline:none;padding:3px 7px;min-width:80px;transition:all 0.15s;}
+.verb-inp:focus{border-bottom-color:var(--purple);}
+.verb-inp.ok{border-bottom-color:var(--sage);background:var(--sage-light);color:var(--sage-dark);pointer-events:none;}
+.verb-inp.ko{border-bottom-color:var(--red);background:var(--red-light);color:var(--red);}
+.arow{display:flex;align-items:center;gap:7px;margin-top:5px;}
+.fbline{font-size:12px;margin-top:4px;padding:4px 9px;border-radius:var(--radius-sm);display:none;}
+.fbline.ok{display:block;background:var(--green-light);color:var(--green);}
+.fbline.ko{display:block;background:var(--red-light);color:var(--red);}
+
+/* TEXT EXERCISE */
+.bank-wrap{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1rem;margin-bottom:1.1rem;}
+.bank-lbl{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+.bank-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.bchip{padding:6px 14px;border-radius:99px;font-size:14px;font-weight:600;background:var(--purple-light);border:1.5px solid var(--purple-mid);color:var(--purple);cursor:pointer;transition:all 0.18s;user-select:none;}
+.bchip:hover{background:var(--purple);color:white;}
+.bchip.sel{background:var(--purple);color:white;box-shadow:0 3px 10px rgba(107,63,160,0.3);}
+.bchip.used{opacity:0.28;cursor:default;pointer-events:none;}
+.txt-wrap{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;margin-bottom:1rem;line-height:2.8;font-size:15.5px;}
+.txt-wrap.all-ok{border-color:var(--sage);background:var(--sage-light);}
+.slot{display:inline-flex;align-items:center;justify-content:center;min-width:68px;height:28px;padding:0 9px;border-bottom:2.5px solid var(--purple-mid);background:var(--purple-light);border-radius:4px 4px 0 0;font-size:14px;font-weight:700;color:var(--purple);cursor:pointer;transition:all 0.15s;vertical-align:middle;margin:0 2px;}
+.slot:hover{background:var(--purple);color:white;}
+.slot.filled{border-bottom-color:var(--purple);}
+.slot.ok{background:var(--sage-light);border-bottom-color:var(--sage);color:var(--sage-dark);cursor:default;}
+.slot.ko{background:var(--red-light);border-bottom-color:var(--red);color:var(--red);}
+
+/* RESULT */
+.result{display:none;background:white;border-radius:var(--radius);border:2px solid var(--sage);padding:1.5rem;margin-bottom:1rem;text-align:center;}
+.result.show{display:block;}
+.result-emoji{font-size:44px;margin-bottom:6px;}
+.result-title{font-family:var(--serif);font-size:22px;color:var(--gray-900);margin-bottom:5px;}
+.result-sub{font-size:13px;color:var(--gray-600);line-height:1.6;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.75rem;}
+.btn-p{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:linear-gradient(135deg,var(--purple),var(--sage));color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;}
+.btn-g{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:white;color:var(--purple);border:1.5px solid var(--purple-mid);border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;}
+.btn-g:hover{background:var(--purple-light);}
+.btn-s{padding:5px 13px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--purple),var(--sage));color:white;font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;}
+.btn-s.hidden{display:none;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@keyframes shake{0%,100%{transform:translateX(0)}30%{transform:translateX(-6px)}70%{transform:translateX(6px)}}
+@media(max-width:580px){.conj-wrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 1 · ¡Hola, España!</div>
+    <a class="seq-item" href="mi-espanol-vocab.html"><div class="seq-dot"></div>Vocabulario</a>
+    <div class="seq-item active"><div class="seq-dot"></div>Gramática</div>
+    <div class="ex-sub">
+      <div class="ex-sub-item active" id="ni-art" onclick="showSection('art',this)">Les articles</div>
+      <div class="ex-sub2" id="ns-art">
+        <div class="ex-sub2-item active" id="ni-art1" onclick="showTab('art',0)">📋 Ex.1 · Definidos</div>
+        <div class="ex-sub2-item" id="ni-art2" onclick="showTab('art',1)">📋 Ex.2 · Indefinidos</div>
+      </div>
+      <div class="ex-sub-item" id="ni-ser" onclick="showSection('ser',this)">SER y LLAMARSE</div>
+      <div class="ex-sub2" id="ns-ser" style="display:none">
+        <div class="ex-sub2-item" id="ni-ser1" onclick="showTab('ser',0)">✏️ Ex.1 · SER</div>
+        <div class="ex-sub2-item" id="ni-ser2" onclick="showTab('ser',1)">✏️ Ex.2 · LLAMARSE</div>
+        <div class="ex-sub2-item" id="ni-ser3" onclick="showTab('ser',2)">🧠 Ex.3 · Mixte</div>
+      </div>
+      <div class="ex-sub-item" id="ni-viv" onclick="showSection('viv',this)">VIVIR y TENER</div>
+      <div class="ex-sub2" id="ns-viv" style="display:none">
+        <div class="ex-sub2-item" id="ni-viv1" onclick="showTab('viv',0)">✏️ Ex.1 · VIVIR</div>
+        <div class="ex-sub2-item" id="ni-viv2" onclick="showTab('viv',1)">✏️ Ex.2 · TENER</div>
+        <div class="ex-sub2-item" id="ni-viv3" onclick="showTab('viv',2)">🧠 Ex.3 · Mixte</div>
+      </div>
+      <div class="ex-sub-item" id="ni-txt" onclick="showSection('txt',this)">Texte à compléter</div>
+      <div class="ex-sub2" id="ns-txt" style="display:none">
+        <div class="ex-sub2-item" id="ni-txt1" onclick="showTab('txt',0)">📖 Version 1 ★</div>
+        <div class="ex-sub2-item" id="ni-txt2" onclick="showTab('txt',1)">📖 Version 2 ★★</div>
+        <div class="ex-sub2-item" id="ni-txt3" onclick="showTab('txt',2)">🏆 Reto ★★★</div>
+      </div>
+    </div>
+    <a class="seq-item" href="comprension-lectora.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="comprension-oral-1.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <a class="seq-item" href="expresion-escrita.html"><div class="seq-dot"></div>Expresión escrita</a>
+    <a class="seq-item" href="expresion-oral.html"><div class="seq-dot"></div>Expresión oral</a>
+    <a class="seq-item" href="evaluaciones.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main" id="main-content">
+
+<!-- ART SECTION -->
+<div id="sec-art">
+  <div class="page-hdr"><div><div class="page-hdr-sub">5ème · A1 · Gramática</div><div class="page-hdr-title">Los artículos definidos e indefinidos</div></div><div class="page-hdr-badge">✏️ Grammaire</div></div>
+  <div id="art-rule" style="background:white;border-radius:14px;border:1px solid var(--gray-100);padding:1.1rem 1.5rem;margin-bottom:1.25rem;">
+    <div id="art-rule-title" style="font-size:12px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">📌 Rappel — Los artículos definidos</div>
+    <div class="art-grid">
+      <div class="art-cell m"><div class="art-big">el</div><div class="art-lbl">masc. sing.</div><div class="art-ex">el chico</div></div>
+      <div class="art-cell f"><div class="art-big">la</div><div class="art-lbl">fém. sing.</div><div class="art-ex">la chica</div></div>
+      <div class="art-cell m"><div class="art-big">los</div><div class="art-lbl">masc. plur.</div><div class="art-ex">los chicos</div></div>
+      <div class="art-cell f"><div class="art-big">las</div><div class="art-lbl">fém. plur.</div><div class="art-ex">las chicas</div></div>
+    </div>
+    <div style="font-size:12px;background:var(--purple-light);color:var(--purple);border-left:3px solid var(--purple);border-radius:8px;padding:7px 10px;margin-top:8px;">💡 En espagnol, tous les noms ont un genre. Les articles s'accordent toujours avec le nom.</div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('art',0);artRule('def')">Ejercicio 1 · Definidos</div>
+    <div class="tab" onclick="showTab('art',1);artRule('indef')">Ejercicio 2 · Indefinidos</div>
+  </div>
+  <div class="ex-panel active" id="art-p1">
+    <div class="intro"><span style="font-size:22px">🎯</span><div class="intro-text"><strong>Comment jouer :</strong> Écris l'article défini correct (el / la / los / las). L'indice de genre est affiché sur chaque carte.</div></div>
+    <div class="score-bar"><div><div class="score-num" id="a1-sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="a1-sf"></div></div><div class="score-msg" id="a1-sm">Commence !</div></div>
+    <div class="sec-lbl">Écris l'article défini</div>
+    <div class="word-grid" id="a1-grid"></div>
+    <div class="result" id="a1-res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="a1_reset()">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="a1_reset()">🔄 Recommencer</button><button class="btn-g" onclick="a1_checkAll()">✓ Tout vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="art-p2">
+    <div class="intro"><span style="font-size:22px">🔄</span><div class="intro-text"><strong>Comment jouer :</strong> Transforme avec l'article indéfini (un / una / unos / unas).</div></div>
+    <div class="score-bar"><div><div class="score-num" id="a2-sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="a2-sf"></div></div><div class="score-msg" id="a2-sm">Commence !</div></div>
+    <div class="sec-lbl">Transforme avec l'article indéfini</div>
+    <div class="trans-grid" id="a2-grid"></div>
+    <div class="result" id="a2-res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="a2_reset()">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="a2_reset()">🔄 Recommencer</button><button class="btn-g" onclick="a2_checkAll()">✓ Tout vérifier</button></div>
+  </div>
+</div>
+
+<!-- SER SECTION -->
+<div id="sec-ser" style="display:none">
+  <div class="page-hdr"><div><div class="page-hdr-sub">5ème · A1 · Gramática</div><div class="page-hdr-title">Los verbos SER y LLAMARSE</div></div><div class="page-hdr-badge">✏️ Conjugaison</div></div>
+  <div class="conj-wrap">
+    <div class="conj-card"><div class="conj-title" style="color:var(--purple)">🔵 <span>SER</span> — être</div>
+      <table class="conj-table" style="--c:var(--purple)"><tr><td>yo</td><td style="color:var(--purple);font-weight:600">soy</td></tr><tr><td>tú</td><td style="color:var(--purple);font-weight:600">eres</td></tr><tr><td>él/ella/usted</td><td style="color:var(--purple);font-weight:600">es</td></tr><tr><td>nosotros/as</td><td style="color:var(--purple);font-weight:600">somos</td></tr><tr><td>vosotros/as</td><td style="color:var(--purple);font-weight:600">sois</td></tr><tr><td>ellos/ellas/ustedes</td><td style="color:var(--purple);font-weight:600">son</td></tr></table>
+      <div class="conj-note" style="background:var(--purple-light);color:var(--purple);border-left:3px solid var(--purple)">💡 SER = identité, nationalité, origine, profession.</div></div>
+    <div class="conj-card"><div class="conj-title" style="color:var(--sage-dark)">🟢 <span>LLAMARSE</span> — s'appeler</div>
+      <table class="conj-table"><tr><td>yo</td><td style="color:var(--sage-dark);font-weight:600">me llamo</td></tr><tr><td>tú</td><td style="color:var(--sage-dark);font-weight:600">te llamas</td></tr><tr><td>él/ella/usted</td><td style="color:var(--sage-dark);font-weight:600">se llama</td></tr><tr><td>nosotros/as</td><td style="color:var(--sage-dark);font-weight:600">nos llamamos</td></tr><tr><td>vosotros/as</td><td style="color:var(--sage-dark);font-weight:600">os llamáis</td></tr><tr><td>ellos/ellas/ustedes</td><td style="color:var(--sage-dark);font-weight:600">se llaman</td></tr></table>
+      <div class="conj-note" style="background:var(--sage-light);color:var(--sage-dark);border-left:3px solid var(--sage)">💡 LLAMARSE = s'appeler. Toujours avec un pronom réfléchi (me/te/se…).</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('ser',0)">Exercice 1 · SER</div>
+    <div class="tab" onclick="showTab('ser',1)">Exercice 2 · LLAMARSE</div>
+    <div class="tab" onclick="showTab('ser',2)">Exercice 3 · Mixte</div>
+  </div>
+  <div class="ex-panel active" id="ser-p1">
+    <div class="intro"><span style="font-size:22px">🎯</span><div class="intro-text"><strong>Comment jouer :</strong> Complète avec la bonne forme de <strong>SER</strong>.</div></div>
+    <div class="score-bar"><div><div class="score-num" id="s1sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="s1sf"></div></div><div class="score-msg" id="s1sm">Commence !</div></div>
+    <div class="sec-lbl">Conjugue SER</div>
+    <div class="sent-list" id="s1list"></div>
+    <div class="result" id="s1res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('s1',SER_E1,'s1list','ser')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('s1',SER_E1,'s1list','ser')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('s1')">✓ Tout vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="ser-p2">
+    <div class="intro"><span style="font-size:22px">🎯</span><div class="intro-text"><strong>Comment jouer :</strong> Complète avec la bonne forme de <strong>LLAMARSE</strong>. N'oublie pas le pronom réfléchi !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="s2sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="s2sf"></div></div><div class="score-msg" id="s2sm">Commence !</div></div>
+    <div class="sec-lbl">Conjugue LLAMARSE</div>
+    <div class="sent-list" id="s2list"></div>
+    <div class="result" id="s2res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('s2',SER_E2,'s2list','llamarse')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('s2',SER_E2,'s2list','llamarse')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('s2')">✓ Tout vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="ser-p3">
+    <div class="intro"><span style="font-size:22px">🧠</span><div class="intro-text"><strong>Niveau difficile :</strong> SER et LLAMARSE mélangés — sans indices !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="s3sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="s3sf"></div></div><div class="score-msg" id="s3sm">¡Piensa bien!</div></div>
+    <div class="sec-lbl">SER o LLAMARSE — elige y conjuga</div>
+    <div class="sent-list" id="s3list"></div>
+    <div class="result" id="s3res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('s3',SER_E3,'s3list','mix')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('s3',SER_E3,'s3list','mix')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('s3')">✓ Tout vérifier</button></div>
+  </div>
+</div>
+
+<!-- VIV SECTION -->
+<div id="sec-viv" style="display:none">
+  <div class="page-hdr"><div><div class="page-hdr-sub">5ème · A1 · Gramática</div><div class="page-hdr-title">Los verbos VIVIR y TENER</div></div><div class="page-hdr-badge">✏️ Conjugaison</div></div>
+  <div class="conj-wrap">
+    <div class="conj-card"><div class="conj-title" style="color:#0369A1">🔵 <span>VIVIR</span> — habiter</div>
+      <table class="conj-table"><tr><td>yo</td><td style="color:#0369A1;font-weight:600">vivo</td></tr><tr><td>tú</td><td style="color:#0369A1;font-weight:600">vives</td></tr><tr><td>él/ella/usted</td><td style="color:#0369A1;font-weight:600">vive</td></tr><tr><td>nosotros/as</td><td style="color:#0369A1;font-weight:600">vivimos</td></tr><tr><td>vosotros/as</td><td style="color:#0369A1;font-weight:600">vivís</td></tr><tr><td>ellos/ellas/ustedes</td><td style="color:#0369A1;font-weight:600">viven</td></tr></table>
+      <div class="conj-note" style="background:#E0F2FE;color:#0369A1;border-left:3px solid #0369A1">💡 VIVIR = habiter. Suivi de <strong>en</strong> + ville/pays.</div></div>
+    <div class="conj-card"><div class="conj-title" style="color:var(--amber)">🟠 <span>TENER</span> — avoir</div>
+      <table class="conj-table"><tr><td>yo</td><td style="color:var(--amber);font-weight:600">tengo</td></tr><tr><td>tú</td><td style="color:var(--amber);font-weight:600">tienes</td></tr><tr><td>él/ella/usted</td><td style="color:var(--amber);font-weight:600">tiene</td></tr><tr><td>nosotros/as</td><td style="color:var(--amber);font-weight:600">tenemos</td></tr><tr><td>vosotros/as</td><td style="color:var(--amber);font-weight:600">tenéis</td></tr><tr><td>ellos/ellas/ustedes</td><td style="color:var(--amber);font-weight:600">tienen</td></tr></table>
+      <div class="conj-note" style="background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber)">💡 TENER = avoir (l'âge, la famille, les objets). <em>Tengo 12 años.</em></div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('viv',0)">Exercice 1 · VIVIR</div>
+    <div class="tab" onclick="showTab('viv',1)">Exercice 2 · TENER</div>
+    <div class="tab" onclick="showTab('viv',2)">Exercice 3 · Mixte</div>
+  </div>
+  <div class="ex-panel active" id="viv-p1">
+    <div class="intro"><span style="font-size:22px">🏠</span><div class="intro-text"><strong>Comment jouer :</strong> Complète avec la bonne forme de <strong>VIVIR</strong>.</div></div>
+    <div class="score-bar"><div><div class="score-num" id="v1sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="v1sf"></div></div><div class="score-msg" id="v1sm">Commence !</div></div>
+    <div class="sec-lbl">Conjugue VIVIR</div>
+    <div class="sent-list" id="v1list"></div>
+    <div class="result" id="v1res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('v1',VIV_E1,'v1list','vivir')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('v1',VIV_E1,'v1list','vivir')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('v1')">✓ Tout vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="viv-p2">
+    <div class="intro"><span style="font-size:22px">🎒</span><div class="intro-text"><strong>Comment jouer :</strong> Complète avec la bonne forme de <strong>TENER</strong>. Attention aux formes irrégulières !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="v2sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="v2sf"></div></div><div class="score-msg" id="v2sm">Commence !</div></div>
+    <div class="sec-lbl">Conjugue TENER</div>
+    <div class="sent-list" id="v2list"></div>
+    <div class="result" id="v2res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('v2',VIV_E2,'v2list','tener')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('v2',VIV_E2,'v2list','tener')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('v2')">✓ Tout vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="viv-p3">
+    <div class="intro"><span style="font-size:22px">🧠</span><div class="intro-text"><strong>Niveau difficile :</strong> VIVIR et TENER mélangés — sans indices !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="v3sn">0/18</div><div class="score-lbl">corrects</div></div><div class="score-track"><div class="score-bar-fill" id="v3sf"></div></div><div class="score-msg" id="v3sm">¡Piensa bien!</div></div>
+    <div class="sec-lbl">VIVIR o TENER — elige y conjuga</div>
+    <div class="sent-list" id="v3list"></div>
+    <div class="result" id="v3res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="verbReset('v3',VIV_E3,'v3list','mix')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="verbReset('v3',VIV_E3,'v3list','mix')">🔄 Recommencer</button><button class="btn-g" onclick="verbCheckAll('v3')">✓ Tout vérifier</button></div>
+  </div>
+</div>
+
+<!-- TXT SECTION -->
+<div id="sec-txt" style="display:none">
+  <div class="page-hdr"><div><div class="page-hdr-sub">5ème · A1 · Gramática</div><div class="page-hdr-title">Texte à compléter</div></div><div class="page-hdr-badge">📝 Synthèse</div></div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('txt',0)">Version 1 ★</div>
+    <div class="tab" onclick="showTab('txt',1)">Version 2 ★★</div>
+    <div class="tab" onclick="showTab('txt',2)">Reto ★★★</div>
+  </div>
+  <div class="ex-panel active" id="txt-p1">
+    <div class="intro"><span style="font-size:22px">📖</span><div class="intro-text"><strong>Comment jouer :</strong> Clique sur un mot dans la banque, puis sur le blanc dans le texte.</div></div>
+    <div class="score-bar"><div><div class="score-num" id="t1sn">0/12</div><div class="score-lbl">mots placés</div></div><div class="score-track"><div class="score-bar-fill" id="t1sf"></div></div><div class="score-msg" id="t1sm">Sélectionne un mot !</div></div>
+    <div class="bank-wrap"><div class="bank-lbl">Banque de mots</div><div class="bank-chips" id="t1bank"></div></div>
+    <div class="sec-lbl">Completa el texto</div>
+    <div id="t1text" class="txt-wrap"></div>
+    <div class="result" id="t1res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="resetTxt('t1')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="resetTxt('t1')">🔄 Recommencer</button><button class="btn-g" onclick="removeLast('t1')">↩ Enlever dernier</button><button class="btn-g" onclick="verifyTxt('t1')">✓ Vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="txt-p2">
+    <div class="intro"><span style="font-size:22px">📖</span><div class="intro-text"><strong>Comment jouer :</strong> Plus de mots, plus de contexte à analyser !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="t2sn">0/12</div><div class="score-lbl">mots placés</div></div><div class="score-track"><div class="score-bar-fill" id="t2sf"></div></div><div class="score-msg" id="t2sm">Sélectionne un mot !</div></div>
+    <div class="bank-wrap"><div class="bank-lbl">Banque de mots</div><div class="bank-chips" id="t2bank"></div></div>
+    <div class="sec-lbl">Completa el texto</div>
+    <div id="t2text" class="txt-wrap"></div>
+    <div class="result" id="t2res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="resetTxt('t2')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="resetTxt('t2')">🔄 Recommencer</button><button class="btn-g" onclick="removeLast('t2')">↩ Enlever dernier</button><button class="btn-g" onclick="verifyTxt('t2')">✓ Vérifier</button></div>
+  </div>
+  <div class="ex-panel" id="txt-p3">
+    <div class="intro"><span style="font-size:22px">🏆</span><div class="intro-text"><strong>¡Reto!</strong> Deux personnages, mots répétés — le plus difficile !</div></div>
+    <div class="score-bar"><div><div class="score-num" id="t3sn">0/13</div><div class="score-lbl">mots placés</div></div><div class="score-track"><div class="score-bar-fill" id="t3sf"></div></div><div class="score-msg" id="t3sm">¡Ánimo!</div></div>
+    <div class="bank-wrap"><div class="bank-lbl">Banque de mots</div><div class="bank-chips" id="t3bank"></div></div>
+    <div class="sec-lbl">Completa el texto</div>
+    <div id="t3text" class="txt-wrap"></div>
+    <div class="result" id="t3res"><div class="result-emoji"></div><div class="result-title"></div><div class="result-sub"></div><div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-p" onclick="resetTxt('t3')">🔄 Recommencer</button></div></div>
+    <div class="btn-row"><button class="btn-g" onclick="resetTxt('t3')">🔄 Recommencer</button><button class="btn-g" onclick="removeLast('t3')">↩ Enlever dernier</button><button class="btn-g" onclick="verifyTxt('t3')">✓ Vérifier</button></div>
+  </div>
+</div>
+
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════ UTILITIES ════════════
+function N(s){return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400);}
+function setLvl(el,cl,nv){document.querySelectorAll('.level-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');document.getElementById('nbadge').textContent=cl+' · '+nv;}
+let _lc=0,_lt=null;
+function handleLogoClick(){_lc++;clearTimeout(_lt);_lt=setTimeout(()=>_lc=0,800);if(_lc>=3){toast('🔓 Mode prof activé');_lc=0;}}
+function iw(ans){return Math.max(82,ans.length*10+20)+'px';}
+
+function updScore(nId,fId,mId,sc,tot){
+  document.getElementById(nId).textContent=sc+'/'+tot;
+  document.getElementById(fId).style.width=(sc/tot*100)+'%';
+  const m=['Commence !','Bien parti !','Continue !','Très bien !','Presque fini !','¡Perfecto!'];
+  document.getElementById(mId).textContent=m[Math.min(Math.floor(sc/tot*5),5)];
+}
+function showRes(id,sc,tot,err){
+  let e,t,s;
+  if(err===0){e='🌟';t='¡Perfecto! '+sc+'/'+tot;s='Aucune erreur ! Excellent travail !';}
+  else if(err<=3){e='😊';t='¡Muy bien!';s='Seulement '+err+' erreur(s) !';}
+  else if(err<=7){e='👍';t='¡Bien!';s=err+' erreur(s). Relis le tableau !';}
+  else{e='💪';t='¡Ánimo!';s='Recommence en consultant le tableau.';}
+  const p=document.getElementById(id);
+  p.querySelector('.result-emoji').textContent=e;
+  p.querySelector('.result-title').textContent=t;
+  p.querySelector('.result-sub').textContent=s;
+  p.classList.add('show');p.scrollIntoView({behavior:'smooth'});
+}
+
+// ════════════ NAVIGATION ════════════
+const SECS = ['art','ser','viv','txt'];
+function showSection(key, el){
+  SECS.forEach(k=>{
+    document.getElementById('sec-'+k).style.display = k===key ? 'block' : 'none';
+    document.getElementById('ni-'+k).classList.toggle('active', k===key);
+    const ns=document.getElementById('ns-'+k);
+    if(ns) ns.style.display = k===key ? '' : 'none';
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showTab(sec, idx){
+  const panels = document.querySelectorAll('#sec-'+sec+' .ex-panel');
+  const tabs = document.querySelectorAll('#sec-'+sec+' .tab');
+  panels.forEach((p,i)=>p.classList.toggle('active',i===idx));
+  tabs.forEach((t,i)=>t.classList.toggle('active',i===idx));
+  // update sub-nav
+  for(let i=1;i<=3;i++){
+    const el=document.getElementById('ni-'+sec+i);
+    if(el) el.classList.toggle('active', i===idx+1);
+  }
+}
+
+// ════════════════════════════════════
+// DATA
+// ════════════════════════════════════
+const E1_WORDS = [
+  // niveau facile — mots connus
+  {word:'chico',     fr:'garçon',         gender:'m',  article:'el'},
+  {word:'chica',     fr:'fille',          gender:'f',  article:'la'},
+  {word:'profesor',  fr:'professeur (m)', gender:'m',  article:'el'},
+  {word:'profesora', fr:'professeure',    gender:'f',  article:'la'},
+  {word:'libro',     fr:'livre',          gender:'m',  article:'el'},
+  {word:'mochila',   fr:'cartable',       gender:'f',  article:'la'},
+  // niveau moyen — vocabulaire élargi
+  {word:'ciudad',    fr:'ville',          gender:'f',  article:'la'},
+  {word:'país',      fr:'pays',           gender:'m',  article:'el'},
+  {word:'amigo',     fr:'ami',            gender:'m',  article:'el'},
+  {word:'amiga',     fr:'amie',           gender:'f',  article:'la'},
+  {word:'casa',      fr:'maison',         gender:'f',  article:'la'},
+  {word:'perro',     fr:'chien',          gender:'m',  article:'el'},
+  // niveau plus difficile — accords moins évidents
+  {word:'mapa',      fr:'carte (géo)',    gender:'m',  article:'el', note:'⚠️ mapa = masculin (exception !)'},
+  {word:'día',       fr:'jour',           gender:'m',  article:'el', note:'⚠️ día = masculin'},
+  {word:'problema',  fr:'problème',       gender:'m',  article:'el', note:'⚠️ problema = masculin'},
+  // pluriels
+  {word:'libros',    fr:'livres',         gender:'mp', article:'los'},
+  {word:'amigas',    fr:'amies',          gender:'fp', article:'las'},
+  {word:'chicos',    fr:'garçons',        gender:'mp', article:'los'},
+];
+
+const E2_WORDS = [
+  // SINGULIER masculin → un
+  {given:'el chico',      answer:'un chico',      hint:'masc. sing. → un'},
+  {given:'el libro',      answer:'un libro',      hint:'masc. sing. → un'},
+  {given:'el profesor',   answer:'un profesor',   hint:'masc. sing. → un'},
+  {given:'el perro',      answer:'un perro',      hint:'masc. sing. → un'},
+  {given:'el país',       answer:'un país',       hint:'masc. sing. → un'},
+  {given:'el problema',   answer:'un problema',   hint:'masc. sing. → un ⚠️ problema est masculin !'},
+  // SINGULIER féminin → una
+  {given:'la chica',      answer:'una chica',     hint:'fém. sing. → una'},
+  {given:'la profesora',  answer:'una profesora', hint:'fém. sing. → una'},
+  {given:'la ciudad',     answer:'una ciudad',    hint:'fém. sing. → una'},
+  {given:'la mochila',    answer:'una mochila',   hint:'fém. sing. → una'},
+  {given:'la casa',       answer:'una casa',      hint:'fém. sing. → una'},
+  {given:'la amiga',      answer:'una amiga',     hint:'fém. sing. → una'},
+  // PLURIEL masculin → unos
+  {given:'los chicos',    answer:'unos chicos',   hint:'masc. plur. → unos'},
+  {given:'los libros',    answer:'unos libros',   hint:'masc. plur. → unos'},
+  {given:'los profesores',answer:'unos profesores',hint:'masc. plur. → unos'},
+  // PLURIEL féminin → unas
+  {given:'las chicas',    answer:'unas chicas',   hint:'fém. plur. → unas'},
+  {given:'las mochilas',  answer:'unas mochilas', hint:'fém. plur. → unas'},
+  {given:'las ciudades',  answer:'unas ciudades', hint:'fém. plur. → unas'},
+];
+const SER_E1 = [
+  // yo
+  {before:'Yo ',             after:' español.',              answer:'soy',    subject:'yo',                     fr:'Je suis espagnol.'},
+  {before:'Yo ',             after:' de Madrid.',            answer:'soy',    subject:'yo',                     fr:'Je suis de Madrid.'},
+  {before:'Yo no ',          after:' francés, ',             answer:'soy',    subject:'yo',                     fr:'Je ne suis pas français,'},
+  // tú
+  {before:'Tú ',             after:' muy amable.',           answer:'eres',   subject:'tú',                     fr:'Tu es très gentil(le).'},
+  {before:'¿De dónde ',      after:' tú?',                   answer:'eres',   subject:'tú',                     fr:'D\'où es-tu ?'},
+  {before:'Tú no ',          after:' argentino.',            answer:'eres',   subject:'tú',                     fr:'Tu n\'es pas argentin.'},
+  // él/ella
+  {before:'Ella ',           after:' profesora.',            answer:'es',     subject:'él / ella',              fr:'Elle est professeure.'},
+  {before:'Carlos ',         after:' de Colombia.',          answer:'es',     subject:'él / ella',              fr:'Carlos est de Colombie.'},
+  {before:'Mi amiga ',       after:' colombiana.',           answer:'es',     subject:'él / ella',              fr:'Mon amie est colombienne.'},
+  // nosotros
+  {before:'Nosotros ',       after:' estudiantes.',          answer:'somos',  subject:'nosotros',               fr:'Nous sommes élèves.'},
+  {before:'Nosotros ',       after:' de España.',            answer:'somos',  subject:'nosotros',               fr:'Nous sommes d\'Espagne.'},
+  // vosotros
+  {before:'Vosotros ',       after:' españoles.',            answer:'sois',   subject:'vosotros',               fr:'Vous êtes espagnols.'},
+  {before:'¿Vosotros ',      after:' de México?',            answer:'sois',   subject:'vosotros',               fr:'Vous êtes du Mexique ?'},
+  // ellos/ellas
+  {before:'Ellos ',          after:' altos y simpáticos.',   answer:'son',    subject:'ellos / ellas',          fr:'Ils sont grands et sympas.'},
+  {before:'Ana y María ',    after:' argentinas.',           answer:'son',    subject:'ellos / ellas',          fr:'Ana et María sont argentines.'},
+  // mixed harder
+  {before:'¿Cómo ',          after:' usted?',                answer:'es',     subject:'usted',                  fr:'Comment allez-vous ?'},
+  {before:'Pedro y yo ',     after:' amigos.',               answer:'somos',  subject:'nosotros',               fr:'Pedro et moi sommes amis.'},
+  {before:'Tu profesora ',   after:' muy simpática.',        answer:'es',     subject:'él / ella',              fr:'Ta prof est très sympa.'},
+];
+
+const SER_E2 = [
+  // yo
+  {before:'Yo ',             after:' Ana.',                  answer:'me llamo',   subject:'yo',           fr:'Je m\'appelle Ana.'},
+  {before:'Yo ',             after:' Carlos Ramírez.',       answer:'me llamo',   subject:'yo',           fr:'Je m\'appelle Carlos Ramírez.'},
+  {before:'Yo no ',          after:' Pedro.',                answer:'me llamo',   subject:'yo',           fr:'Je ne m\'appelle pas Pedro.'},
+  // tú
+  {before:'¿Cómo ',          after:' tú?',                   answer:'te llamas',  subject:'tú',           fr:'Comment t\'appelles-tu ?'},
+  {before:'Tú ',             after:' Diego, ¿no?',           answer:'te llamas',  subject:'tú',           fr:'Tu t\'appelles Diego, non ?'},
+  {before:'¿Cómo ',          after:'?',                      answer:'te llamas',  subject:'tú',           fr:'Comment tu t\'appelles ?'},
+  // él/ella
+  {before:'Él ',             after:' Roberto.',              answer:'se llama',   subject:'él / ella',    fr:'Il s\'appelle Roberto.'},
+  {before:'Mi profesora ',   after:' Lucía.',                answer:'se llama',   subject:'él / ella',    fr:'Ma prof s\'appelle Lucía.'},
+  {before:'¿Cómo ',          after:' tu amiga?',             answer:'se llama',   subject:'él / ella',    fr:'Comment s\'appelle ton amie ?'},
+  // nosotros
+  {before:'Nosotros ',       after:' Pablo y Ana.',          answer:'nos llamamos',subject:'nosotros',    fr:'Nous nous appelons Pablo et Ana.'},
+  {before:'Nosotros ',       after:' los García.',           answer:'nos llamamos',subject:'nosotros',    fr:'Nous nous appelons les García.'},
+  // vosotros
+  {before:'¿Cómo ',          after:' vosotros?',             answer:'os llamáis', subject:'vosotros',     fr:'Comment vous appelez-vous ?'},
+  {before:'Vosotros ',       after:' Emma y Léa.',           answer:'os llamáis', subject:'vosotros',     fr:'Vous vous appelez Emma et Léa.'},
+  // ellos/ellas
+  {before:'Ellos ',          after:' Carlos y Luis.',        answer:'se llaman',  subject:'ellos / ellas',fr:'Ils s\'appellent Carlos et Luis.'},
+  {before:'Mis amigos ',     after:' Juan y Pedro.',         answer:'se llaman',  subject:'ellos / ellas',fr:'Mes amis s\'appellent Juan et Pedro.'},
+  {before:'¿Cómo ',          after:' tus profesores?',       answer:'se llaman',  subject:'ellos / ellas',fr:'Comment s\'appellent tes profs ?'},
+  // usted/ustedes
+  {before:'¿Cómo ',          after:' usted?',                answer:'se llama',   subject:'usted',        fr:'Comment vous appelez-vous ? (formel)'},
+  {before:'¿Cómo ',          after:' ustedes?',              answer:'se llaman',  subject:'ustedes',      fr:'Comment vous appelez-vous ? (pl.)'},
+];
+
+const SER_E3 = [
+  {before:'Yo ',         after:' Ana.',           answers:['me llamo'],             subject:'yo',           fr:'Je m\'appelle Ana.'},
+  {before:'Yo ',         after:' española.',           answers:['soy'],                  subject:'yo',           fr:'Je suis espagnole.'},
+  {before:'Tú ',         after:' muy simpático.',      answers:['eres'],                 subject:'tú',           fr:'Tu es très sympa.'},
+  {before:'¿Cómo ',      after:' tú?',            answers:['te llamas'],            subject:'tú',           fr:'Comment t\'appelles-tu ?'},
+  {before:'Él ',         after:' de México.',          answers:['es'],                   subject:'él',           fr:'Il est du Mexique.'},
+  {before:'Ella ',       after:' Sofía.',         answers:['se llama'],             subject:'ella',         fr:'Elle s\'appelle Sofía.'},
+  {before:'Nosotros ',   after:' estudiantes.',        answers:['somos'],                subject:'nosotros',     fr:'Nous sommes élèves.'},
+  {before:'Nosotros ',   after:' Pablo y Ana.',   answers:['nos llamamos'],         subject:'nosotros',     fr:'Nous nous appelons Pablo et Ana.'},
+  {before:'¿Vosotros ',  after:' colombianos?',        answers:['sois'],                 subject:'vosotros',     fr:'Vous êtes colombiens ?'},
+  {before:'¿Cómo ',      after:' vosotros?',      answers:['os llamáis'],           subject:'vosotros',     fr:'Comment vous appelez-vous ?'},
+  {before:'Ellos ',      after:' altos.',              answers:['son'],                  subject:'ellos',        fr:'Ils sont grands.'},
+  {before:'Ellos ',      after:' Carlos y Luis.', answers:['se llaman'],            subject:'ellos',        fr:'Ils s\'appellent Carlos et Luis.'},
+  // harder — no verb hint
+  {before:'Soy de España, ',after:' español.',               answers:['soy'],                  subject:'yo',           fr:'Je suis d\'Espagne, je suis espagnol.'},
+  {before:'¿Cómo ',      after:' tu profesora?',             answers:['se llama'],             subject:'ella',         fr:'Comment s\'appelle ta prof ?'},
+  {before:'Ana y María ', after:' argentinas.',              answers:['son'],                  subject:'ellas',        fr:'Ana et María sont argentines.'},
+  {before:'¿De dónde ',  after:' vosotros?',                 answers:['sois'],                 subject:'vosotros',     fr:'D\'où êtes-vous ?'},
+  {before:'Mi amigo ',   after:' Pedro Venegas.',            answers:['se llama'],             subject:'él',           fr:'Mon ami s\'appelle Pedro Venegas.'},
+  {before:'Pedro y yo ', after:' de Madrid.',                answers:['somos'],                subject:'nosotros',     fr:'Pedro et moi sommes de Madrid.'},
+];
+const VIV_E1 = [
+  // yo
+  {before:'Yo ',              after:' en Madrid.',           answer:'vivo',    subject:'yo'},
+  {before:'Yo ',              after:' en un piso pequeño.',  answer:'vivo',    subject:'yo'},
+  {before:'No ',              after:' en Francia.',          answer:'vivo',    subject:'yo'},
+  // tú
+  {before:'Tú ',              after:' en Barcelona.',        answer:'vives',   subject:'tú'},
+  {before:'¿Dónde ',          after:' tú?',                  answer:'vives',   subject:'tú'},
+  {before:'¿En qué ciudad ',  after:'?',                     answer:'vives',   subject:'tú'},
+  // él/ella
+  {before:'Ella ',            after:' en París.',            answer:'vive',    subject:'él / ella'},
+  {before:'Mi amigo ',        after:' en Colombia.',         answer:'vive',    subject:'él / ella'},
+  {before:'Carlos ',          after:' en Bogotá.',           answer:'vive',    subject:'él / ella'},
+  // nosotros
+  {before:'Nosotros ',        after:' en España.',           answer:'vivimos', subject:'nosotros'},
+  {before:'Mi familia y yo ', after:' en Valencia.',         answer:'vivimos', subject:'nosotros'},
+  // vosotros
+  {before:'¿Vosotros ',       after:' en México?',           answer:'vivís',   subject:'vosotros'},
+  {before:'Vosotros ',        after:' en un pueblo pequeño.',answer:'vivís',   subject:'vosotros'},
+  // ellos
+  {before:'Ellos ',           after:' en Lima.',             answer:'viven',   subject:'ellos / ellas'},
+  {before:'Mis amigos ',      after:' en Argentina.',        answer:'viven',   subject:'ellos / ellas'},
+  // harder — inversion or question
+  {before:'¿Dónde ',          after:' tu familia?',          answer:'vive',    subject:'él / ella'},
+  {before:'Ana y María ',     after:' en Chile.',            answer:'viven',   subject:'ellos / ellas'},
+  {before:'Pedro y yo ',      after:' en Sevilla.',          answer:'vivimos', subject:'nosotros'},
+];
+
+const VIV_E2 = [
+  // yo
+  {before:'Yo ',              after:' 12 años.',             answer:'tengo',   subject:'yo'},
+  {before:'Yo ',              after:' un perro.',            answer:'tengo',   subject:'yo'},
+  {before:'No ',              after:' hermanos.',            answer:'tengo',   subject:'yo'},
+  // tú
+  {before:'Tú ',              after:' 11 años.',             answer:'tienes',  subject:'tú'},
+  {before:'¿Cuántos años ',   after:' tú?',                  answer:'tienes',  subject:'tú'},
+  {before:'¿ ',               after:' tú una mochila nueva?',answer:'tienes',  subject:'tú'},
+  // él/ella
+  {before:'Ella ',            after:' dos hermanas.',        answer:'tiene',   subject:'él / ella'},
+  {before:'Pedro ',           after:' 13 años.',             answer:'tiene',   subject:'él / ella'},
+  {before:'Mi profesor ',     after:' muchos libros.',       answer:'tiene',   subject:'él / ella'},
+  // nosotros
+  {before:'Nosotros ',        after:' un gato muy bonito.',  answer:'tenemos', subject:'nosotros'},
+  {before:'Mi familia y yo ', after:' una casa grande.',     answer:'tenemos', subject:'nosotros'},
+  // vosotros
+  {before:'¿Vosotros ',       after:' clase de español hoy?',answer:'tenéis',  subject:'vosotros'},
+  {before:'Vosotros ',        after:' mucha suerte.',        answer:'tenéis',  subject:'vosotros'},
+  // ellos
+  {before:'Ellos ',           after:' muchos amigos.',       answer:'tienen',  subject:'ellos / ellas'},
+  {before:'Ana y Pedro ',     after:' 12 años.',             answer:'tienen',  subject:'ellos / ellas'},
+  // harder
+  {before:'¿Cuántos años ',   after:' tu amiga?',            answer:'tiene',   subject:'él / ella'},
+  {before:'Carlos y yo ',     after:' dos perros.',          answer:'tenemos', subject:'nosotros'},
+  {before:'¿ ',               after:' vosotros muchos deberes?', answer:'tenéis', subject:'vosotros'},
+];
+
+const VIV_E3 = [
+  {before:'Yo ',              after:' en Madrid.',                answers:['vivo'],    subject:'yo'},
+  {before:'Yo ',              after:' 12 años.',                  answers:['tengo'],   subject:'yo'},
+  {before:'Tú ',              after:' en Barcelona.',             answers:['vives'],   subject:'tú'},
+  {before:'¿Cuántos años ',   after:' tú?',                       answers:['tienes'],  subject:'tú'},
+  {before:'Ella ',            after:' en París.',                 answers:['vive'],    subject:'ella'},
+  {before:'Él ',              after:' dos hermanas.',             answers:['tiene'],   subject:'él'},
+  {before:'Nosotros ',        after:' en Valencia.',              answers:['vivimos'], subject:'nosotros'},
+  {before:'Mi familia y yo ', after:' una casa grande.',          answers:['tenemos'], subject:'nosotros'},
+  {before:'¿Vosotros ',       after:' en México?',                answers:['vivís'],   subject:'vosotros'},
+  {before:'Vosotros ',        after:' mucha suerte.',             answers:['tenéis'],  subject:'vosotros'},
+  {before:'Ellos ',           after:' en Lima.',                  answers:['viven'],   subject:'ellos'},
+  {before:'Ana y Pedro ',     after:' 12 años.',                  answers:['tienen'],  subject:'ellos'},
+  // harder — no subject pronoun
+  {before:'Mi amigo Carlos ', after:' en Bogotá.',                answers:['vive'],    subject:'él'},
+  {before:'¿Dónde ',          after:' tu familia?',               answers:['vive'],    subject:'él / ella'},
+  {before:'Pedro y yo ',      after:' en Sevilla.',               answers:['vivimos'], subject:'nosotros'},
+  {before:'Carlos y yo ',     after:' dos perros.',               answers:['tenemos'], subject:'nosotros'},
+  {before:'¿Cuántos años ',   after:' tu profesora?',             answers:['tiene'],   subject:'él / ella'},
+  {before:'Ana y María ',     after:' muchos amigos en Chile.',   answers:['tienen'],  subject:'ellos'},
+];
+const TEXTS = {
+  e1: {
+    total: 12,
+    words: ['me','soy','Tengo','vivo','llama','es','vive','tiene','somos','Cómo','dónde','tienes'],
+    segments: [
+      {t:'text', c:'Hola. '},
+      {t:'blank', id:'b1', a:'me'},
+      {t:'text', c:' llamo Lucas y '},
+      {t:'blank', id:'b2', a:'soy'},
+      {t:'text', c:' español. '},
+      {t:'blank', id:'b3', a:'Tengo'},
+      {t:'text', c:' doce años y '},
+      {t:'blank', id:'b4', a:'vivo'},
+      {t:'text', c:' en Madrid. Mi amiga se '},
+      {t:'blank', id:'b5', a:'llama'},
+      {t:'text', c:' Sofía. Ella '},
+      {t:'blank', id:'b6', a:'es'},
+      {t:'text', c:' argentina y '},
+      {t:'blank', id:'b7', a:'vive'},
+      {t:'text', c:' en Buenos Aires. Sofía '},
+      {t:'blank', id:'b8', a:'tiene'},
+      {t:'text', c:' trece años. Nosotros '},
+      {t:'blank', id:'b9', a:'somos'},
+      {t:'text', c:' estudiantes y hablamos español. ¿'},
+      {t:'blank', id:'b10', a:'Cómo'},
+      {t:'text', c:' te llamas? ¿De '},
+      {t:'blank', id:'b11', a:'dónde'},
+      {t:'text', c:' eres? ¿Cuántos años '},
+      {t:'blank', id:'b12', a:'tienes'},
+      {t:'text', c:'?'},
+    ]
+  },
+
+  e2: {
+    total: 12,
+    words: ['Soy','vivo','Tengo','llama','es','vive','Tiene','somos','su','Cómo','dónde','Vives'],
+    // note: 12 unique words but 'su' and some repeat from context — we add extras
+    segments: [
+      {t:'text', c:'Hola. Mi nombre es Lucas. '},
+      {t:'blank', id:'b1', a:'Soy'},
+      {t:'text', c:' español y '},
+      {t:'blank', id:'b2', a:'vivo'},
+      {t:'text', c:' en Madrid. '},
+      {t:'blank', id:'b3', a:'Tengo'},
+      {t:'text', c:' doce años y mi color favorito es el azul. Mi amiga Sofía se '},
+      {t:'blank', id:'b4', a:'llama'},
+      {t:'text', c:' Sofía García. Ella '},
+      {t:'blank', id:'b5', a:'es'},
+      {t:'text', c:' argentina y '},
+      {t:'blank', id:'b6', a:'vive'},
+      {t:'text', c:' en Buenos Aires. '},
+      {t:'blank', id:'b7', a:'Tiene'},
+      {t:'text', c:' trece años y su mascota es un gato. Nosotros '},
+      {t:'blank', id:'b8', a:'somos'},
+      {t:'text', c:' amigos. Mi ciudad es grande y '},
+      {t:'blank', id:'b9', a:'su'},
+      {t:'text', c:' ciudad también es muy bonita. ¿'},
+      {t:'blank', id:'b10', a:'Cómo'},
+      {t:'text', c:' te llamas? ¿De '},
+      {t:'blank', id:'b11', a:'dónde'},
+      {t:'text', c:' eres? ¿'},
+      {t:'blank', id:'b12', a:'Vives'},
+      {t:'text', c:' en una ciudad grande?'},
+    ]
+  },
+
+  e3: {
+    total: 13,
+    words: ['es','vive','Tiene','llama','es','vive','Tiene','Mi','Mi','son','Cómo','vives','tienes'],
+    // note: some words repeat — we handle duplicates with unique ids
+    segments: [
+      {t:'text', c:'Lucas y Sofía son amigos. Lucas '},
+      {t:'blank', id:'b1', a:'es'},
+      {t:'text', c:' mexicano y '},
+      {t:'blank', id:'b2', a:'vive'},
+      {t:'text', c:' en Guadalajara. '},
+      {t:'blank', id:'b3', a:'Tiene'},
+      {t:'text', c:' doce años. Sofía se '},
+      {t:'blank', id:'b4', a:'llama'},
+      {t:'text', c:' Sofía Pérez. Ella '},
+      {t:'blank', id:'b5', a:'es'},
+      {t:'text', c:' chilena y '},
+      {t:'blank', id:'b6', a:'vive'},
+      {t:'text', c:' en Santiago. '},
+      {t:'blank', id:'b7', a:'Tiene'},
+      {t:'text', c:' trece años. Lucas dice: «'},
+      {t:'blank', id:'b8', a:'Mi'},
+      {t:'text', c:' escuela es grande». Sofía responde: «'},
+      {t:'blank', id:'b9', a:'Mi'},
+      {t:'text', c:' escuela también es grande». Los dos '},
+      {t:'blank', id:'b10', a:'son'},
+      {t:'text', c:' estudiantes y hablan español. ¿'},
+      {t:'blank', id:'b11', a:'Cómo'},
+      {t:'text', c:' te llamas? ¿Dónde '},
+      {t:'blank', id:'b12', a:'vives'},
+      {t:'text', c:'? ¿Cuántos años '},
+      {t:'blank', id:'b13', a:'tienes'},
+      {t:'text', c:'?'},
+    ]
+  }
+};
+
+// ════════════════════════════════════
+// ARTICLES — Ex1 definidos
+// ════════════════════════════════════
+const GB = {m:'M · masc.',f:'F · fém.',mp:'MP · masc. plur.',fp:'FP · fém. plur.'};
+let a1_items=[], a1_sc=0, a1_err=0;
+
+function a1_build(){
+  a1_items = shuf(E1_WORDS).map((w,i)=>{return {...w,id:i+1,solved:false};});
+  const grid = document.getElementById('a1-grid');
+  grid.innerHTML = '';
+  a1_items.forEach(w=>{
+    const card = document.createElement('div');
+    card.className='word-card'; card.id='a1c'+w.id;
+    card.innerHTML = `
+      <div class="word-top">
+        <span class="word-num">${w.id}.</span>
+        <span class="gbadge ${w.gender}">${GB[w.gender]}</span>
+      </div>
+      <div class="word-es">${w.word}</div>
+      <div class="word-fr-lbl">${w.fr}</div>
+      <div class="irow">
+        <input class="art-inp" id="a1i${w.id}" maxlength="4" placeholder="___" autocomplete="off" spellcheck="false">
+        <span class="word-after">${w.word}</span>
+        <button class="btn-s" onclick="a1_check(${w.id})">OK</button>
+      </div>`;
+    grid.appendChild(card);
+    document.getElementById('a1i'+w.id).addEventListener('keydown', e=>{if(e.key==='Enter')a1_check(w.id);});
+  });
+}
+function a1_check(id){
+  const w=a1_items.find(x=>x.id===id); if(!w||w.solved)return;
+  const inp=document.getElementById('a1i'+id);
+  const val=N(inp.value); if(!val){toast('Écris un article !');return;}
+  if(val===N(w.article)){
+    w.solved=true; inp.className='art-inp ok'; inp.value=w.article;
+    document.getElementById('a1c'+id).className='word-card ok';
+    inp.nextElementSibling.nextElementSibling.className='btn-s hidden';
+    a1_sc++; updScore('a1-sn','a1-sf','a1-sm',a1_sc,18);
+    toast('✓ ¡Muy bien! '+w.article+' '+w.word);
+    if(a1_sc===18) setTimeout(()=>showRes('a1-res',a1_sc,18,a1_err),600);
+  } else {
+    a1_err++; inp.className='art-inp ko';
+    document.getElementById('a1c'+id).className='word-card ko';
+    toast('✗ Réessaie !');
+    setTimeout(()=>{document.getElementById('a1c'+id).className='word-card';inp.className='art-inp';inp.value='';inp.focus();},700);
+  }
+}
+function a1_checkAll(){ a1_items.forEach(w=>{if(!w.solved){const inp=document.getElementById('a1i'+w.id);if(inp&&inp.value.trim())a1_check(w.id);}});}
+function a1_reset(){a1_sc=0;a1_err=0;document.getElementById('a1-res').classList.remove('show');a1_build();updScore('a1-sn','a1-sf','a1-sm',0,18);}
+
+// ════════════════════════════════════
+// ARTICLES — Ex2 indefinidos
+// ════════════════════════════════════
+let a2_items=[], a2_sc=0, a2_err=0;
+function a2_build(){
+  a2_items = shuf(E2_WORDS).map((w,i)=>{return {...w,id:i+1,solved:false};});
+  const grid=document.getElementById('a2-grid'); grid.innerHTML='';
+  a2_items.forEach(w=>{
+    const card=document.createElement('div'); card.className='trans-card'; card.id='a2c'+w.id;
+    card.innerHTML=`
+      <div class="irow" style="gap:5px">
+        <span style="font-size:11px;font-weight:700;color:var(--gray-400)">${w.id}.</span>
+        <span class="given">${w.given} →</span>
+      </div>
+      <div class="irow">
+        <input class="trans-inp" id="a2i${w.id}" placeholder="Écris ici..." autocomplete="off" spellcheck="false">
+        <button class="btn-s" onclick="a2_check(${w.id})">OK</button>
+      </div>`;
+    grid.appendChild(card);
+    document.getElementById('a2i'+w.id).addEventListener('keydown',e=>{if(e.key==='Enter')a2_check(w.id);});
+  });
+}
+function a2_check(id){
+  const w=a2_items.find(x=>x.id===id); if(!w||w.solved)return;
+  const inp=document.getElementById('a2i'+id);
+  const val=N(inp.value); if(!val){toast('Écris ta réponse !');return;}
+  if(val===N(w.answer)){
+    w.solved=true; inp.className='trans-inp ok'; inp.value=w.answer;
+    document.getElementById('a2c'+id).className='trans-card ok';
+    inp.nextElementSibling.className='btn-s hidden';
+    a2_sc++; updScore('a2-sn','a2-sf','a2-sm',a2_sc,18);
+    toast('✓ ¡Perfecto! '+w.answer);
+    if(a2_sc===18) setTimeout(()=>showRes('a2-res',a2_sc,18,a2_err),600);
+  } else {
+    a2_err++; inp.className='trans-inp ko';
+    document.getElementById('a2c'+id).className='trans-card ko';
+    toast('✗ Vérifie le genre et le nombre !');
+    setTimeout(()=>{document.getElementById('a2c'+id).className='trans-card';inp.className='trans-inp';inp.value='';inp.focus();},700);
+  }
+}
+function a2_checkAll(){ a2_items.forEach(w=>{if(!w.solved){const inp=document.getElementById('a2i'+w.id);if(inp&&inp.value.trim())a2_check(w.id);}});}
+function a2_reset(){a2_sc=0;a2_err=0;document.getElementById('a2-res').classList.remove('show');a2_build();updScore('a2-sn','a2-sf','a2-sm',0,18);}
+
+// ════════════════════════════════════
+// VERBS — shared builder
+// ════════════════════════════════════
+function buildVerbEx(sents, listId, pfx, vbType){
+  const items = shuf(sents).map((s,i)=>{return {...s,id:i+1,solved:false};});
+  VS[pfx].items = items;
+  const list = document.getElementById(listId); list.innerHTML='';
+  items.forEach(s=>{
+    const card=document.createElement('div'); card.className='sent-card'; card.id=pfx+'c'+s.id;
+    const answers = s.answers || [s.answer];
+    const answ0 = answers[0];
+    const vb = vbType==='mix'
+      ? (answ0.includes('llamo')||answ0.includes('llamas')||answ0.includes('llama')||answ0.includes('llamamos')||answ0.includes('llamáis')||answ0.includes('llaman') ? 'llamarse'
+        : answ0==='vivo'||answ0==='vives'||answ0==='vive'||answ0==='vivimos'||answ0==='vivís'||answ0==='viven' ? 'vivir'
+        : answ0==='tengo'||answ0==='tienes'||answ0==='tiene'||answ0==='tenemos'||answ0==='tenéis'||answ0==='tienen' ? 'tener'
+        : 'ser')
+      : vbType;
+    const badgeHtml = vbType!=='mix' ? `<span class="vbadge ${vb}">${vb.toUpperCase()}</span>` : '';
+    card.innerHTML=`
+      <div class="sent-top">
+        <span class="sent-num">${s.id}.</span>
+        ${badgeHtml}
+        <span class="stag">${s.subject}</span>
+      </div>
+      <div class="sent-body">
+        <span>${s.before}</span>
+        <input class="verb-inp" id="${pfx}i${s.id}" placeholder="___" autocomplete="off" spellcheck="false" style="width:${iw(answ0)}">
+        <span>${s.after}</span>
+      </div>
+      <div class="arow">
+        <button class="btn-s" id="${pfx}b${s.id}" onclick="verbCheckById('${pfx}',${s.id})">OK</button>
+      </div>
+      <div class="fbline" id="${pfx}f${s.id}"></div>`;
+    list.appendChild(card);
+    document.getElementById(pfx+'i'+s.id).addEventListener('keydown',e=>{if(e.key==='Enter')verbCheckById(pfx,s.id);});
+  });
+  return items;
+}
+
+// State map for verb exercises
+const VS = {};
+function verbCheck(pfx, s, id){
+  if(s.solved) return;
+  const inp=document.getElementById(pfx+'i'+id);
+  const val=N(inp.value); if(!val){toast('Écris ta réponse !');return;}
+  const answers=s.answers||[s.answer];
+  const ok=answers.some(a=>N(a)===val);
+  const card=document.getElementById(pfx+'c'+id);
+  const fb=document.getElementById(pfx+'f'+id);
+  if(ok){
+    s.solved=true; inp.className='verb-inp ok'; inp.value=answers[0];
+    card.className='sent-card ok';
+    document.getElementById(pfx+'b'+id).className='btn-s hidden';
+    fb.className='fbline ok'; fb.textContent='✓ ¡Correcto!';
+    VS[pfx].sc++; updScore(pfx+'sn',pfx+'sf',pfx+'sm',VS[pfx].sc,18);
+    toast('✓ ¡Muy bien! '+answers[0]);
+    if(VS[pfx].sc===18) setTimeout(()=>showRes(pfx+'res',VS[pfx].sc,18,VS[pfx].err),600);
+  } else {
+    VS[pfx].err++;
+    inp.className='verb-inp ko'; card.className='sent-card ko';
+    fb.className='fbline ko'; fb.textContent='✗ Réessaie — regarde bien le sujet !';
+    toast('✗ Pas tout à fait !');
+    setTimeout(()=>{card.className='sent-card';inp.className='verb-inp';inp.value='';inp.focus();},700);
+  }
+}
+function verbCheckById(pfx,id){
+  const s = VS[pfx].items.find(x=>x.id===id);
+  if(s) verbCheck(pfx,s,id);
+}
+function verbCheckAll(pfx){
+  (VS[pfx].items||[]).forEach(s=>{
+    if(!s.solved){
+      const inp=document.getElementById(pfx+'i'+s.id);
+      if(inp&&inp.value.trim()) verbCheck(pfx,s,s.id);
+    }
+  });
+}
+function verbReset(pfx,sents,listId,vbType){
+  VS[pfx]={sc:0,err:0,items:[]};
+  document.getElementById(pfx+'res').classList.remove('show');
+  buildVerbEx(sents,listId,pfx,vbType);
+  updScore(pfx+'sn',pfx+'sf',pfx+'sm',0,18);
+}
+
+// ════════════════════════════════════
+// TEXT — shared
+// ════════════════════════════════════
+const TS = {};
+function buildTxt(exKey){
+  const data=TEXTS[exKey];
+  const pfx='t'+exKey.slice(-1); // 't1','t2','t3'
+  TS[pfx]={sel:null,sc:0,err:0,slotMap:{},chipMap:{}};
+  const st=TS[pfx];
+
+  // Bank
+  const bank=document.getElementById(pfx+'bank'); bank.innerHTML='';
+  const wordList=buildWordList(data); shuf(wordList).forEach(({word,chipId})=>{
+    const chip=document.createElement('div');
+    chip.className='bchip'; chip.id=pfx+'ch'+chipId;
+    chip.dataset.word=word; chip.dataset.chipId=chipId;
+    chip.textContent=word;
+    chip.onclick=()=>selectChip(pfx,chip);
+    bank.appendChild(chip);
+    st.chipMap[chipId]=chip;
+  });
+
+  // Text
+  const textDiv=document.getElementById(pfx+'text'); textDiv.innerHTML=''; textDiv.className='txt-wrap';
+  data.segments.forEach(seg=>{
+    if(seg.t==='text'){
+      textDiv.appendChild(document.createTextNode(seg.c));
+    } else {
+      const slot=document.createElement('span');
+      slot.className='slot'; slot.id=pfx+'sl'+seg.id;
+      slot.dataset.slotId=seg.id; slot.dataset.answer=seg.a;
+      slot.textContent='___';
+      slot.onclick=()=>fillSlot(pfx,slot);
+      textDiv.appendChild(slot);
+      st.slotMap[seg.id]={slot,answer:seg.a,filled:false,correct:false,chipId:null};
+    }
+  });
+}
+function buildWordList(data){
+  const cnt={};
+  data.segments.filter(s=>s.t==='blank').forEach(s=>{cnt[s.a]=(cnt[s.a]||0)+1;});
+  const res=[];const c2={};
+  Object.entries(cnt).forEach(([w,n])=>{for(let i=0;i<n;i++){c2[w]=(c2[w]||0)+1;res.push({word:w,chipId:w+'_'+c2[w]});}  });
+  return res;
+}
+function selectChip(pfx,chip){
+  const st=TS[pfx];
+  if(chip.classList.contains('used'))return;
+  document.querySelectorAll('#'+pfx+'bank .bchip.sel').forEach(c=>c.classList.remove('sel'));
+  if(st.sel===chip){st.sel=null;return;}
+  chip.classList.add('sel'); st.sel=chip;
+  toast('Clique sur un blanc dans le texte !');
+}
+function fillSlot(pfx,slot){
+  const st=TS[pfx];
+  if(!st.sel){toast('Sélectionne un mot !');return;}
+  if(slot.classList.contains('ok'))return;
+  const sid=slot.dataset.slotId; const sd=st.slotMap[sid];
+  if(sd.chipId){const prev=st.chipMap[sd.chipId];if(prev)prev.classList.remove('used');}
+  slot.textContent=st.sel.dataset.word; slot.classList.add('filled'); slot.classList.remove('ko');
+  st.sel.classList.add('used'); st.sel.classList.remove('sel');
+  sd.chipId=st.sel.dataset.chipId; sd.filled=true; st.sel=null;
+}
+function verifyTxt(pfx){
+  const st=TS[pfx]; const data=TEXTS['e'+pfx.slice(-1)];
+  let correct=0,wrong=0;
+  Object.entries(st.slotMap).forEach(([sid,sd])=>{
+    if(!sd.filled||sd.correct)return;
+    const slot=document.getElementById(pfx+'sl'+sid);
+    const ok=N(slot.textContent)===N(sd.answer);
+    if(ok){slot.className='slot ok';sd.correct=true;correct++;st.sc++;}
+    else{
+      slot.className='slot ko';wrong++;st.err++;
+      if(sd.chipId){const prev=st.chipMap[sd.chipId];if(prev)prev.classList.remove('used');}
+      sd.chipId=null;sd.filled=false;
+      setTimeout(()=>{slot.className='slot';slot.textContent='___';},800);
+    }
+  });
+  updScore(pfx+'sn',pfx+'sf',pfx+'sm',st.sc,data.total);
+  if(correct>0) toast('✓ '+correct+' correct(s) !'+(wrong?' '+wrong+' à revoir.':''));
+  if(wrong>0&&!correct) toast('✗ '+wrong+' erreur(s) à corriger.');
+  if(st.sc===data.total) setTimeout(()=>showRes(pfx+'res',st.sc,data.total,st.err),600);
+}
+function removeLast(pfx){
+  const st=TS[pfx];
+  const slots=Object.entries(st.slotMap).filter(([,d])=>d.filled&&!d.correct).map(([id,d])=>{return {id,d};});
+  if(!slots.length){toast('Aucun mot à enlever.');return;}
+  const last=slots[slots.length-1];
+  const slot=document.getElementById(pfx+'sl'+last.id);
+  if(last.d.chipId){const chip=st.chipMap[last.d.chipId];if(chip)chip.classList.remove('used');}
+  last.d.chipId=null;last.d.filled=false;
+  slot.classList.remove('filled','ko');slot.textContent='___';
+  toast('Mot enlevé.');
+}
+function resetTxt(pfx){
+  TS[pfx]={sel:null,sc:0,err:0,slotMap:{},chipMap:{}};
+  document.getElementById(pfx+'res').classList.remove('show');
+  buildTxt('e'+pfx.slice(-1));
+  const data=TEXTS['e'+pfx.slice(-1)];
+  updScore(pfx+'sn',pfx+'sf',pfx+'sm',0,data.total);
+}
+
+// ════════════════════════════════════
+// INIT
+// ════════════════════════════════════
+function initAll(){
+  // Init articles
+  a1_build(); a2_build();
+  // Init verb exercises
+  ['s1','s2','s3','v1','v2','v3'].forEach(p=>VS[p]={sc:0,err:0,items:[]});
+  buildVerbEx(SER_E1,'s1list','s1','ser');
+  buildVerbEx(SER_E2,'s2list','s2','llamarse');
+  buildVerbEx(SER_E3,'s3list','s3','mix');
+  buildVerbEx(VIV_E1,'v1list','v1','vivir');
+  buildVerbEx(VIV_E2,'v2list','v2','tener');
+  buildVerbEx(VIV_E3,'v3list','v3','mix');
+  // Init text
+  buildTxt('e1'); buildTxt('e2'); buildTxt('e3');
+  // Show first section
+  showSection('art');
+}
+
+window.addEventListener('DOMContentLoaded', initAll);
+
+function artRule(type){
+  const title = document.getElementById('art-rule-title');
+  const grid = document.getElementById('art-rule').querySelector('.art-grid');
+  const note = document.getElementById('art-rule').querySelector('div[style*="border-left"]');
+  if(type==='indef'){
+    title.textContent='📌 Rappel — Los artículos indefinidos';
+    grid.innerHTML=`
+      <div class="art-cell m"><div class="art-big">un</div><div class="art-lbl">masc. sing.</div><div class="art-ex">un chico</div></div>
+      <div class="art-cell f"><div class="art-big">una</div><div class="art-lbl">fém. sing.</div><div class="art-ex">una chica</div></div>
+      <div class="art-cell m"><div class="art-big">unos</div><div class="art-lbl">masc. plur.</div><div class="art-ex">unos chicos</div></div>
+      <div class="art-cell f"><div class="art-big">unas</div><div class="art-lbl">fém. plur.</div><div class="art-ex">unas chicas</div></div>`;
+    note.textContent="💡 Los artículos indefinidos s'accordent aussi avec le nom.";
+  } else {
+    title.textContent='📌 Rappel — Los artículos definidos';
+    grid.innerHTML=`
+      <div class="art-cell m"><div class="art-big">el</div><div class="art-lbl">masc. sing.</div><div class="art-ex">el chico</div></div>
+      <div class="art-cell f"><div class="art-big">la</div><div class="art-lbl">fém. sing.</div><div class="art-ex">la chica</div></div>
+      <div class="art-cell m"><div class="art-big">los</div><div class="art-lbl">masc. plur.</div><div class="art-ex">los chicos</div></div>
+      <div class="art-cell f"><div class="art-big">las</div><div class="art-lbl">fém. plur.</div><div class="art-ex">las chicas</div></div>`;
+    note.textContent="💡 En espagnol, tous les noms ont un genre. Les articles s'accordent toujours avec le nom.";
+  }
+}
+
+</script>
+</body>
+</html>

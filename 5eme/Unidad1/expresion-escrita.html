@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expresión escrita · 5ème · LFJM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A6B4A;--green-light:#E8F5EE;--green-mid:#2E9B6E;
+  --pink:#D63B6E;--pink-light:#FCE8EF;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-dark:#4A2880;--purple-mid:#9B72C8;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --teal:#0E7C7B;--teal-light:#E0F4F4;
+  --red:#B83232;--red-light:#FDEAEA;
+  --gray-50:#F7F8F6;--gray-100:#EAEDE8;--gray-200:#D4D9D2;--gray-300:#C4CAC1;
+  --gray-400:#8FA08E;--gray-500:#6E7D6D;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'Nunito',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;padding:1.5rem;}
+
+/* HEADER */
+.page-header{background:linear-gradient(135deg,#4A2880,#6B3FA0 60%,#3A8C6E);border-radius:var(--radius);padding:1.1rem 1.75rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;}
+.ph-tag{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
+.ph-title{font-family:var(--serif);font-size:22px;color:white;font-style:italic;}
+.ph-badge{background:rgba(255,255,255,0.2);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.3);}
+
+/* TABS */
+.level-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.lvl-tab{padding:8px 18px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid var(--gray-200);background:white;color:var(--gray-600);transition:all 0.15s;display:flex;align-items:center;gap:6px;}
+.lvl-tab:hover{border-color:var(--purple);color:var(--purple);}
+.lvl-tab.active{background:linear-gradient(135deg,#4A2880,#6B3FA0);border-color:transparent;color:white;box-shadow:0 3px 10px rgba(107,63,160,0.25);}
+.ex-page{display:none;}.ex-page.active{display:block;}
+
+/* PROGRESS BAR */
+.prog-bar{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:0.9rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:14px;}
+.prog-label{font-size:12px;color:var(--gray-300);font-weight:700;white-space:nowrap;}
+.prog-track{flex:1;height:8px;background:var(--gray-100);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--green-mid));border-radius:99px;transition:width 0.5s;width:0%;}
+.prog-msg{font-size:12px;color:var(--gray-600);min-width:130px;text-align:right;font-weight:700;}
+
+/* CARDS */
+.card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;}
+.card-full{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;margin-bottom:1.1rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-bottom:1.1rem;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.1rem;}
+
+/* SECTION HEADING */
+.ex-header{margin-bottom:1.25rem;}
+.ex-num{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:var(--gray-300);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.ex-title{font-family:var(--serif);font-size:20px;color:var(--gray-900);margin-bottom:4px;}
+.ex-instr{font-size:13.5px;color:var(--gray-600);line-height:1.6;}
+.diff-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:800;margin-bottom:10px;}
+.diff-1{background:#E8F5EE;color:var(--green);}
+.diff-2{background:#E6EEF9;color:var(--blue);}
+.diff-3{background:var(--amber-light);color:var(--amber);}
+.diff-4{background:#F0EAF8;color:var(--purple);}
+
+/* IDENTITY CARD */
+.id-card{background:linear-gradient(135deg,#F0EAF8,#E6EEF9);border-radius:var(--radius);border:2px solid #C4B3E0;padding:1.5rem;position:relative;overflow:hidden;}
+.id-card::before{content:"✏️";position:absolute;right:16px;top:16px;font-size:32px;opacity:0.2;}
+.id-card-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.id-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(107,63,160,0.1);}
+.id-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.id-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0;}
+.id-label{font-size:13px;font-weight:700;color:var(--gray-600);min-width:130px;flex-shrink:0;}
+.id-inp{flex:1;border:none;border-bottom:2px solid #C4B3E0;background:transparent;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--purple);outline:none;padding:3px 4px;transition:border-color 0.15s;}
+.id-inp:focus{border-bottom-color:var(--purple);}
+.id-inp.ok{border-bottom-color:var(--green);color:var(--green);}
+.id-inp.ko{border-bottom-color:var(--pink);color:var(--pink);}
+
+/* FRASES SECTION */
+.frases-wrap{margin-top:1.1rem;}
+.frase-label{font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;}
+.example-block{background:var(--gray-50);border-left:4px solid var(--purple);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--gray-600);line-height:1.8;}
+.example-block strong{color:var(--purple);}
+.frase-list{display:flex;flex-direction:column;gap:10px;}
+.frase-item{display:flex;align-items:center;gap:10px;}
+.frase-num{font-size:11px;font-weight:800;color:var(--gray-300);width:20px;flex-shrink:0;}
+.frase-inp{flex:1;border:none;border-bottom:2px solid var(--gray-200);background:transparent;font-family:var(--sans);font-size:14px;color:var(--gray-900);outline:none;padding:4px 3px;transition:border-color 0.15s;}
+.frase-inp:focus{border-bottom-color:var(--purple);}
+.frase-inp.ok{border-bottom-color:var(--green);color:var(--green);}
+.frase-inp.ko{border-bottom-color:var(--pink);color:var(--pink);}
+
+/* INFO CARD for ex2 */
+.info-card{background:var(--blue-light);border-radius:var(--radius-sm);border:1.5px solid #C0D4F0;padding:1rem;margin-bottom:1.1rem;}
+.info-title{font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
+.info-item{font-size:13px;color:var(--blue);display:flex;align-items:center;gap:6px;}
+.info-item::before{content:"•";opacity:0.5;}
+.info-item strong{font-weight:800;}
+
+/* AYUDA box */
+.ayuda-box{background:var(--amber-light);border-radius:var(--radius-sm);border:1.5px solid #F5C26E;padding:0.9rem 1rem;margin-bottom:1.1rem;}
+.ayuda-title{font-size:11px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.ayuda-list{display:flex;flex-wrap:wrap;gap:6px;}
+.ayuda-chip{font-size:12.5px;background:white;border:1.5px solid #F5C26E;border-radius:99px;padding:4px 12px;color:var(--amber);font-weight:700;}
+
+/* TEXTAREA */
+.text-area-wrap{position:relative;}
+.text-area{width:100%;min-height:140px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-family:var(--sans);font-size:14px;color:var(--gray-900);background:white;outline:none;padding:12px;resize:vertical;line-height:1.9;transition:border-color 0.15s;}
+.text-area:focus{border-color:var(--purple);}
+.text-area.ok{border-color:var(--green);}
+.text-area.warn{border-color:var(--amber);}
+.word-count{font-size:11px;color:var(--gray-300);text-align:right;margin-top:4px;font-weight:600;}
+.word-count.good{color:var(--green);}
+.word-count.warn{color:var(--amber);}
+
+/* CRITERIA CHECKLIST */
+.criteria-wrap{background:var(--gray-50);border-radius:var(--radius-sm);padding:10px 14px;margin-top:10px;border:1.5px solid var(--gray-100);}
+.criteria-title{font-size:11px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.criteria-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.crit{display:flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:99px;background:var(--gray-100);color:var(--gray-600);font-weight:600;transition:all 0.2s;}
+.crit.met{background:var(--green-light);color:var(--green);}
+.crit::before{content:"○";font-size:10px;}
+.crit.met::before{content:"✓";}
+
+/* COMPARISON TABLE ex3 */
+.comp-table{width:100%;border-collapse:collapse;margin-bottom:1.1rem;}
+.comp-table th{padding:10px 12px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;border:1.5px solid var(--gray-100);text-align:center;}
+.comp-table th:first-child{background:var(--gray-50);color:var(--gray-400);text-align:left;}
+.th-yo{background:linear-gradient(135deg,#F0EAF8,#E6EEF9);color:var(--purple);}
+.th-comp{background:linear-gradient(135deg,#E8F5EE,#E0F4F4);color:var(--teal);}
+.comp-table td{padding:9px 10px;border:1.5px solid var(--gray-100);vertical-align:middle;}
+.comp-table td:first-child{font-size:12px;font-weight:800;color:var(--gray-400);background:var(--gray-50);text-transform:uppercase;letter-spacing:0.05em;}
+.comp-inp{width:100%;border:none;border-bottom:2px solid var(--gray-200);background:transparent;font-family:var(--sans);font-size:13.5px;color:var(--gray-900);outline:none;padding:3px 2px;text-align:center;}
+.comp-inp:focus{border-bottom-color:var(--purple);}
+
+/* STUDENT CARDS ex4 */
+.student-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.1rem;}
+.student-card{border-radius:var(--radius-sm);padding:1rem;border:1.5px solid;}
+.sc-emma{background:#FCE8EF;border-color:var(--pink);}
+.sc-lucas{background:#E6EEF9;border-color:var(--blue);}
+.sc-martina{background:#E8F5EE;border-color:var(--green);}
+.sc-name{font-family:var(--serif);font-size:17px;font-weight:700;margin-bottom:8px;}
+.sc-emma .sc-name{color:var(--pink);}
+.sc-lucas .sc-name{color:var(--blue);}
+.sc-martina .sc-name{color:var(--green);}
+.sc-item{font-size:12.5px;color:var(--gray-600);margin-bottom:4px;display:flex;align-items:center;gap:5px;}
+.sc-item::before{content:"•";opacity:0.4;}
+
+/* CHECKLIST for ex4 */
+.verb-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
+.verb-chip{font-size:12px;padding:4px 12px;border-radius:99px;background:var(--gray-100);color:var(--gray-600);font-weight:700;transition:all 0.2s;border:1.5px solid var(--gray-200);}
+.verb-chip.used{background:var(--purple-light);color:var(--purple);border-color:var(--purple);}
+
+/* FEEDBACK */
+.fb{font-size:12.5px;margin-top:8px;display:none;font-weight:700;padding:8px 12px;border-radius:var(--radius-sm);}
+.fb.ok{display:block;background:var(--green-light);color:var(--green);}
+.fb.ko{display:block;background:var(--red-light);color:var(--red);}
+.fb.warn{display:block;background:var(--amber-light);color:var(--amber);}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.btn-p{padding:9px 22px;background:linear-gradient(135deg,#4A2880,#6B3FA0);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-p:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-g{padding:9px 22px;background:white;color:var(--purple);border:2px solid var(--purple);border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-g:hover{background:var(--purple-light);}
+.btn-next{padding:10px 24px;background:linear-gradient(135deg,var(--green),#3BB87A);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-next:hover{opacity:0.9;}
+
+/* RESULT */
+.result{display:none;background:white;border-radius:var(--radius);border:2px solid var(--green);padding:1.5rem;margin-top:1rem;text-align:center;}
+.result.show{display:block;}
+.result-emoji{font-size:44px;margin-bottom:6px;}
+.result-title{font-family:var(--serif);font-size:22px;color:var(--gray-900);margin-bottom:4px;}
+.result-sub{font-size:13px;color:var(--gray-600);line-height:1.6;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:640px){.two-col,.three-col,.student-cards{grid-template-columns:1fr;}.info-grid{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════════
+   MIE:KIT — Banner principal + Banner nivel + Sidebar
+   Componente único, reutilizable en toda la plataforma
+═══════════════════════════════════════════════════ */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;text-decoration:none;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:8px;border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;min-width:76px;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;box-shadow:0 2px 8px rgba(107,63,160,0.25);}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;margin-top:1px;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+.layout{display:flex;min-height:calc(100vh - 105px);align-items:flex-start;}
+
+.sidebar{width:236px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;overflow-y:auto;position:sticky;top:108px;height:calc(100vh - 108px);}
+.sidebar-section{margin-bottom:1.25rem;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:5px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:8px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);transition:all 0.12s;border-left:3px solid transparent;line-height:1.3;text-decoration:none;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;cursor:default;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.45;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+
+.ex-sub{padding:0 0 4px 2.2rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);transition:all 0.12s;border-left:2px solid transparent;text-decoration:none;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub-item .ex-icon{font-size:12px;width:16px;text-align:center;}
+
+.main{flex:1;padding:1.5rem;overflow-y:auto;min-width:0;}
+
+@media(max-width:880px){
+  .layout{display:block;}
+  .sidebar{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--gray-100);}
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 1 · ¡Hola, España!</div>
+    <a class="seq-item" href="mi-espanol-vocab.html"><div class="seq-dot"></div>Vocabulario</a>
+    <a class="seq-item" href="mi-espanol-gram.html"><div class="seq-dot"></div>Gramática</a>
+    <a class="seq-item" href="comprension-lectora.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="comprension-oral-1.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <div class="seq-item active"><div class="seq-dot"></div>Expresión escrita</div>
+    <div class="ex-sub">
+      <a class="ex-sub-item active" href="javascript:void(0)" onclick="mieTab(0,this)"><span class="ex-icon">📋</span>1 · Mi ficha</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(1,this)"><span class="ex-icon">👤</span>2 · Mi amigo Diego</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(2,this)"><span class="ex-icon">👥</span>3 · Somos diferentes</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(3,this)"><span class="ex-icon">🏫</span>4 · Intercambio</a>
+    </div>
+    <a class="seq-item" href="expresion-oral.html"><div class="seq-dot"></div>Expresión oral</a>
+    <a class="seq-item" href="evaluaciones.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main">
+
+
+<div class="page-header">
+  <div>
+    <div class="ph-tag">5ème · A1 · Expresión escrita</div>
+    <div class="ph-title">✏️ ¡Escribe en español!</div>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <div class="ph-badge">✏️ Écriture</div>
+    <div class="ph-badge">Séquence 1</div>
+  </div>
+</div>
+
+<div class="level-tabs">
+  <div class="lvl-tab active" onclick="switchEx(this,'ex1')">📋 1 · Mi ficha</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex2')">👤 2 · Mi amigo Diego</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex3')">👥 3 · Somos diferentes</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex4')">🏫 4 · Intercambio</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     EX 1 — La ficha de identidad
+══════════════════════════════════════ -->
+<div class="ex-page active" id="ex1">
+
+  <div class="ex-header">
+    <div class="diff-badge diff-1">⭐ Muy fácil</div>
+    <div class="ex-title">1. La ficha de identidad</div>
+    <div class="ex-instr">Completa tu ficha personal. Luego escribe 4 frases sobre ti mismo/a.</div>
+  </div>
+
+  <div class="two-col">
+    <!-- Identity card -->
+    <div>
+      <div class="id-card">
+        <div class="id-card-title">🪪 Mi ficha de identidad</div>
+        <div class="id-row"><span class="id-icon">👤</span><span class="id-label">Nombre:</span><input class="id-inp" id="e1-nombre" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">👤</span><span class="id-label">Apellido:</span><input class="id-inp" id="e1-apellido" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">🗓️</span><span class="id-label">Edad:</span><input class="id-inp" id="e1-edad" placeholder="... años" autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">🌍</span><span class="id-label">Nacionalidad:</span><input class="id-inp" id="e1-nac" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">📍</span><span class="id-label">Ciudad:</span><input class="id-inp" id="e1-ciudad" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">🎨</span><span class="id-label">Color favorito:</span><input class="id-inp" id="e1-color" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">🔢</span><span class="id-label">Número favorito:</span><input class="id-inp" id="e1-num" placeholder="..." autocomplete="off" spellcheck="false"></div>
+        <div class="id-row"><span class="id-icon">💬</span><span class="id-label">Idioma(s):</span><input class="id-inp" id="e1-idioma" placeholder="..." autocomplete="off" spellcheck="false"></div>
+      </div>
+    </div>
+
+    <!-- 4 frases -->
+    <div>
+      <div class="frases-wrap">
+        <div class="frase-label">✏️ Ahora escribe 4 frases sobre ti</div>
+        <div class="example-block">
+          <strong>Ejemplo:</strong><br>
+          Me llamo Clara.<br>
+          Tengo once años.<br>
+          Soy francesa.<br>
+          Mi color favorito es el azul.
+        </div>
+        <div class="frase-list">
+          <div class="frase-item"><span class="frase-num">1.</span><input class="frase-inp" id="e1-f1" placeholder="Me llamo..." autocomplete="off" spellcheck="false"></div>
+          <div class="frase-item"><span class="frase-num">2.</span><input class="frase-inp" id="e1-f2" placeholder="Tengo..." autocomplete="off" spellcheck="false"></div>
+          <div class="frase-item"><span class="frase-num">3.</span><input class="frase-inp" id="e1-f3" placeholder="Soy..." autocomplete="off" spellcheck="false"></div>
+          <div class="frase-item"><span class="frase-num">4.</span><input class="frase-inp" id="e1-f4" placeholder="Mi... favorito/a es..." autocomplete="off" spellcheck="false"></div>
+        </div>
+        <div class="fb" id="e1-fb"></div>
+        <div class="btn-row">
+          <button class="btn-p" onclick="checkEx1()">✓ Verificar</button>
+          <button class="btn-g" onclick="resetEx1()">🔄 Reiniciar</button>
+          <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[1],'ex2')">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     EX 2 — Presenta a tu nuevo amigo
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex2">
+
+  <div class="ex-header">
+    <div class="diff-badge diff-2">⭐⭐ Fácil</div>
+    <div class="ex-title">2. Presenta a tu nuevo amigo Diego</div>
+    <div class="ex-instr">Utiliza la información de la ficha para escribir un pequeño texto de 6 o 7 líneas sobre Diego.</div>
+  </div>
+
+  <div class="two-col">
+    <!-- Info card Diego -->
+    <div>
+      <div class="info-card">
+        <div class="info-title">📋 Ficha de Diego</div>
+        <div class="info-grid">
+          <div class="info-item"><strong>Nombre:</strong> Diego Martínez</div>
+          <div class="info-item"><strong>Edad:</strong> 12 años</div>
+          <div class="info-item"><strong>Nacionalidad:</strong> mexicana</div>
+          <div class="info-item"><strong>Ciudad:</strong> Guadalajara</div>
+          <div class="info-item"><strong>Color favorito:</strong> verde</div>
+          <div class="info-item"><strong>Número favorito:</strong> 8</div>
+          <div class="info-item"><strong>Idiomas:</strong> español e inglés</div>
+        </div>
+      </div>
+      <div class="ayuda-box">
+        <div class="ayuda-title">💡 Ayuda — empieza cada frase con:</div>
+        <div class="ayuda-list">
+          <span class="ayuda-chip">Se llama…</span>
+          <span class="ayuda-chip">Tiene…</span>
+          <span class="ayuda-chip">Es…</span>
+          <span class="ayuda-chip">Vive en…</span>
+          <span class="ayuda-chip">Habla…</span>
+          <span class="ayuda-chip">Su color favorito es…</span>
+          <span class="ayuda-chip">Su número favorito es…</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">✏️ Tu texto sobre Diego:</div>
+      <div class="text-area-wrap">
+        <textarea class="text-area" id="e2-text" placeholder="Se llama Diego Martínez..." oninput="liveCheck2(this)"></textarea>
+        <div class="word-count" id="e2-wc">0 palabras</div>
+      </div>
+      <div class="criteria-wrap">
+        <div class="criteria-title">Criterios — ¿has incluido todo?</div>
+        <div class="criteria-grid">
+          <span class="crit" id="c2-nombre">Diego / Se llama</span>
+          <span class="crit" id="c2-edad">12 / doce años</span>
+          <span class="crit" id="c2-nac">mexicano / México</span>
+          <span class="crit" id="c2-ciudad">Guadalajara</span>
+          <span class="crit" id="c2-color">verde</span>
+          <span class="crit" id="c2-num">ocho / 8</span>
+          <span class="crit" id="c2-idioma">inglés / español</span>
+        </div>
+      </div>
+      <div class="fb" id="e2-fb"></div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="checkEx2()">✓ Verificar</button>
+        <button class="btn-g" onclick="resetEx2()">🔄 Reiniciar</button>
+        <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[2],'ex3')">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     EX 3 — Somos diferentes
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex3">
+
+  <div class="ex-header">
+    <div class="diff-badge diff-3">⭐⭐⭐ Nivel medio</div>
+    <div class="ex-title">3. Somos diferentes</div>
+    <div class="ex-instr">Completa la tabla con tu información y la de un compañero/a. Luego escribe un texto de 8 líneas.</div>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="card-full">
+    <div style="font-size:13px;font-weight:700;color:var(--gray-600);margin-bottom:12px;">📊 Completa la tabla:</div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="th-yo">👤 Yo</th>
+          <th class="th-comp">👤 Mi compañero/a</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Nombre</td><td><input class="comp-inp" id="e3-yo-nom" placeholder="..." autocomplete="off" spellcheck="false"></td><td><input class="comp-inp" id="e3-co-nom" placeholder="..." autocomplete="off" spellcheck="false"></td></tr>
+        <tr><td>Edad</td><td><input class="comp-inp" id="e3-yo-edad" placeholder="... años" autocomplete="off" spellcheck="false"></td><td><input class="comp-inp" id="e3-co-edad" placeholder="... años" autocomplete="off" spellcheck="false"></td></tr>
+        <tr><td>Nacionalidad</td><td><input class="comp-inp" id="e3-yo-nac" placeholder="..." autocomplete="off" spellcheck="false"></td><td><input class="comp-inp" id="e3-co-nac" placeholder="..." autocomplete="off" spellcheck="false"></td></tr>
+        <tr><td>Color favorito</td><td><input class="comp-inp" id="e3-yo-color" placeholder="..." autocomplete="off" spellcheck="false"></td><td><input class="comp-inp" id="e3-co-color" placeholder="..." autocomplete="off" spellcheck="false"></td></tr>
+        <tr><td>Número favorito</td><td><input class="comp-inp" id="e3-yo-num" placeholder="..." autocomplete="off" spellcheck="false"></td><td><input class="comp-inp" id="e3-co-num" placeholder="..." autocomplete="off" spellcheck="false"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <!-- Ayuda + structure -->
+    <div>
+      <div class="ayuda-box">
+        <div class="ayuda-title">💡 Estructura del texto (8 líneas)</div>
+        <div class="ayuda-list" style="flex-direction:column;gap:5px;">
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Yo me llamo…</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Mi compañero/a se llama…</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Tengo… años. Él/Ella tiene…</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Soy… Él/Ella es…</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Mi color favorito es… Su color favorito es…</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;">Los dos somos estudiantes.</span>
+          <span class="ayuda-chip" style="text-align:left;border-radius:8px;background:var(--purple-light);border-color:var(--purple);color:var(--purple);">⭐ Una diferencia y una semejanza</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">✏️ Tu texto:</div>
+      <textarea class="text-area" id="e3-text" style="min-height:180px;" placeholder="Yo me llamo... Mi compañero/a se llama..." oninput="liveCheck3(this)"></textarea>
+      <div class="word-count" id="e3-wc">0 palabras</div>
+      <div class="criteria-wrap">
+        <div class="criteria-title">Criterios</div>
+        <div class="criteria-grid">
+          <span class="crit" id="c3-yo">Yo me llamo</span>
+          <span class="crit" id="c3-comp">compañero / se llama</span>
+          <span class="crit" id="c3-edad">tengo / tiene años</span>
+          <span class="crit" id="c3-soy">soy / es</span>
+          <span class="crit" id="c3-color">color favorito</span>
+          <span class="crit" id="c3-losdos">los dos</span>
+          <span class="crit" id="c3-dif">diferencia / semejanza / pero / también</span>
+        </div>
+      </div>
+      <div class="fb" id="e3-fb"></div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="checkEx3()">✓ Verificar</button>
+        <button class="btn-g" onclick="resetEx3()">🔄 Reiniciar</button>
+        <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[3],'ex4')">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     EX 4 — Los estudiantes de intercambio
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex4">
+
+  <div class="ex-header">
+    <div class="diff-badge diff-4">⭐⭐⭐⭐ Difícil</div>
+    <div class="ex-title">4. Los estudiantes de intercambio</div>
+    <div class="ex-instr">Eres el profesor. Presenta a los tres estudiantes de intercambio. Escribe entre 10 y 12 líneas. Termina con una frase de bienvenida.</div>
+  </div>
+
+  <!-- Student cards -->
+  <div class="student-cards">
+    <div class="student-card sc-emma">
+      <div class="sc-name">Emma</div>
+      <div class="sc-item"><strong>Nacionalidad:</strong> francesa</div>
+      <div class="sc-item"><strong>Edad:</strong> 13 años</div>
+      <div class="sc-item"><strong>Ciudad:</strong> Lyon</div>
+      <div class="sc-item"><strong>Color favorito:</strong> rosa</div>
+      <div class="sc-item"><strong>Idioma:</strong> francés y español</div>
+    </div>
+    <div class="student-card sc-lucas">
+      <div class="sc-name">Lucas</div>
+      <div class="sc-item"><strong>Nacionalidad:</strong> mexicano</div>
+      <div class="sc-item"><strong>Edad:</strong> 12 años</div>
+      <div class="sc-item"><strong>Ciudad:</strong> Guadalajara</div>
+      <div class="sc-item"><strong>Color favorito:</strong> azul</div>
+      <div class="sc-item"><strong>Idioma:</strong> español e inglés</div>
+    </div>
+    <div class="student-card sc-martina">
+      <div class="sc-name">Martina</div>
+      <div class="sc-item"><strong>Nacionalidad:</strong> argentina</div>
+      <div class="sc-item"><strong>Edad:</strong> 12 años</div>
+      <div class="sc-item"><strong>Ciudad:</strong> Buenos Aires</div>
+      <div class="sc-item"><strong>Color favorito:</strong> rojo</div>
+      <div class="sc-item"><strong>Idioma:</strong> español y un poco de inglés</div>
+    </div>
+  </div>
+
+  <!-- Verb checklist -->
+  <div class="card-full">
+    <div style="font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;">✅ Verbos y elementos que debes usar:</div>
+    <div class="verb-list">
+      <span class="verb-chip" id="v-llamarse">llamarse</span>
+      <span class="verb-chip" id="v-ser">ser</span>
+      <span class="verb-chip" id="v-tener">tener</span>
+      <span class="verb-chip" id="v-vivir">vivir</span>
+      <span class="verb-chip" id="v-hablar">hablar</span>
+      <span class="verb-chip" id="v-numeros">números</span>
+      <span class="verb-chip" id="v-nac">nacionalidades</span>
+      <span class="verb-chip" id="v-colores">colores</span>
+      <span class="verb-chip" id="v-bienvenida">🎉 bienvenida</span>
+    </div>
+    <div style="font-size:12px;color:var(--gray-400);font-style:italic;">Los verbos se marcan en morado automáticamente a medida que los usas.</div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="card-full">
+    <div style="font-size:13px;font-weight:700;color:var(--gray-600);margin-bottom:8px;">✏️ Tu presentación (10-12 líneas):</div>
+    <div class="text-area-wrap">
+      <textarea class="text-area" id="e4-text" style="min-height:240px;" placeholder="Buenos días, clase. Hoy tenemos tres nuevos estudiantes de intercambio. Se llaman Emma, Lucas y Martina..." oninput="liveCheck4(this)"></textarea>
+      <div class="word-count" id="e4-wc">0 palabras</div>
+    </div>
+    <div class="criteria-wrap" style="margin-top:10px;">
+      <div class="criteria-title">Criterios de evaluación</div>
+      <div class="criteria-grid">
+        <span class="crit" id="c4-emma">Emma</span>
+        <span class="crit" id="c4-lucas">Lucas</span>
+        <span class="crit" id="c4-martina">Martina</span>
+        <span class="crit" id="c4-llama">se llama / llamarse</span>
+        <span class="crit" id="c4-tiene">tiene / tener</span>
+        <span class="crit" id="c4-vive">vive / vivir</span>
+        <span class="crit" id="c4-habla">habla / hablar</span>
+        <span class="crit" id="c4-nac">francesa / mexicano / argentina</span>
+        <span class="crit" id="c4-colores">rosa / azul / rojo</span>
+        <span class="crit" id="c4-bienvenida">bienvenido/a/os/as</span>
+      </div>
+    </div>
+    <div class="fb" id="e4-fb"></div>
+    <div class="btn-row">
+      <button class="btn-p" onclick="checkEx4()">✓ Evaluar mi texto</button>
+      <button class="btn-g" onclick="resetEx4()">🔄 Reiniciar</button>
+    </div>
+  </div>
+
+  <div class="result" id="e4-result">
+    <div class="result-emoji">🌟</div>
+    <div class="result-title">¡Excelente trabajo!</div>
+    <div class="result-sub">Has utilizado todos los elementos necesarios. Tu presentación es completa y correcta.</div>
+    <div style="margin-top:1rem;"><button class="btn-g" onclick="switchEx(document.querySelectorAll('.lvl-tab')[0],'ex1')">← Volver al principio</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function N(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim();}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2300);}
+function wc(text){return text.trim().split(/\s+/).filter(w=>w.length>0).length;}
+
+function switchEx(tabEl,id){
+  document.querySelectorAll(".ex-page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".lvl-tab").forEach(t=>t.classList.remove("active"));
+  if(tabEl) tabEl.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+
+// ── Utilidad: proximidad de palabras ──
+// Devuelve true si alguna de las keywords aparece dentro de `radius` chars de algún ancla
+function nearAnchor(text, anchors, keywords, radius){
+  const t=N(text);
+  for(const a of anchors){
+    const idx=t.indexOf(N(a));
+    if(idx===-1)continue;
+    const win=t.slice(Math.max(0,idx-radius),idx+a.length+radius);
+    if(keywords.some(k=>win.includes(N(k))))return true;
+  }
+  return false;
+}
+// Devuelve true si alguna keyword aparece cerca de un ancla INCORRECTA (penalización)
+function nearWrongAnchor(text, wrongAnchors, keywords, radius){
+  return nearAnchor(text, wrongAnchors, keywords, radius);
+}
+
+// ── EX 1 ──
+function checkEx1(){
+  const fieldIds=["e1-nombre","e1-apellido","e1-edad","e1-nac","e1-ciudad","e1-color","e1-num","e1-idioma"];
+  let filled=0;
+  fieldIds.forEach(id=>{const inp=document.getElementById(id);if(inp&&inp.value.trim()){inp.classList.remove("ko");inp.classList.add("ok");filled++;}else if(inp){inp.classList.remove("ok");inp.classList.add("ko");}});
+  const fichaVals=fieldIds.map(id=>{const el=document.getElementById(id);return el?el.value.trim():""}).filter(v=>v.length>0);
+  const fraseIds=["e1-f1","e1-f2","e1-f3","e1-f4"];
+  let frasesText=""; let fOk=0;
+  fraseIds.forEach(id=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    const val=inp.value.trim();
+    if(val.length>4&&val.includes(" "))fOk++;
+    frasesText+=" "+val;
+  });
+  const nombre=document.getElementById("e1-nombre")?document.getElementById("e1-nombre").value.trim():"";
+  const verbos=["me llamo","llamo","tengo","soy","vivo","hablo","mi"];
+  // Each ficha value must appear near a verb anchor OR near the student's own name
+  const anchors=[nombre,...verbos].filter(a=>a.length>1);
+  const matched=fichaVals.filter(v=>v.length>1&&nearAnchor(frasesText,anchors,[v],200));
+  const missing=fichaVals.filter(v=>v.length>1&&!nearAnchor(frasesText,anchors,[v],200));
+  const fb=document.getElementById("e1-fb");
+  if(filled<8||fOk<4){
+    fb.className="fb ko";fb.textContent="Completa todos los campos de la ficha y escribe las 4 frases.";
+  } else if(matched.length>=6){
+    fb.className="fb ok";fb.textContent="✓ ¡Perfecto! Tus frases coinciden con los datos de tu ficha.";
+  } else {
+    fb.className="fb warn";fb.textContent="¡Casi! Incluye en tus frases: "+missing.slice(0,3).join(", ")+".";
+  }
+}
+function resetEx1(){
+  ["e1-nombre","e1-apellido","e1-edad","e1-nac","e1-ciudad","e1-color","e1-num","e1-idioma","e1-f1","e1-f2","e1-f3","e1-f4"].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.value="";el.className=el.tagName==="INPUT"?(id.startsWith("e1-f")?"frase-inp":"id-inp"):el.className;}
+  });
+  document.getElementById("e1-fb").className="fb";
+}
+
+// ── EX 2 ──
+const E2_CRITERIA={
+  "c2-nombre":["diego","martinez","martínez"],
+  "c2-edad":["12","doce"],
+  "c2-nac":["mexicano","mexicana","mexico","méxico"],
+  "c2-ciudad":["guadalajara"],
+  "c2-color":["verde"],
+  "c2-num":["ocho","8"],
+  "c2-idioma":["inglés","ingles"]
+};
+const E2_ANCHORS=["diego","martinez","martínez","amigo","se llama","llama"];
+function liveCheck2(ta){
+  const val=N(ta.value);const words=wc(ta.value);
+  const wEl=document.getElementById("e2-wc");
+  wEl.textContent=words+" palabras";
+  wEl.className="word-count "+(words>=30?"good":words>=15?"warn":"");
+  Object.entries(E2_CRITERIA).forEach(([id,keywords])=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.className="crit "+(nearAnchor(ta.value,E2_ANCHORS,keywords,200)?"met":"");
+  });
+}
+function checkEx2(){
+  const txt=document.getElementById("e2-text").value;
+  const words=wc(txt);
+  const metCount=Object.entries(E2_CRITERIA).filter(([_,kw])=>nearAnchor(txt,E2_ANCHORS,kw,200)).length;
+  const fb=document.getElementById("e2-fb");
+  if(words<20){fb.className="fb ko";fb.textContent="✗ Escribe al menos 30 palabras (texto de 6-7 líneas).";return;}
+  if(metCount===7){fb.className="fb ok";fb.textContent="✓ ¡Perfecto! Has incluido toda la información de Diego.";}
+  else if(metCount>=5){fb.className="fb warn";fb.textContent="¡Bien! Faltan "+(7-metCount)+" elemento(s) de la ficha de Diego. Revisa los criterios.";}
+  else{fb.className="fb ko";fb.textContent="✗ Tu texto no coincide con la ficha de Diego. Incluye su nombre, edad, ciudad, color, número e idiomas.";}
+}
+function resetEx2(){
+  const ta=document.getElementById("e2-text");ta.value="";ta.className="text-area";
+  document.getElementById("e2-wc").textContent="0 palabras";document.getElementById("e2-wc").className="word-count";
+  document.getElementById("e2-fb").className="fb";
+  Object.keys(E2_CRITERIA).forEach(id=>{const el=document.getElementById(id);if(el)el.className="crit";});
+}
+
+// ── EX 3 ──
+const E3_CRITERIA={
+  "c3-yo":["yo me llamo","me llamo"],
+  "c3-comp":["compañero","compañera","se llama"],
+  "c3-edad":["años"],
+  "c3-soy":["soy","es"],
+  "c3-color":["color favorito","favorito"],
+  "c3-losdos":["los dos","nosotros"],
+  "c3-dif":["pero","también","diferencia","semejanza","sin embargo","los dos","ambos"]
+};
+function liveCheck3(ta){
+  const words=wc(ta.value);
+  const wEl=document.getElementById("e3-wc");
+  wEl.textContent=words+" palabras";wEl.className="word-count "+(words>=40?"good":words>=20?"warn":"");
+}
+function checkEx3(){
+  const txt=document.getElementById("e3-text").value;
+  const words=wc(txt);
+  const tableIds=["e3-yo-nom","e3-yo-edad","e3-yo-nac","e3-yo-color","e3-yo-num","e3-co-nom","e3-co-edad","e3-co-nac","e3-co-color","e3-co-num"];
+  const tableFilled=tableIds.filter(id=>document.getElementById(id)&&document.getElementById(id).value.trim()).length;
+  const fb=document.getElementById("e3-fb");
+  if(words<35){fb.className="fb ko";fb.textContent="✗ Escribe al menos 40 palabras (8 líneas).";return;}
+  if(tableFilled<8){fb.className="fb warn";fb.textContent="¡Completa también la tabla comparativa antes de verificar!";return;}
+  // Get names from table
+  const yoNom=document.getElementById("e3-yo-nom")?document.getElementById("e3-yo-nom").value.trim():"yo";
+  const coNom=document.getElementById("e3-co-nom")?document.getElementById("e3-co-nom").value.trim():"";
+  // Get yo values and co values
+  const yoFields=["e3-yo-edad","e3-yo-nac","e3-yo-color","e3-yo-num"];
+  const coFields=["e3-co-edad","e3-co-nac","e3-co-color","e3-co-num"];
+  const yoVals=yoFields.map(id=>{const el=document.getElementById(id);return el?el.value.trim():"";}).filter(v=>v.length>1);
+  const coVals=coFields.map(id=>{const el=document.getElementById(id);return el?el.value.trim():"";}).filter(v=>v.length>1);
+  const yoAnchors=[yoNom,"me llamo","yo","tengo","soy","vivo"].filter(a=>a.length>1);
+  const coAnchors=[coNom,"se llama","mi compañero","mi compañera"].filter(a=>a.length>1);
+  const yoMatched=yoVals.filter(v=>nearAnchor(txt,yoAnchors,[v],200));
+  const coMatched=coVals.filter(v=>nearAnchor(txt,coAnchors,[v],200));
+  // Penalize: yo data near co name or vice versa
+  const yoWrong=yoVals.filter(v=>nearWrongAnchor(txt,coAnchors,[v],150)&&!nearAnchor(txt,yoAnchors,[v],200));
+  const coWrong=coVals.filter(v=>nearWrongAnchor(txt,yoAnchors,[v],150)&&!nearAnchor(txt,coAnchors,[v],200));
+  const totalMatched=yoMatched.length+coMatched.length;
+  const totalVals=yoVals.length+coVals.length;
+  const errors=yoWrong.length+coWrong.length;
+  if(errors>0){
+    fb.className="fb ko";fb.textContent="✗ Atención: algunos datos parecen asignados a la persona incorrecta. Revisa quién tiene qué característica.";
+  } else if(totalMatched>=totalVals-1){
+    fb.className="fb ok";fb.textContent="✓ ¡Muy bien! Tu texto incluye los datos correctos de cada persona.";
+  } else {
+    const missingYo=yoVals.filter(v=>!nearAnchor(txt,yoAnchors,[v],200));
+    const missingCo=coVals.filter(v=>!nearAnchor(txt,coAnchors,[v],200));
+    const allMissing=[...missingYo,...missingCo];
+    fb.className="fb warn";fb.textContent="¡Revisa! Faltan datos en tu texto: "+allMissing.slice(0,3).join(", ")+".";
+  }
+}
+function resetEx3(){
+  ["e3-yo-nom","e3-yo-edad","e3-yo-nac","e3-yo-color","e3-yo-num","e3-co-nom","e3-co-edad","e3-co-nac","e3-co-color","e3-co-num"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  const ta=document.getElementById("e3-text");ta.value="";ta.className="text-area";
+  document.getElementById("e3-wc").textContent="0 palabras";document.getElementById("e3-wc").className="word-count";
+  document.getElementById("e3-fb").className="fb";
+  Object.keys(E3_CRITERIA).forEach(id=>{const el=document.getElementById(id);if(el)el.className="crit";});
+}
+
+// ── EX 4 ──
+const E4_CHARS={
+  emma:{anchors:["emma"],data:["francesa","lyon","13","trece","rosa","frances","francés"]},
+  lucas:{anchors:["lucas"],data:["mexicano","guadalajara","12","doce","azul","ingles","inglés"]},
+  martina:{anchors:["martina"],data:["argentina","buenos aires","12","doce","rojo","ingles","inglés"]}
+};
+const E4_CRITERIA={
+  "c4-emma":["emma"],
+  "c4-lucas":["lucas"],
+  "c4-martina":["martina"],
+  "c4-llama":["llama","llamarse"],
+  "c4-tiene":["tiene","tener","tienen"],
+  "c4-vive":["vive","vivir","viven"],
+  "c4-habla":["habla","hablar","hablan"],
+  "c4-nac":["francesa","mexicano","argentina"],
+  "c4-colores":["rosa","azul","rojo"],
+  "c4-bienvenida":["bienvenido","bienvenida","bienvenidos","bienvenidas"]
+};
+const VERB_CHIPS={
+  "v-llamarse":["llama","llamarse"],
+  "v-ser":["soy","eres","es","somos","son","ser"],
+  "v-tener":["tiene","tengo","tienes","tienen","tener"],
+  "v-vivir":["vive","vivo","viven","vivir"],
+  "v-hablar":["habla","hablas","hablan","hablar"],
+  "v-numeros":["doce","trece","12","13"],
+  "v-nac":["francesa","mexicano","argentina"],
+  "v-colores":["rosa","azul","rojo"],
+  "v-bienvenida":["bienvenido","bienvenida","bienvenidos"]
+};
+function liveCheck4(ta){
+  const val=N(ta.value);const words=wc(ta.value);
+  const wEl=document.getElementById("e4-wc");
+  wEl.textContent=words+" palabras";wEl.className="word-count "+(words>=60?"good":words>=35?"warn":"");
+  Object.entries(E4_CRITERIA).forEach(([id,kw])=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.className="crit "+(kw.some(k=>val.includes(N(k)))?"met":"");
+  });
+  Object.entries(VERB_CHIPS).forEach(([id,kw])=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.className="verb-chip "+(kw.some(k=>val.includes(N(k)))?"used":"");
+  });
+}
+function checkEx4(){
+  const txt=document.getElementById("e4-text").value;
+  const words=wc(txt);
+  const fb=document.getElementById("e4-fb");
+  if(words<50){fb.className="fb ko";fb.textContent="✗ Tu texto es demasiado corto. Escribe entre 10 y 12 líneas.";return;}
+  // Per-character proximity check
+  let totalOk=0; let totalData=0; let errors=[];
+  const chars=Object.keys(E4_CHARS);
+  chars.forEach(name=>{
+    const {anchors,data}=E4_CHARS[name];
+    const otherAnchors=chars.filter(n=>n!==name).flatMap(n=>E4_CHARS[n].anchors);
+    data.forEach(d=>{
+      totalData++;
+      const correctNear=nearAnchor(txt,anchors,[d],200);
+      const wrongNear=nearWrongAnchor(txt,otherAnchors,[d],150);
+      if(correctNear&&!wrongNear){totalOk++;}
+      else if(wrongNear){errors.push(d+" → personaje incorrecto");}
+    });
+  });
+  // Also check bienvenida somewhere in text
+  const hasBienvenida=["bienvenido","bienvenida","bienvenidos","bienvenidas"].some(k=>N(txt).includes(k));
+  if(hasBienvenida)totalOk++;
+  totalData++;
+  if(errors.length>0){
+    fb.className="fb ko";fb.textContent="✗ Algunos datos están asignados al personaje incorrecto: "+errors.slice(0,2).join("; ")+". Revisa tu texto.";
+  } else if(totalOk>=totalData-2){
+    fb.className="fb ok";fb.textContent="✓ ¡Perfecto! Has presentado a los tres estudiantes con sus datos correctos.";
+    document.getElementById("e4-result").classList.add("show");
+  } else {
+    fb.className="fb warn";fb.textContent="¡Bien! Faltan "+(totalData-totalOk)+" dato(s). Revisa que cada estudiante tenga su información correcta (nacionalidad, ciudad, color, idioma).";
+  }
+}
+function resetEx4(){
+  const ta=document.getElementById("e4-text");ta.value="";ta.className="text-area";
+  document.getElementById("e4-wc").textContent="0 palabras";document.getElementById("e4-wc").className="word-count";
+  document.getElementById("e4-fb").className="fb";
+  document.getElementById("e4-result").classList.remove("show");
+  Object.keys(E4_CRITERIA).forEach(id=>{const el=document.getElementById(id);if(el)el.className="crit";});
+  Object.keys(VERB_CHIPS).forEach(id=>{const el=document.getElementById(id);if(el)el.className="verb-chip";});
+}
+
+// ── MIE:KIT helper — conecta el sidebar con las pestañas existentes de la página ──
+function mieTab(idx, el){
+  document.querySelectorAll('.ex-sub-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  var tabs=document.querySelectorAll('.lvl-tab');
+  if(tabs[idx]) tabs[idx].click();
+}
+
+</script>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expresión oral · 5ème · Séquence 1 · Portrait</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A6B4A;--green-light:#E8F5EE;--green-mid:#2E9B6E;
+  --pink:#D63B6E;--pink-light:#FCE8EF;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-dark:#4A2880;--purple-mid:#9B72C8;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --teal:#0E7C7B;--teal-light:#E0F4F4;
+  --orange:#C25B0A;--orange-light:#FEF0E6;
+  --gray-50:#F7F8F6;--gray-100:#EAEDE8;--gray-200:#D4D9D2;--gray-300:#C4CAC1;
+  --gray-400:#9CA89A;--gray-600:#546053;--gray-700:#374035;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'Nunito',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;padding:1.5rem;}
+
+/* HEADER */
+.page-header{background:linear-gradient(135deg,#0E5A8A,#1E5FA8 60%,#0E7C7B);border-radius:var(--radius);padding:1.1rem 1.75rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.ph-tag{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
+.ph-title{font-family:var(--serif);font-size:22px;color:white;font-style:italic;}
+.ph-badge{background:rgba(255,255,255,0.2);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.3);}
+
+/* TABS */
+.level-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.lvl-tab{padding:8px 18px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid var(--gray-200);background:white;color:var(--gray-600);transition:all 0.15s;display:flex;align-items:center;gap:6px;}
+.lvl-tab:hover{border-color:var(--blue);color:var(--blue);}
+.lvl-tab.active{background:linear-gradient(135deg,#0E5A8A,#1E5FA8);border-color:transparent;color:white;box-shadow:0 3px 10px rgba(30,95,168,0.25);}
+.ex-page{display:none;}.ex-page.active{display:block;}
+
+/* CARD */
+.card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;}
+.card-full{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;margin-bottom:1.1rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-bottom:1.1rem;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.1rem;}
+
+/* EX HEADER */
+.diff-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:800;margin-bottom:8px;}
+.diff-1{background:var(--green-light);color:var(--green);}
+.diff-2{background:var(--blue-light);color:var(--blue);}
+.diff-3{background:var(--amber-light);color:var(--amber);}
+.diff-4{background:var(--purple-light);color:var(--purple);}
+.ex-title{font-family:var(--serif);font-size:20px;color:var(--gray-900);margin-bottom:5px;}
+.ex-instr{font-size:13.5px;color:var(--gray-600);line-height:1.6;margin-bottom:1.1rem;}
+
+/* SPEAK BANNER */
+.speak-banner{
+  background:linear-gradient(135deg,#0E5A8A,#1E5FA8);
+  border-radius:var(--radius-sm);padding:12px 18px;
+  display:flex;align-items:center;gap:12px;margin-bottom:1.1rem;
+}
+.speak-banner-icon{font-size:28px;}
+.speak-banner-text{color:white;font-size:14px;font-weight:700;}
+.speak-banner-text span{font-size:12px;opacity:0.8;font-weight:400;display:block;margin-top:1px;}
+
+/* WORD CARDS */
+.word-section{margin-bottom:1.25rem;}
+.word-section-title{font-size:11px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.word-section-title::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.word-card{
+  background:white;border-radius:var(--radius-sm);border:1.5px solid var(--gray-100);
+  padding:14px 16px;text-align:center;cursor:pointer;transition:all 0.18s;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  user-select:none;
+}
+.word-card:hover{border-color:#5A8FC8;box-shadow:0 3px 12px rgba(30,95,168,0.12);transform:translateY(-1px);}
+.word-card.active{border-color:var(--blue);background:var(--blue-light);box-shadow:0 3px 12px rgba(30,95,168,0.2);}
+.word-card.done-ok{border-color:var(--green);background:var(--green-light);}
+.word-card.done-ko{border-color:var(--pink);background:var(--pink-light);}
+.word-es{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.word-card.active .word-es{color:var(--blue);}
+.word-card.done-ok .word-es{color:var(--green);}
+.word-card.done-ko .word-es{color:var(--pink);}
+.word-icon{font-size:14px;color:var(--gray-300);}
+.word-card.active .word-icon{color:var(--blue);}
+
+/* SENTENCES */
+.sent-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.1rem;}
+.sent-item{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  background:white;border-radius:var(--radius-sm);border:1.5px solid var(--gray-100);
+  cursor:pointer;transition:all 0.15s;user-select:none;
+}
+.sent-item:hover{border-color:#5A8FC8;background:var(--blue-light);}
+.sent-item.active{border-color:var(--blue);background:var(--blue-light);}
+.sent-item.done-ok{border-color:var(--green);background:var(--green-light);}
+.sent-item.done-ko{border-color:var(--pink);background:var(--pink-light);}
+.sent-num{font-size:11px;font-weight:800;color:var(--gray-300);min-width:24px;flex-shrink:0;}
+.sent-text{font-size:15px;color:var(--gray-900);font-family:var(--serif);flex:1;font-weight:500;}
+.sent-item.active .sent-text{color:var(--blue);}
+.sent-item.done-ok .sent-text{color:var(--green);}
+.sent-item.done-ko .sent-text{color:var(--pink);}
+.sent-speak{font-size:18px;flex-shrink:0;}
+
+/* TEXT READER */
+.reading-card{
+  background:linear-gradient(135deg,#F7F9FC,white);
+  border-radius:var(--radius);border:1.5px solid var(--gray-100);
+  padding:2rem;margin-bottom:1.1rem;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+}
+.reading-lines{display:flex;flex-direction:column;gap:0;}
+.reading-line{
+  font-family:var(--serif);font-size:19px;color:var(--gray-900);
+  padding:8px 12px;border-radius:var(--radius-sm);cursor:pointer;
+  transition:all 0.15s;line-height:1.6;border:1.5px solid transparent;
+}
+.reading-line:hover{background:var(--blue-light);border-color:#AEC6E8;}
+.reading-line.active{background:var(--blue-light);border-color:var(--blue);color:var(--blue);}
+.reading-line.done-ok{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.reading-line.done-ko{background:var(--pink-light);border-color:var(--pink);color:var(--pink);}
+.reading-hint{font-size:11px;color:var(--gray-400);font-style:italic;margin-top:8px;text-align:center;}
+
+/* TIPS BOX */
+.tips-box{background:var(--amber-light);border-radius:var(--radius-sm);border:1.5px solid #F5C26E;padding:1rem;margin-bottom:1.1rem;}
+.tips-title{font-size:11px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.tip-item{font-size:12.5px;color:var(--amber);display:flex;align-items:flex-start;gap:6px;line-height:1.4;}
+
+/* AIDE — EX4 */
+.aide-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.1rem;}
+.aide-chip{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:white;border-radius:var(--radius-sm);border:1.5px solid var(--gray-100);
+  font-size:13.5px;color:var(--gray-900);cursor:pointer;transition:all 0.15s;
+  user-select:none;
+}
+.aide-chip:hover{border-color:var(--blue);background:var(--blue-light);}
+.aide-chip.active{border-color:var(--blue);background:var(--blue-light);font-weight:700;color:var(--blue);}
+.aide-icon{font-size:18px;flex-shrink:0;}
+.aide-text{font-size:13px;}
+.aide-text strong{color:var(--blue);font-weight:800;}
+
+/* TIMER */
+.timer-wrap{text-align:center;margin-bottom:1.25rem;}
+.timer-circle{
+  width:140px;height:140px;border-radius:50%;
+  background:white;border:6px solid var(--gray-100);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 12px;position:relative;transition:border-color 0.3s;
+  box-shadow:0 4px 20px rgba(30,95,168,0.1);
+}
+.timer-circle.running{border-color:var(--blue);box-shadow:0 4px 20px rgba(30,95,168,0.25);}
+.timer-circle.done{border-color:var(--green);box-shadow:0 4px 20px rgba(26,107,74,0.2);}
+.timer-circle.warning{border-color:var(--amber);box-shadow:0 4px 20px rgba(196,123,26,0.2);}
+.timer-num{font-family:var(--serif);font-size:48px;font-weight:700;color:var(--blue);line-height:1;}
+.timer-circle.done .timer-num{color:var(--green);}
+.timer-circle.warning .timer-num{color:var(--amber);}
+.timer-label{font-size:11px;font-weight:700;color:var(--gray-300);text-transform:uppercase;letter-spacing:0.1em;}
+.timer-svg{position:absolute;top:-6px;left:-6px;width:calc(100% + 12px);height:calc(100% + 12px);}
+.timer-progress{fill:none;stroke:var(--blue);stroke-width:6;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1s linear,stroke 0.3s;}
+.timer-buttons{display:flex;gap:8px;justify-content:center;}
+
+/* CRITERIA */
+.criteria-section{background:var(--gray-50);border-radius:var(--radius-sm);padding:1rem;border:1.5px solid var(--gray-100);}
+.criteria-title{font-size:11px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.criteria-title span{font-size:10px;color:var(--gray-300);font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;}
+.crit-list{display:flex;flex-direction:column;gap:8px;}
+.crit-row{
+  display:flex;align-items:center;gap:10px;padding:8px 12px;
+  background:white;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);
+  cursor:pointer;transition:all 0.15s;user-select:none;
+}
+.crit-row:hover{border-color:var(--green-mid);}
+.crit-row.checked{background:var(--green-light);border-color:var(--green);}
+.crit-box{
+  width:22px;height:22px;border-radius:6px;border:2px solid var(--gray-300);
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+  flex-shrink:0;transition:all 0.15s;background:white;
+}
+.crit-row.checked .crit-box{background:var(--green);border-color:var(--green);color:white;}
+.crit-row-text{font-size:13.5px;font-weight:600;color:var(--gray-700);}
+.crit-row.checked .crit-row-text{color:var(--green);}
+.score-display{margin-top:12px;text-align:center;padding:8px;background:white;border-radius:var(--radius-sm);border:1px solid var(--gray-100);}
+.score-display span{font-family:var(--serif);font-size:22px;color:var(--blue);font-weight:700;}
+.score-display small{font-size:12px;color:var(--gray-400);margin-left:4px;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.btn-p{padding:9px 22px;background:linear-gradient(135deg,#0E5A8A,#1E5FA8);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-p:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-g{padding:9px 22px;background:white;color:var(--blue);border:2px solid var(--blue);border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-g:hover{background:var(--blue-light);}
+.btn-green{padding:9px 22px;background:linear-gradient(135deg,var(--green),#3BB87A);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;}
+.btn-next{padding:10px 24px;background:linear-gradient(135deg,#0E5A8A,#1E5FA8);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;}
+
+/* PROGRESS CHIPS */
+.progress-chips{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;}
+.prog-chip{width:24px;height:8px;border-radius:99px;background:var(--gray-100);transition:background 0.3s;}
+.prog-chip.ok{background:var(--green);}
+.prog-chip.active-chip{background:var(--blue);}
+
+/* CHALLENGE BOX */
+.challenge-box{background:var(--purple-light);border:1.5px solid #C4A8E8;border-radius:var(--radius-sm);padding:10px 14px;margin-top:12px;font-size:13px;color:var(--purple);font-weight:700;}
+.challenge-box span{font-weight:400;margin-left:4px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:640px){
+  .two-col,.three-col,.tips-grid,.aide-grid{grid-template-columns:1fr;}
+  .word-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+}
+
+/* MICROPHONE */
+.mic-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:99px;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;background:linear-gradient(135deg,#1E5FA8,#0E7C7B);color:white;transition:all 0.2s;box-shadow:0 3px 12px rgba(30,95,168,0.3);}
+.mic-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(30,95,168,0.4);}
+.mic-btn.listening{background:linear-gradient(135deg,#B83232,#D63B6E);box-shadow:0 3px 12px rgba(184,50,50,0.4);animation:pulse-mic 1s infinite;}
+.mic-btn.processing{background:linear-gradient(135deg,#C47B1A,#E09B30);}
+.mic-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+@keyframes pulse-mic{0%,100%{box-shadow:0 3px 12px rgba(184,50,50,0.4);}50%{box-shadow:0 3px 24px rgba(184,50,50,0.7);}}
+.mic-status{font-size:12px;color:var(--gray-400);font-style:italic;margin-top:6px;min-height:18px;}
+.mic-status.listening{color:#B83232;font-weight:700;font-style:normal;}
+.mic-status.processing{color:var(--amber);font-weight:700;font-style:normal;}
+.ai-feedback{margin-top:10px;padding:12px 14px;border-radius:var(--radius-sm);font-size:13.5px;line-height:1.6;display:none;border-left:4px solid;text-align:left;}
+.ai-feedback.show{display:block;}
+.ai-feedback.ok{background:var(--green-light);border-color:var(--green);color:#1A3D2B;}
+.ai-feedback.warn{background:var(--amber-light);border-color:var(--amber);color:#7A4A00;}
+.ai-feedback.ko{background:#FDEAEA;border-color:#B83232;color:#7A1A1A;}
+.mic-wave{display:none;align-items:center;justify-content:center;gap:3px;height:24px;margin:6px auto;}
+.mic-wave.show{display:flex;}
+.mic-wave span{width:4px;background:#B83232;border-radius:99px;animation:wave-bar 0.8s infinite ease-in-out;}
+.mic-wave span:nth-child(1){height:8px;animation-delay:0s;}
+.mic-wave span:nth-child(2){height:16px;animation-delay:0.1s;}
+.mic-wave span:nth-child(3){height:24px;animation-delay:0.2s;}
+.mic-wave span:nth-child(4){height:16px;animation-delay:0.3s;}
+.mic-wave span:nth-child(5){height:8px;animation-delay:0.4s;}
+@keyframes wave-bar{0%,100%{transform:scaleY(0.5);}50%{transform:scaleY(1);}}
+
+/* MARK BUTTONS */
+.mark-buttons{display:flex;gap:10px;justify-content:center;margin-top:10px;}
+.btn-ok{padding:8px 24px;background:var(--green);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;}
+.btn-ko{padding:8px 24px;background:var(--pink);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;}
+.btn-ok-sm{padding:7px 20px;background:var(--green);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;}
+.btn-ko-sm{padding:7px 20px;background:var(--pink);color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;}
+
+/* ══════════════════════════════════════════════════
+   MIE:KIT — Banner principal + Banner nivel + Sidebar
+   Componente único, reutilizable en toda la plataforma
+═══════════════════════════════════════════════════ */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;text-decoration:none;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:8px;border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;min-width:76px;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;box-shadow:0 2px 8px rgba(107,63,160,0.25);}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;margin-top:1px;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+.layout{display:flex;min-height:calc(100vh - 105px);align-items:flex-start;}
+
+.sidebar{width:236px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;overflow-y:auto;position:sticky;top:108px;height:calc(100vh - 108px);}
+.sidebar-section{margin-bottom:1.25rem;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:5px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:8px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);transition:all 0.12s;border-left:3px solid transparent;line-height:1.3;text-decoration:none;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;cursor:default;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.45;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+
+.ex-sub{padding:0 0 4px 2.2rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);transition:all 0.12s;border-left:2px solid transparent;text-decoration:none;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub-item .ex-icon{font-size:12px;width:16px;text-align:center;}
+
+.main{flex:1;padding:1.5rem;overflow-y:auto;min-width:0;}
+
+@media(max-width:880px){
+  .layout{display:block;}
+  .sidebar{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--gray-100);}
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 2 · ¿Quién soy? ¿Cómo soy?</div>
+    <a class="seq-item" href="u2-vocabulario.html"><div class="seq-dot"></div>Vocabulario</a>
+    <a class="seq-item" href="gramatica-unidad2-5eme.html"><div class="seq-dot"></div>Gramática</a>
+    <a class="seq-item" href="ce-uni2-5eme.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="CO1-Uni2-5eme.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <a class="seq-item" href="expresion-escrita-Uni2.html"><div class="seq-dot"></div>Expresión escrita</a>
+    <div class="seq-item active"><div class="seq-dot"></div>Expresión oral</div>
+    <div class="ex-sub">
+      <a class="ex-sub-item active" href="javascript:void(0)" onclick="mieTab(0,this)">1 · Vocabulario</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(1,this)">2 · Frases</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(2,this)">3 · Texto</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(3,this)">4 · Me presento</a>
+    </div>
+    <a class="seq-item" href="evaluaciones-u2.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main">
+
+
+<div class="page-header">
+  <div>
+    <div class="ph-tag">5ème · A1 · Expresión oral · Séquence 1</div>
+    <div class="ph-title">¡Habla en español!</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div class="ph-badge">Oral</div>
+    <div class="ph-badge">Portrait · Autoportrait</div>
+  </div>
+</div>
+
+<div class="level-tabs">
+  <div class="lvl-tab active" onclick="switchEx(this,'ex1')">1 · Vocabulario</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex2')">2 · Frases</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex3')">3 · Texto</div>
+  <div class="lvl-tab" onclick="switchEx(this,'ex4')">4 · Me presento</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     EX 1 — Pronunciación del vocabulario
+══════════════════════════════════════ -->
+<div class="ex-page active" id="ex1">
+
+  <div style="margin-bottom:1.1rem;">
+    <div class="diff-badge diff-1">Nivel 1 · Palabras</div>
+    <div class="ex-title">Lee las palabras en voz alta</div>
+    <div class="ex-instr">Pronuncia cada palabra claramente. Haz clic en una palabra, léela y marca si te ha salido bien.</div>
+  </div>
+
+  <div class="speak-banner">
+    <div class="speak-banner-icon">&#128483;</div>
+    <div class="speak-banner-text">
+      Haz clic en cada palabra, léela en voz alta y márcala como correcto o incorrecto
+      <span>Puedes practicar varias veces antes de marcar</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="word-section">
+        <div class="word-section-title">Descripción física</div>
+        <div class="word-grid">
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">rubio</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">moreno</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">pelirrojo</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">alto</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">bajo</span><span class="word-icon">&#128266;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="word-section">
+        <div class="word-section-title">Emociones</div>
+        <div class="word-grid">
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">contento</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">triste</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">nervioso</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">cansado</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">alegre</span><span class="word-icon">&#128266;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="word-section">
+        <div class="word-section-title">Ropa y accesorios</div>
+        <div class="word-grid">
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">camiseta</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">pantalones</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">zapatos</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">gafas</span><span class="word-icon">&#128266;</span>
+          </div>
+          <div class="word-card" onclick="activateWord(this)">
+            <span class="word-es">vestido</span><span class="word-icon">&#128266;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="challenge-box">Desafío<span>Pronuncia las palabras sin leerlas dos veces.</span></div>
+    </div>
+  </div>
+
+  <!-- Panel de la palabra activa -->
+  <div id="word-active-panel" style="display:none;background:linear-gradient(135deg,#E6EEF9,#EEF4FC);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.1rem;border:2px solid var(--blue);text-align:center;">
+    <div style="font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Lee en voz alta:</div>
+    <div id="word-active-text" style="font-family:var(--serif);font-size:40px;font-weight:700;color:var(--blue);margin-bottom:12px;"></div>
+    <button class="mic-btn" id="word-mic-btn" onclick="startMic('word')">&#127908; Grabar mi pronunciación</button>
+    <div class="mic-wave" id="word-mic-wave"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="mic-status" id="word-mic-status">Haz clic para grabar</div>
+    <div class="ai-feedback" id="word-ai-fb"></div>
+    <div class="mark-buttons">
+      <button class="btn-ok" onclick="markWord(true)">&#10003; Bien</button>
+      <button class="btn-ko" onclick="markWord(false)">&#10007; Repetir</button>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="criteria-section">
+      <div class="criteria-title">Criterios de evaluación <span>(para el/la profesor/a)</span></div>
+      <div class="crit-list" id="crit-ex1">
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex1',3)"><div class="crit-box"></div><span class="crit-row-text">Pronunciación correcta</span></div>
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex1',3)"><div class="crit-box"></div><span class="crit-row-text">Entonación adecuada</span></div>
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex1',3)"><div class="crit-box"></div><span class="crit-row-text">Comprensión del vocabulario</span></div>
+      </div>
+      <div class="score-display">
+        <span id="sc-ex1">0</span><small>/ 3</small>
+      </div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="font-size:12px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Progreso</div>
+        <div class="progress-chips" id="prog-ex1"></div>
+        <div id="prog-ex1-text" style="font-size:13px;color:var(--gray-600);">0 / 15 palabras pronunciadas</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="resetEx1()">Reiniciar</button>
+        <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[1],'ex2')">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     EX 2 — Lee las frases
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex2">
+
+  <div style="margin-bottom:1.1rem;">
+    <div class="diff-badge diff-2">Nivel 2 · Frases</div>
+    <div class="ex-title">Lee las frases en voz alta</div>
+    <div class="ex-instr">Presta atención a la pronunciación y la entonación. Haz clic en una frase para activarla.</div>
+  </div>
+
+  <div class="speak-banner">
+    <div class="speak-banner-icon">&#128483;</div>
+    <div class="speak-banner-text">
+      Haz clic en una frase, léela con claridad y buena entonación
+      <span>Marca correcto si te ha salido bien, o incorrecto para repetir</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="sent-list">
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">1.</span><span class="sent-text">Me llamo Lucas.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">2.</span><span class="sent-text">Tengo doce años.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">3.</span><span class="sent-text">Soy español.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">4.</span><span class="sent-text">Vivo en Madrid.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">5.</span><span class="sent-text">Ana es francesa.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">6.</span><span class="sent-text">Pablo tiene los ojos marrones.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">7.</span><span class="sent-text">Marta lleva gafas.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">8.</span><span class="sent-text">Estoy muy contento hoy.</span><span class="sent-speak">&#128266;</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="sent-list">
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">9.</span><span class="sent-text">Nosotros vivimos en Sevilla.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">10.</span><span class="sent-text">Mi hermana es simpática.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">11.</span><span class="sent-text">Mis amigos tienen el pelo corto.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">12.</span><span class="sent-text">Vosotros sois muy divertidos.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">13.</span><span class="sent-text">Ellas llevan zapatillas deportivas.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">14.</span><span class="sent-text">Mi profesor vive en Valencia.</span><span class="sent-speak">&#128266;</span></div>
+        <div class="sent-item" onclick="activateSent(this)"><span class="sent-num">15.</span><span class="sent-text">Somos estudiantes de secundaria.</span><span class="sent-speak">&#128266;</span></div>
+      </div>
+      <div class="challenge-box">Desafío<span>Lee las frases sin detenerte.</span></div>
+    </div>
+  </div>
+
+  <!-- Panel frase activa -->
+  <div id="sent-active-panel" style="display:none;background:linear-gradient(135deg,#E6EEF9,#EEF4FC);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.1rem;border:2px solid var(--blue);text-align:center;">
+    <div style="font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Lee en voz alta:</div>
+    <div id="sent-active-text" style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--blue);margin-bottom:12px;line-height:1.5;"></div>
+    <button class="mic-btn" id="sent-mic-btn" onclick="startMic('sent')">&#127908; Grabar mi pronunciación</button>
+    <div class="mic-wave" id="sent-mic-wave"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="mic-status" id="sent-mic-status">Haz clic para grabar</div>
+    <div class="ai-feedback" id="sent-ai-fb"></div>
+    <div class="mark-buttons">
+      <button class="btn-ok" onclick="markSent(true)">&#10003; Bien dicho</button>
+      <button class="btn-ko" onclick="markSent(false)">&#10007; Repetir</button>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="criteria-section">
+      <div class="criteria-title">Criterios de evaluación <span>(para el/la profesor/a)</span></div>
+      <div class="crit-list">
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex2',3)"><div class="crit-box"></div><span class="crit-row-text">Pronuncia correctamente</span></div>
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex2',3)"><div class="crit-box"></div><span class="crit-row-text">Habla con claridad</span></div>
+        <div class="crit-row" onclick="toggleCrit(this,'sc-ex2',3)"><div class="crit-box"></div><span class="crit-row-text">Respeta la entonación</span></div>
+      </div>
+      <div class="score-display"><span id="sc-ex2">0</span><small>/ 3</small></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="font-size:12px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Progreso</div>
+        <div class="progress-chips" id="prog-ex2"></div>
+        <div id="prog-ex2-text" style="font-size:13px;color:var(--gray-600);">0 / 15 frases leídas</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="resetEx2()">Reiniciar</button>
+        <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[2],'ex3')">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     EX 3 — Lee el texto
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex3">
+
+  <div style="margin-bottom:1.1rem;">
+    <div class="diff-badge diff-3">Nivel 3 · Texto</div>
+    <div class="ex-title">Lectura en voz alta</div>
+    <div class="ex-instr">Haz clic en cada frase para resaltarla, léela con fluidez, y márcala cuando te salga bien.</div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="speak-banner" style="margin-bottom:1.1rem;">
+        <div class="speak-banner-icon">&#128218;</div>
+        <div class="speak-banner-text">
+          Lee todo el texto de corrido, luego trabaja frase por frase
+          <span>Haz clic en una línea para practicarla por separado</span>
+        </div>
+      </div>
+
+      <div class="reading-card">
+        <div class="reading-lines" id="reading-lines">
+          <div class="reading-line" onclick="activateLine(this)">Hola.</div>
+          <div class="reading-line" onclick="activateLine(this)">Me llamo Sofía y tengo doce años.</div>
+          <div class="reading-line" onclick="activateLine(this)">Soy española y vivo en Valencia con mis padres y mi hermano.</div>
+          <div class="reading-line" onclick="activateLine(this)">Soy bastante alta y delgada.</div>
+          <div class="reading-line" onclick="activateLine(this)">Tengo el pelo largo y moreno y los ojos verdes.</div>
+          <div class="reading-line" onclick="activateLine(this)">Llevo gafas y casi siempre llevo zapatillas deportivas.</div>
+          <div class="reading-line" onclick="activateLine(this)">Me gusta escuchar música y jugar al voleibol.</div>
+          <div class="reading-line" onclick="activateLine(this)">También estudio francés en el colegio.</div>
+          <div class="reading-line" onclick="activateLine(this)">Hoy estoy muy contenta porque voy a participar en un programa de intercambio.</div>
+        </div>
+        <div class="reading-hint">Haz clic en una línea → léela → correcto o incorrecto</div>
+      </div>
+
+      <!-- Panel línea activa -->
+      <div id="line-panel" style="display:none;background:var(--blue-light);border-radius:var(--radius-sm);border:1.5px solid var(--blue);padding:12px 16px;margin-top:8px;text-align:center;">
+        <div style="font-family:var(--serif);font-size:20px;color:var(--blue);margin-bottom:10px;" id="line-panel-text"></div>
+        <button class="mic-btn" id="line-mic-btn" onclick="startMic('line')">&#127908; Grabar mi pronunciación</button>
+        <div class="mic-wave" id="line-mic-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="mic-status" id="line-mic-status">Haz clic para grabar</div>
+        <div class="ai-feedback" id="line-ai-fb"></div>
+        <div class="mark-buttons">
+          <button class="btn-ok-sm" onclick="markLine(true)">&#10003; Bien</button>
+          <button class="btn-ko-sm" onclick="markLine(false)">&#10007; Repetir</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="tips-box">
+        <div class="tips-title">Recuerda</div>
+        <div class="tips-grid">
+          <div class="tip-item">Pronuncia despacio y con claridad</div>
+          <div class="tip-item">Respeta los puntos y las comas</div>
+          <div class="tip-item"><strong>ll</strong> → son "y" : <em>llamo</em> = "yamo"</div>
+          <div class="tip-item"><strong>h</strong> → muda : <em>hola</em> = "ola"</div>
+          <div class="tip-item"><strong>v</strong> → como "b" : <em>vivo</em> = "bibo"</div>
+          <div class="tip-item"><strong>j</strong> → jota : <em>jugar</em> = "jugar"</div>
+        </div>
+      </div>
+
+      <div class="criteria-section">
+        <div class="criteria-title">Criterios de evaluación <span>(para el/la profesor/a)</span></div>
+        <div class="crit-list">
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex3',4)"><div class="crit-box"></div><span class="crit-row-text">Fluidez — sin pausas largas</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex3',4)"><div class="crit-box"></div><span class="crit-row-text">Pronunciación correcta</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex3',4)"><div class="crit-box"></div><span class="crit-row-text">Entonación natural</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex3',4)"><div class="crit-box"></div><span class="crit-row-text">Respeto de los signos de puntuación</span></div>
+        </div>
+        <div class="score-display"><span id="sc-ex3">0</span><small>/ 4</small></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" onclick="resetEx3()">Reiniciar</button>
+        <button class="btn-next" onclick="switchEx(document.querySelectorAll('.lvl-tab')[3],'ex4')">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     EX 4 — Me presento
+══════════════════════════════════════ -->
+<div class="ex-page" id="ex4">
+
+  <div style="margin-bottom:1.1rem;">
+    <div class="diff-badge diff-4">Nivel 4 · Producción oral libre</div>
+    <div class="ex-title">Me presento</div>
+    <div class="ex-instr">Habla de ti durante 1 minuto. Utiliza los elementos de ayuda para construir tu presentación.</div>
+  </div>
+
+  <div class="two-col">
+    <!-- Izquierda: cronómetro + ayuda -->
+    <div>
+      <!-- Cronómetro -->
+      <div class="card" style="margin-bottom:1.1rem;text-align:center;">
+        <div style="font-size:12px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:14px;">Cronómetro — objetivo: 45 seg a 1 min</div>
+        <div class="timer-wrap">
+          <div class="timer-circle" id="timer-circle">
+            <svg class="timer-svg" viewBox="0 0 152 152">
+              <circle cx="76" cy="76" r="70" fill="none" stroke="#EAEDE8" stroke-width="6"/>
+              <circle class="timer-progress" id="timer-prog" cx="76" cy="76" r="70"
+                stroke-dasharray="439.8" stroke-dashoffset="0"/>
+            </svg>
+            <div class="timer-num" id="timer-num">60</div>
+            <div class="timer-label">segundos</div>
+          </div>
+        </div>
+        <div class="timer-buttons">
+          <button class="btn-green" id="timer-btn" onclick="timerToggle()">Iniciar</button>
+          <button class="btn-p" onclick="timerReset()">Reiniciar</button>
+        </div>
+        <div id="timer-msg" style="font-size:13px;color:var(--gray-600);margin-top:10px;min-height:20px;font-weight:600;"></div>
+      </div>
+
+      <!-- Expresiones útiles -->
+      <div class="card">
+        <div style="font-size:12px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Expresiones útiles</div>
+        <div class="aide-grid">
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#128100;</span><span class="aide-text"><strong>Me llamo</strong>…</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#127874;</span><span class="aide-text"><strong>Tengo</strong>… años.</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#127758;</span><span class="aide-text"><strong>Soy</strong>… (nacionalidad)</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#127968;</span><span class="aide-text"><strong>Vivo en</strong>…</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#128064;</span><span class="aide-text"><strong>Tengo</strong>… (descripción)</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#128248;</span><span class="aide-text"><strong>Llevo</strong>… (ropa)</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#128515;</span><span class="aide-text"><strong>Estoy</strong>…</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#9917;</span><span class="aide-text"><strong>Me gusta</strong>…</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#128683;</span><span class="aide-text"><strong>No me gusta</strong>…</span></div>
+          <div class="aide-chip" onclick="this.classList.toggle('active')"><span class="aide-icon">&#127912;</span><span class="aide-text">Mi <strong>color favorito</strong> es…</span></div>
+        </div>
+        <div style="font-size:11.5px;color:var(--gray-400);font-style:italic;margin-top:8px;">Haz clic en los elementos que quieras usar — se marcan en azul</div>
+      </div>
+    </div>
+
+    <!-- Derecha: criterios + micrófono -->
+    <div>
+      <!-- Micrófono de producción libre -->
+      <div class="card" style="margin-bottom:1.1rem;text-align:center;">
+        <div style="font-size:12px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px;">Graba tu presentación</div>
+        <div style="font-size:13.5px;color:var(--gray-600);margin-bottom:14px;line-height:1.6;">
+          Habla sin leer un texto completo.<br>
+          Objetivo: <strong>45 segundos a 1 minuto</strong>.
+        </div>
+        <button class="mic-btn" id="free-mic-btn" onclick="startFreeMic()">&#127908; Iniciar grabación</button>
+        <div class="mic-wave" id="free-mic-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="mic-status" id="free-mic-status">Haz clic para grabar tu presentación</div>
+        <div class="ai-feedback" id="free-ai-fb"></div>
+      </div>
+
+      <!-- Criterios -->
+      <div class="criteria-section">
+        <div class="criteria-title">Grille d'évaluation <span>(pour l'enseignant)</span></div>
+        <div class="crit-list">
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Dice su nombre</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Menciona su edad</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Dice su nacionalidad</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Indica su ciudad</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Descripción física</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Menciona cómo está</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Describe su ropa / accesorios</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Pronunciación clara</span></div>
+          <div class="crit-row" onclick="toggleCrit(this,'sc-ex4',9)"><div class="crit-box"></div><span class="crit-row-text">Habla 45 seg o más sin leer</span></div>
+        </div>
+        <div class="score-display"><span id="sc-ex4">0</span><small>/ 9</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Debes incluir -->
+  <div class="card-full" style="background:var(--teal-light);border-color:#9ED8D8;">
+    <div style="font-size:12px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px;">Debes incluir en tu presentación</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;">
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#128100; Nombre</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#127874; Edad</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#127758; Nacionalidad</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#127968; Ciudad donde vives</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#128064; Descripción física</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#128515; Cómo estás hoy</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#128248; Ropa o accesorios que llevas</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#127912; Color favorito</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#9917; Actividades que te gustan</div>
+      <div style="font-size:13px;color:#0A5555;display:flex;align-items:center;gap:6px;">&#128683; Algo que no te gusta</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script>
+// ── NAVIGATION ──
+function switchEx(tab, id){
+  document.querySelectorAll('.lvl-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ex-page').forEach(p=>p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── TOAST ──
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ── PROGRESS CHIPS ──
+function initProgChips(id,n){
+  const c=document.getElementById(id);
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=0;i<n;i++){const d=document.createElement('div');d.className='prog-chip';c.appendChild(d);}
+}
+
+// ── CRITERIA TOGGLE ──
+function toggleCrit(row, scoreId, max){
+  row.classList.toggle('checked');
+  const box=row.querySelector('.crit-box');
+  box.textContent=row.classList.contains('checked')?'✓':'';
+  const section=row.closest('.crit-list');
+  const checked=section.querySelectorAll('.crit-row.checked').length;
+  document.getElementById(scoreId).textContent=checked;
+}
+
+// ── EX1: WORDS ──
+let activeWordEl=null;
+let ex1Done=0;
+const ex1Total=15;
+
+function activateWord(el){
+  if(el.classList.contains('done-ok'))return;
+  if(activeWordEl)activeWordEl.classList.remove('active');
+  activeWordEl=el;
+  el.classList.add('active');
+  const text=el.querySelector('.word-es').textContent;
+  document.getElementById('word-active-text').textContent=text;
+  document.getElementById('word-active-panel').style.display='block';
+  document.getElementById('word-active-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  // Reset mic panel
+  document.getElementById('word-ai-fb').className='ai-feedback';
+  document.getElementById('word-mic-status').textContent='Haz clic para grabar';
+  document.getElementById('word-mic-btn').className='mic-btn';
+  document.getElementById('word-mic-btn').textContent='🎤 Grabar mi pronunciación';
+  document.getElementById('word-mic-btn').disabled=false;
+  document.getElementById('word-mic-btn').onclick=()=>startMic('word');
+}
+
+function markWord(ok){
+  if(!activeWordEl)return;
+  activeWordEl.classList.remove('active');
+  if(ok){
+    activeWordEl.classList.add('done-ok');
+    activeWordEl.querySelector('.word-icon').textContent='✓';
+    ex1Done++;
+    updateProg1();
+    toast('¡Muy bien pronunciado!');
+  } else {
+    toast('Inténtalo de nuevo con más claridad.');
+    setTimeout(()=>{if(activeWordEl)activeWordEl.classList.remove('active');},400);
+  }
+  document.getElementById('word-active-panel').style.display='none';
+  activeWordEl=null;
+}
+
+function updateProg1(){
+  const chips=document.querySelectorAll('#prog-ex1 .prog-chip');
+  chips.forEach((c,i)=>{c.className='prog-chip '+(i<ex1Done?'ok':'');});
+  document.getElementById('prog-ex1-text').textContent=ex1Done+' / '+ex1Total+' palabras pronunciadas';
+}
+
+function resetEx1(){
+  activeWordEl=null;ex1Done=0;
+  document.querySelectorAll('#ex1 .word-card').forEach(c=>{
+    c.className='word-card';
+    c.querySelector('.word-icon').textContent='🔊';
+  });
+  document.getElementById('word-active-panel').style.display='none';
+  updateProg1();
+  document.querySelectorAll('#crit-ex1 .crit-row.checked').forEach(r=>{r.classList.remove('checked');r.querySelector('.crit-box').textContent='';});
+  document.getElementById('sc-ex1').textContent='0';
+}
+
+// ── EX2: SENTENCES ──
+let activeSentEl=null;
+let ex2Done=0;
+
+function activateSent(el){
+  if(el.classList.contains('done-ok'))return;
+  if(activeSentEl)activeSentEl.classList.remove('active');
+  activeSentEl=el;el.classList.add('active');
+  document.getElementById('sent-active-text').textContent=el.querySelector('.sent-text').textContent;
+  document.getElementById('sent-active-panel').style.display='block';
+  document.getElementById('sent-active-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('sent-ai-fb').className='ai-feedback';
+  document.getElementById('sent-mic-status').textContent='Haz clic para grabar';
+  document.getElementById('sent-mic-btn').className='mic-btn';
+  document.getElementById('sent-mic-btn').textContent='🎤 Grabar mi pronunciación';
+  document.getElementById('sent-mic-btn').disabled=false;
+  document.getElementById('sent-mic-btn').onclick=()=>startMic('sent');
+}
+
+function markSent(ok){
+  if(!activeSentEl)return;
+  activeSentEl.classList.remove('active');
+  if(ok){
+    activeSentEl.classList.add('done-ok');
+    activeSentEl.querySelector('.sent-speak').textContent='✓';
+    ex2Done++;
+    const chips=document.querySelectorAll('#prog-ex2 .prog-chip');
+    chips.forEach((c,i)=>{c.className='prog-chip '+(i<ex2Done?'ok':'');});
+    document.getElementById('prog-ex2-text').textContent=ex2Done+' / 15 frases leídas';
+    toast('¡Muy bien dicho!');
+  } else {
+    toast('Intenta de nuevo con más claridad.');
+    setTimeout(()=>{if(activeSentEl)activeSentEl.classList.remove('active');},400);
+  }
+  document.getElementById('sent-active-panel').style.display='none';
+  activeSentEl=null;
+}
+
+function resetEx2(){
+  activeSentEl=null;ex2Done=0;
+  document.querySelectorAll('#ex2 .sent-item').forEach(s=>{s.className='sent-item';s.querySelector('.sent-speak').textContent='🔊';});
+  document.getElementById('sent-active-panel').style.display='none';
+  document.querySelectorAll('#prog-ex2 .prog-chip').forEach(c=>c.className='prog-chip');
+  document.getElementById('prog-ex2-text').textContent='0 / 15 frases leídas';
+  document.querySelectorAll('#ex2 .crit-row.checked').forEach(r=>{r.classList.remove('checked');r.querySelector('.crit-box').textContent='';});
+  document.getElementById('sc-ex2').textContent='0';
+}
+
+// ── EX3: READING LINES ──
+let activeLineEl=null;
+
+function activateLine(el){
+  if(activeLineEl)activeLineEl.classList.remove('active');
+  activeLineEl=el;el.classList.add('active');
+  document.getElementById('line-panel-text').textContent=el.textContent;
+  document.getElementById('line-panel').style.display='block';
+  document.getElementById('line-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('line-ai-fb').className='ai-feedback';
+  document.getElementById('line-mic-status').textContent='Haz clic para grabar';
+  document.getElementById('line-mic-btn').className='mic-btn';
+  document.getElementById('line-mic-btn').textContent='🎤 Grabar mi pronunciación';
+  document.getElementById('line-mic-btn').disabled=false;
+  document.getElementById('line-mic-btn').onclick=()=>startMic('line');
+}
+
+function markLine(ok){
+  if(!activeLineEl)return;
+  activeLineEl.classList.remove('active');
+  activeLineEl.classList.add(ok?'done-ok':'done-ko');
+  if(!ok)setTimeout(()=>{if(activeLineEl)activeLineEl.classList.remove('done-ko');},600);
+  document.getElementById('line-panel').style.display='none';
+  activeLineEl=null;
+  if(ok)toast('¡Bien leído!');
+}
+
+function resetEx3(){
+  activeLineEl=null;
+  document.querySelectorAll('#reading-lines .reading-line').forEach(l=>l.className='reading-line');
+  document.getElementById('line-panel').style.display='none';
+  document.querySelectorAll('#ex3 .crit-row.checked').forEach(r=>{r.classList.remove('checked');r.querySelector('.crit-box').textContent='';});
+  document.getElementById('sc-ex3').textContent='0';
+}
+
+// ── EX4: TIMER ──
+let timerSec=60;
+let timerRunning=false;
+let timerInterval=null;
+const TOTAL_SEC=60;
+const CIRCUMFERENCE=439.8;
+
+function timerToggle(){
+  if(timerRunning){
+    clearInterval(timerInterval);timerRunning=false;
+    document.getElementById('timer-btn').textContent='Continuar';
+    document.getElementById('timer-circle').className='timer-circle';
+  } else {
+    if(timerSec===0)return;
+    timerRunning=true;
+    document.getElementById('timer-btn').textContent='Pausar';
+    document.getElementById('timer-circle').className='timer-circle running';
+    timerInterval=setInterval(()=>{
+      timerSec--;
+      updateTimer();
+      if(timerSec<=0){
+        clearInterval(timerInterval);timerRunning=false;
+        document.getElementById('timer-btn').textContent='Iniciar';
+        document.getElementById('timer-circle').className='timer-circle done';
+        document.getElementById('timer-msg').textContent='¡Tiempo! Muy bien.';
+        toast('¡60 segundos completados!');
+      } else if(timerSec<=15){
+        document.getElementById('timer-circle').className='timer-circle running warning';
+      }
+    },1000);
+  }
+}
+
+function updateTimer(){
+  document.getElementById('timer-num').textContent=timerSec;
+  const offset=CIRCUMFERENCE*(1-(timerSec/TOTAL_SEC));
+  document.getElementById('timer-prog').style.strokeDashoffset=offset;
+  document.getElementById('timer-prog').style.stroke=timerSec<=15?'var(--amber)':'var(--blue)';
+}
+
+function timerReset(){
+  clearInterval(timerInterval);timerRunning=false;timerSec=TOTAL_SEC;
+  updateTimer();
+  document.getElementById('timer-btn').textContent='Iniciar';
+  document.getElementById('timer-circle').className='timer-circle';
+  document.getElementById('timer-msg').textContent='';
+  document.getElementById('timer-prog').style.stroke='var(--blue)';
+}
+
+// ── MICROPHONE CORE ──
+const SpeechRec=window.SpeechRecognition||window.webkitSpeechRecognition;
+let micAvailable=!!SpeechRec;
+let currentRec=null;
+let currentMode=null;
+
+if(!micAvailable){
+  document.querySelectorAll('.mic-btn').forEach(btn=>{
+    btn.textContent='No disponible';
+    btn.disabled=true;
+    btn.title='Utiliza Chrome o Safari para el micrófono';
+  });
+}
+
+function getMicTarget(mode){
+  if(mode==='free'){
+    return{
+      btn:document.getElementById('free-mic-btn'),
+      wave:document.getElementById('free-mic-wave'),
+      status:document.getElementById('free-mic-status'),
+      fb:document.getElementById('free-ai-fb'),
+      text:'[presentación libre]'
+    };
+  }
+  return{
+    btn:document.getElementById(mode+'-mic-btn'),
+    wave:document.getElementById(mode+'-mic-wave'),
+    status:document.getElementById(mode+'-mic-status'),
+    fb:document.getElementById(mode+'-ai-fb'),
+    text:mode==='word'
+      ?document.getElementById('word-active-text').textContent
+      :mode==='sent'
+        ?document.getElementById('sent-active-text').textContent
+        :document.getElementById('line-panel-text').textContent
+  };
+}
+
+function startMic(mode){
+  if(!micAvailable){toast('Micrófono no disponible — utiliza Chrome o Safari.');return;}
+  if(currentRec){currentRec.stop();currentRec=null;}
+
+  const{btn,wave,status,fb}=getMicTarget(mode);
+  currentMode=mode;
+
+  const rec=new SpeechRec();
+  currentRec=rec;
+  rec.lang='es-ES';
+  rec.continuous=false;
+  rec.interimResults=false;
+  rec.maxAlternatives=3;
+
+  rec.onstart=()=>{
+    btn.className='mic-btn listening';
+    btn.textContent='Detener';
+    btn.onclick=()=>{rec.stop();};
+    wave.classList.add('show');
+    status.textContent='Escuchando...';
+    status.className='mic-status listening';
+    fb.className='ai-feedback';
+  };
+
+  rec.onresult=(e)=>{
+    const transcripts=Array.from(e.results[0]).map(alt=>alt.transcript);
+    const best=transcripts[0];
+    wave.classList.remove('show');
+    btn.className='mic-btn processing';
+    btn.textContent='Analizando...';
+    btn.disabled=true;
+    status.textContent='Claude analiza tu pronunciación...';
+    status.className='mic-status processing';
+    askClaude(mode,best,transcripts);
+  };
+
+  rec.onerror=(e)=>{
+    wave.classList.remove('show');
+    btn.className='mic-btn';
+    btn.textContent='🎤 Grabar mi pronunciación';
+    btn.disabled=false;
+    btn.onclick=()=>startMic(mode);
+    status.textContent='Error: '+e.error+'. Inténtalo de nuevo.';
+    status.className='mic-status';
+    if(e.error==='not-allowed')toast('Activa el micrófono en tu navegador.');
+    else if(e.error==='no-speech')toast('No se detectó voz. Habla más fuerte.');
+  };
+
+  rec.onend=()=>{
+    if(btn.className==='mic-btn listening'){
+      btn.className='mic-btn';
+      btn.textContent='🎤 Grabar mi pronunciación';
+      btn.disabled=false;
+      btn.onclick=()=>startMic(mode);
+      wave.classList.remove('show');
+      status.textContent='Haz clic para grabar';
+      status.className='mic-status';
+    }
+  };
+
+  rec.start();
+}
+
+function startFreeMic(){
+  startMic('free');
+}
+
+async function askClaude(mode,transcript,allAlternatives){
+  const target=getMicTarget(mode);
+  const expected=target.text;
+  const{btn,status,fb}=target;
+
+  let prompt;
+  if(mode==='free'){
+    prompt=`Tu es un professeur d'espagnol pour des élèves de 5ème (niveau A1) dans un lycée français.
+
+Un élève vient de faire sa présentation orale en espagnol (activité "Me presento").
+Transcription de la reconnaissance vocale : "${transcript}"
+
+Évalue cette production orale en 3-4 phrases en français. L'élève doit se présenter (nom, âge, nationalité, ville, description physique, humeur, vêtements, goûts) et parler pendant environ 1 minute.
+
+Réponds dans ce format JSON strict, sans markdown, sans backticks :
+{"result":"ok|warn|ko","feedback":"ton feedback en français","tip":"un conseil pour améliorer, sinon chaîne vide"}
+
+- "ok" = présentation complète et claire
+- "warn" = présentation compréhensible mais incomplète ou avec erreurs
+- "ko" = trop courte ou incompréhensible
+
+Sois encourageant et précis. Tiens compte que la reconnaissance vocale peut mal transcrire.`;
+  } else {
+    prompt=`Tu es un professeur d'espagnol pour des élèves de 5ème (niveau A1) dans un lycée français.
+
+Un élève devait dire en espagnol : "${expected}"
+Ce que le système de reconnaissance vocale a transcrit : "${transcript}"
+Autres alternatives reconnues : ${allAlternatives.slice(1).join(', ')||'aucune'}
+
+Évalue la prononciation de l'élève en 2-3 phrases maximum en français. Sois encourageant et précis.
+
+Réponds dans ce format JSON strict, sans markdown, sans backticks :
+{"result":"ok|warn|ko","feedback":"ton feedback en français","tip":"un conseil de prononciation si nécessaire, sinon chaîne vide"}
+
+- "ok" = prononciation correcte ou très proche
+- "warn" = compréhensible mais avec des erreurs légères
+- "ko" = trop éloigné de la bonne prononciation
+
+Tiens compte que la reconnaissance vocale espagnole peut mal transcrire un accent français — sois indulgent si c'est proche.`;
+  }
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:350,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await res.json();
+    const text=data.content[0].text.trim();
+    let parsed;
+    try{parsed=JSON.parse(text);}
+    catch(e){parsed={result:'warn',feedback:text,tip:''};}
+
+    fb.className='ai-feedback show '+parsed.result;
+    let html='<div style="font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">';
+    html+=parsed.result==='ok'?'Excellente prononciation !':parsed.result==='warn'?'Presque !':'À retravailler';
+    html+='</div>';
+    html+='<div>'+parsed.feedback+'</div>';
+    if(parsed.tip)html+='<div style="margin-top:5px;font-size:12px;opacity:0.8;">Conseil : '+parsed.tip+'</div>';
+    if(mode!=='free')html+='<div style="margin-top:5px;font-size:11px;opacity:0.6;font-style:italic;">Has dicho : « '+transcript+' »</div>';
+    fb.innerHTML=html;
+
+    if(parsed.result==='ok'){
+      setTimeout(()=>{
+        if(mode==='word')markWord(true);
+        else if(mode==='sent')markSent(true);
+        else if(mode==='line')markLine(true);
+      },2000);
+    }
+
+  }catch(err){
+    fb.className='ai-feedback show warn';
+    fb.innerHTML='<div><strong>Connexion requise</strong></div><div>Has dicho : « '+transcript+' » — verifica tu conexión a internet para el análisis IA.</div>';
+  }
+
+  btn.className='mic-btn';
+  btn.textContent=mode==='free'?'🎤 Grabar de nuevo':'🎤 Grabar de nuevo';
+  btn.disabled=false;
+  btn.onclick=()=>startMic(mode);
+  status.textContent='';
+  status.className='mic-status';
+}
+
+// ── INIT ──
+initProgChips('prog-ex1',15);
+initProgChips('prog-ex2',15);
+updateTimer();
+
+
+// ── MIE:KIT helper ──
+function mieTab(idx, el){
+  document.querySelectorAll('.ex-sub-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  var tabs=document.querySelectorAll('.lvl-tab');
+  if(tabs[idx]) tabs[idx].click();
+}
+
+</script>
+
+</div>
+</div>
+</body>
+</html>

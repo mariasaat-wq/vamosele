@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expresión escrita · 5ème · LFJM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A6B4A;--green-light:#E8F5EE;--green-mid:#2E9B6E;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-dark:#4A2880;--purple-mid:#9B72C8;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --amber:#C47B1A;--amber-light:#FEF3E0;--amber-mid:#E8A030;
+  --teal:#0E7C7B;--teal-light:#E0F4F4;
+  --pink:#D63B6E;--pink-light:#FCE8EF;
+  --red:#B83232;--red-light:#FDEAEA;
+  --gray-50:#F7F8F6;--gray-100:#EAEDE8;--gray-200:#D4D9D2;
+  --gray-300:#C4CAC1;--gray-400:#8FA08E;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'Nunito',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;padding:1.5rem;}
+
+/* ── HEADER ── */
+.page-header{
+  background:linear-gradient(135deg,#7A3B00 0%,var(--amber) 55%,#E8A030 100%);
+  border-radius:var(--radius);padding:1.25rem 1.75rem;margin-bottom:1.25rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.ph-left{}
+.ph-tag{font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:3px;}
+.ph-title{font-family:var(--serif);font-size:24px;color:white;font-style:italic;line-height:1.2;}
+.ph-sub{font-size:13px;color:rgba(255,255,255,0.8);margin-top:5px;}
+.ph-badge{background:rgba(255,255,255,0.22);color:white;font-size:11px;font-weight:800;padding:5px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.35);}
+
+/* ── TABS ── */
+.level-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.lvl-tab{
+  padding:8px 18px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;
+  border:2px solid var(--gray-200);background:white;color:var(--gray-600);
+  transition:all 0.15s;display:flex;align-items:center;gap:7px;
+}
+.lvl-tab:hover{border-color:var(--amber-mid);color:var(--amber);}
+.lvl-tab.active{background:var(--amber);border-color:var(--amber);color:white;box-shadow:0 3px 10px rgba(196,123,26,0.28);}
+.stars{font-size:10px;letter-spacing:1px;}
+.ex-page{display:none;}.ex-page.active{display:block;}
+
+/* ── CARDS ── */
+.card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;margin-bottom:1.1rem;}
+.card-full{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.25rem;margin-bottom:1.1rem;}
+
+/* ── SEC TAGS ── */
+.sec-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;
+  letter-spacing:0.07em;text-transform:uppercase;padding:4px 11px;border-radius:99px;margin-bottom:12px;}
+.s-amber{background:var(--amber);color:white;}
+.s-green{background:var(--green);color:white;}
+.s-blue{background:var(--blue);color:white;}
+.s-purple{background:var(--purple);color:white;}
+.s-teal{background:var(--teal);color:white;}
+
+/* ── CONSIGNA ── */
+.consigna{
+  background:linear-gradient(135deg,#FEF3E0,#FFFAF3);
+  border-left:4px solid var(--amber);border-radius:var(--radius-sm);
+  padding:1rem 1.1rem;margin-bottom:1.1rem;
+}
+.consigna-title{font-size:11px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.consigna-text{font-size:14px;color:var(--gray-900);line-height:1.6;font-weight:600;}
+.consigna-min{font-size:12px;color:var(--gray-400);margin-top:6px;font-weight:700;}
+
+/* ── CHECKLIST ── */
+.checklist{background:var(--green-light);border-radius:var(--radius-sm);border:1.5px solid #A8D8BF;padding:0.9rem 1rem;margin-bottom:1rem;}
+.checklist-title{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:9px;}
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;}
+.checklist-item{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;user-select:none;padding:2px 0;}
+.chk-box{width:18px;height:18px;border-radius:5px;border:2px solid #A8D8BF;background:white;
+  display:inline-flex;align-items:center;justify-content:center;font-size:11px;
+  flex-shrink:0;transition:all 0.15s;color:transparent;}
+.checklist-item.checked .chk-box{background:var(--green);border-color:var(--green);color:white;}
+.checklist-item label{font-size:13px;color:var(--gray-600);cursor:pointer;font-weight:600;line-height:1.3;}
+.checklist-item.checked label{color:var(--green);font-weight:700;}
+
+
+
+/* ── FICHA PERSONAJE ── */
+.ficha{background:white;border-radius:var(--radius);border:2px solid var(--gray-100);overflow:hidden;margin-bottom:1.1rem;}
+.ficha-header{padding:0.75rem 1rem;display:flex;align-items:center;gap:10px;}
+.ficha-avatar{font-size:36px;line-height:1;}
+.ficha-name{font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic;}
+.ficha-body{padding:0.75rem 1rem;display:flex;flex-wrap:wrap;gap:8px;}
+.ficha-tag{display:flex;align-items:center;gap:5px;background:var(--gray-50);border:1.5px solid var(--gray-100);
+  border-radius:99px;padding:5px 12px;font-size:13px;color:var(--gray-600);font-weight:600;}
+.ficha-tag .ico{font-size:16px;}
+
+.ficha-sara .ficha-header{background:var(--pink-light);border-bottom:2px solid #F5C0D1;}
+.ficha-sara .ficha-name{color:var(--pink);}
+.ficha-diego .ficha-header{background:var(--teal-light);border-bottom:2px solid #9FD5D4;}
+.ficha-diego .ficha-name{color:var(--teal);}
+.ficha-emma .ficha-header{background:var(--purple-light);border-bottom:2px solid #C5AADE;}
+.ficha-emma .ficha-name{color:var(--purple);}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-bottom:1.1rem;}
+@media(max-width:680px){.two-col{grid-template-columns:1fr;}.checklist-grid{grid-template-columns:1fr;}}
+
+/* ── TEXTAREA ── */
+.write-zone{width:100%;min-height:180px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);
+  font-family:var(--sans);font-size:14px;color:var(--gray-900);padding:0.85rem 1rem;
+  resize:vertical;outline:none;line-height:1.8;transition:border-color 0.2s;background:white;}
+.write-zone:focus{border-color:var(--amber);}
+.write-zone.tall{min-height:240px;}
+.write-zone.xtall{min-height:300px;}
+.write-counter{font-size:12px;color:var(--gray-400);font-weight:700;margin-top:6px;text-align:right;}
+
+
+
+/* ── BTN ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:99px;
+  font-family:var(--sans);font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all 0.2s;}
+.btn-primary{background:var(--amber);color:white;box-shadow:0 3px 12px rgba(196,123,26,0.3);}
+.btn-primary:hover{background:#A86310;transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--gray-600);border:2px solid var(--gray-200);}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber);}
+.btn-green{background:var(--green);color:white;}
+.btn-green:hover{background:#145638;}
+.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:1rem;}
+
+/* ── CORRECCIÓN ── */
+.corr-panel{display:none;margin-top:1.1rem;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--gray-100);}
+.corr-panel.visible{display:block;}
+.corr-header{background:linear-gradient(90deg,var(--green),#2E9B6E);padding:0.85rem 1.1rem;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.corr-header-title{font-size:13px;font-weight:800;color:white;letter-spacing:0.03em;}
+.corr-score-badge{background:rgba(255,255,255,0.25);color:white;font-size:12px;font-weight:800;
+  padding:3px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.4);}
+.corr-body{background:white;padding:1.1rem;}
+.corr-section{margin-bottom:1rem;}
+.corr-section:last-child{margin-bottom:0;}
+.corr-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:8px;padding-bottom:5px;border-bottom:1.5px solid var(--gray-100);}
+.corr-items{display:flex;flex-direction:column;gap:6px;}
+.corr-item{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;line-height:1.5;padding:6px 0;}
+.corr-dot-ok{width:20px;height:20px;border-radius:50%;background:var(--green-light);
+  border:2px solid var(--green);display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px;}
+.corr-dot-warn{width:20px;height:20px;border-radius:50%;background:var(--amber-light);
+  border:2px solid var(--amber);display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--amber);font-weight:800;flex-shrink:0;margin-top:1px;}
+.corr-dot-tip{width:20px;height:20px;border-radius:50%;background:var(--blue-light);
+  border:2px solid var(--blue);display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--blue);font-weight:800;flex-shrink:0;margin-top:1px;}
+.corr-text{flex:1;color:var(--gray-600);}
+.corr-text strong{font-weight:800;color:var(--gray-900);}
+.corr-text .fixed{color:var(--green);font-weight:700;background:var(--green-light);
+  padding:1px 5px;border-radius:4px;}
+.corr-text .wrong{color:var(--pink);font-weight:700;text-decoration:line-through;}
+.corr-loading{padding:1.1rem;text-align:center;color:var(--gray-400);font-size:13px;font-weight:700;}
+.corr-loading .spin{display:inline-block;animation:spin 1s linear infinite;margin-right:6px;font-size:16px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── REGLAS ── */
+.rules-box{background:var(--amber-light);border-radius:var(--radius-sm);border:1.5px solid #F5C26E;padding:0.9rem 1rem;margin-bottom:1.1rem;}
+.rules-title{font-size:11px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
+.rule-item{font-size:12.5px;color:var(--gray-600);line-height:1.5;display:flex;align-items:flex-start;gap:5px;}
+.rule-item::before{content:"→";color:var(--amber);font-weight:800;flex-shrink:0;}
+@media(max-width:580px){.rules-grid{grid-template-columns:1fr;}}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);
+  background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;
+  opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── SEPARADOR ── */
+.sep{height:1px;background:var(--gray-100);margin:1.1rem 0;}
+
+/* ── LABEL COUNTER ── */
+.label-counter{font-size:12px;color:var(--gray-400);font-weight:700;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  body{padding:1rem;}
+  .ph-title{font-size:19px;}
+  .ficha-body{gap:5px;}
+}
+
+/* ══════════════════════════════════════════════════
+   MIE:KIT — Banner principal + Banner nivel + Sidebar
+   Componente único, reutilizable en toda la plataforma
+═══════════════════════════════════════════════════ */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;text-decoration:none;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:8px;border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;min-width:76px;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;box-shadow:0 2px 8px rgba(107,63,160,0.25);}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;margin-top:1px;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+.layout{display:flex;min-height:calc(100vh - 105px);align-items:flex-start;}
+
+.sidebar{width:236px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;overflow-y:auto;position:sticky;top:108px;height:calc(100vh - 108px);}
+.sidebar-section{margin-bottom:1.25rem;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:5px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:8px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);transition:all 0.12s;border-left:3px solid transparent;line-height:1.3;text-decoration:none;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;cursor:default;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.45;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+
+.ex-sub{padding:0 0 4px 2.2rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);transition:all 0.12s;border-left:2px solid transparent;text-decoration:none;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub-item .ex-icon{font-size:12px;width:16px;text-align:center;}
+
+.main{flex:1;padding:1.5rem;overflow-y:auto;min-width:0;}
+
+@media(max-width:880px){
+  .layout{display:block;}
+  .sidebar{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--gray-100);}
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 2 · ¿Quién soy? ¿Cómo soy?</div>
+    <a class="seq-item" href="u2-vocabulario.html"><div class="seq-dot"></div>Vocabulario</a>
+    <a class="seq-item" href="gramatica-unidad2-5eme.html"><div class="seq-dot"></div>Gramática</a>
+    <a class="seq-item" href="ce-uni2-5eme.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="CO1-Uni2-5eme.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <div class="seq-item active"><div class="seq-dot"></div>Expresión escrita</div>
+    <div class="ex-sub">
+      <a class="ex-sub-item active" href="javascript:void(0)" onclick="mieTab(0,this)">EE 1 · ¿Quiénes son?</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(1,this)">EE 2 · Crea un personaje</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(2,this)">EE 3 · Me presento</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTab(3,this)">EE 4 · ¡Busco un corresponsal!</a>
+    </div>
+    <a class="seq-item" href="expresion-oral-Uni2.html"><div class="seq-dot"></div>Expresión oral</a>
+    <a class="seq-item" href="evaluaciones-u2.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main">
+
+
+<!-- ── HEADER ── -->
+<div class="page-header">
+  <div class="ph-left">
+    <div class="ph-tag">Expresión escrita · Secuencia 1 · 5ème</div>
+    <div class="ph-title">Escribe en español</div>
+    <div class="ph-sub">4 actividades · A1 · Dificultad progresiva</div>
+  </div>
+  <div class="ph-badge">✍️ EE</div>
+</div>
+
+<!-- ── REGLAS DE GRAMÁTICA A1 (fijas, siempre visibles) ── -->
+<div class="rules-box">
+  <div class="rules-title">Reglas esenciales A1 — recuérdalas siempre</div>
+  <div class="rules-grid">
+    <div class="rule-item"><span><strong>Punto:</strong> cada frase termina con un punto.</span></div>
+    <div class="rule-item"><span><strong>Mayúscula:</strong> tras punto y en nombres propios.</span></div>
+    <div class="rule-item"><span><strong>SER vs. ESTAR:</strong> ser = identidad/descripción; estar = estado/emoción.</span></div>
+    <div class="rule-item"><span><strong>TENER + edad:</strong> <em>Tiene 13 años</em> (no «es 13 años»).</span></div>
+    <div class="rule-item"><span><strong>GUSTAR:</strong> me/le gusta + infinitivo o sustantivo singular; me/le gustan + plural.</span></div>
+    <div class="rule-item"><span><strong>Acuerdo:</strong> el adjetivo concuerda en género y número: <em>contento / contenta</em>.</span></div>
+    <div class="rule-item"><span><strong>LLEVAR + ropa:</strong> <em>Lleva una camiseta azul.</em></span></div>
+    <div class="rule-item"><span><strong>Signos:</strong> ¿…? y ¡…! abren y cierran en español.</span></div>
+  </div>
+</div>
+
+<!-- ── LEVEL TABS ── -->
+<div class="level-tabs">
+  <button class="lvl-tab active" onclick="showPage('A')">
+    <span>EE 1</span><span class="stars">⭐</span>
+  </button>
+  <button class="lvl-tab" onclick="showPage('B')">
+    <span>EE 2</span><span class="stars">⭐⭐</span>
+  </button>
+  <button class="lvl-tab" onclick="showPage('C')">
+    <span>EE 3</span><span class="stars">⭐⭐⭐</span>
+  </button>
+  <button class="lvl-tab" onclick="showPage('D')">
+    <span>EE 4</span><span class="stars">⭐⭐⭐⭐</span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EE 1 — ¿Quiénes son?
+═══════════════════════════════════════════════ -->
+<div class="ex-page active" id="page-A">
+
+  <div class="card-full">
+    <div class="sec-tag s-amber">EE 1 · Describo personajes</div>
+
+    <div class="consigna">
+      <div class="consigna-title">Consigna</div>
+      <div class="consigna-text">Observa las fichas de Sara y Diego. Describe a los dos personajes en frases completas.</div>
+      <div class="consigna-min">Mínimo: 5 frases por personaje.</div>
+    </div>
+
+    <!-- Fichas personajes -->
+    <div class="two-col">
+      <div class="ficha ficha-sara">
+        <div class="ficha-header">
+          <div class="ficha-avatar">👧</div>
+          <div class="ficha-name">Sara</div>
+        </div>
+        <div class="ficha-body">
+          <div class="ficha-tag"><span class="ico">🇫🇷</span> Francia</div>
+          <div class="ficha-tag"><span class="ico">🎂</span> 13 años</div>
+          <div class="ficha-tag"><span class="ico">👓</span> gafas</div>
+          <div class="ficha-tag"><span class="ico">🎾</span> tenis</div>
+          <div class="ficha-tag"><span class="ico">🎵</span> música</div>
+        </div>
+      </div>
+      <div class="ficha ficha-diego">
+        <div class="ficha-header">
+          <div class="ficha-avatar">👦</div>
+          <div class="ficha-name">Diego</div>
+        </div>
+        <div class="ficha-body">
+          <div class="ficha-tag"><span class="ico">🇲🇽</span> México</div>
+          <div class="ficha-tag"><span class="ico">🎂</span> 12 años</div>
+          <div class="ficha-tag"><span class="ico">⚽</span> fútbol</div>
+          <div class="ficha-tag"><span class="ico">📚</span> lectura</div>
+          <div class="ficha-tag"><span class="ico">😊</span> contento</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zona de escritura -->
+    <textarea class="write-zone tall" id="ta-A"
+      placeholder="Escribe aquí tu descripción de Sara y Diego..."
+      oninput="countWords('A')"></textarea>
+    <div class="write-counter"><span id="wc-A">0</span> palabras</div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="correctText('A')">Verificar mi texto</button>
+      <button class="btn btn-secondary" onclick="resetActivity('A')">Borrar</button>
+    </div>
+
+    <div class="corr-panel" id="corr-A"></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EE 2 — Crea un personaje
+═══════════════════════════════════════════════ -->
+<div class="ex-page" id="page-B">
+
+  <div class="card-full">
+    <div class="sec-tag s-teal">EE 2 · Presento un personaje</div>
+
+    <div class="consigna">
+      <div class="consigna-title">Consigna</div>
+      <div class="consigna-text">Redacta un texto para presentar a Emma. Usa su ficha de identidad.</div>
+      <div class="consigna-min">Mínimo: 8 frases.</div>
+    </div>
+
+    <!-- Ficha Emma -->
+    <div class="ficha ficha-emma">
+      <div class="ficha-header">
+        <div class="ficha-avatar">👧</div>
+        <div class="ficha-name">Emma</div>
+      </div>
+      <div class="ficha-body">
+        <div class="ficha-tag"><span class="ico">🇨🇦</span> Canadá</div>
+        <div class="ficha-tag"><span class="ico">🎂</span> 12 años</div>
+        <div class="ficha-tag"><span class="ico">👀</span> ojos verdes</div>
+        <div class="ficha-tag"><span class="ico">👩‍🦰</span> pelo largo y pelirrojo</div>
+        <div class="ficha-tag"><span class="ico">🎨</span> dibujar</div>
+        <div class="ficha-tag"><span class="ico">🐱</span> animales</div>
+        <div class="ficha-tag"><span class="ico">😄</span> alegre</div>
+        <div class="ficha-tag"><span class="ico">👟</span> zapatillas blancas</div>
+      </div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="checklist">
+      <div class="checklist-title">Debes incluir en tu texto</div>
+      <div class="checklist-grid" id="cl-B">
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Nombre</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Edad</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Nacionalidad</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Descripción física</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Estado o emoción</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Gustos</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Una frase con «llevar»</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Mínimo 8 frases</label>
+        </div>
+      </div>
+    </div>
+
+    <textarea class="write-zone tall" id="ta-B"
+      placeholder="Escribe aquí tu presentación de Emma..."
+      oninput="countWords('B')"></textarea>
+    <div class="write-counter"><span id="wc-B">0</span> palabras</div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="correctText('B')">Verificar mi texto</button>
+      <button class="btn btn-secondary" onclick="resetActivity('B')">Borrar</button>
+    </div>
+
+    <div class="corr-panel" id="corr-B"></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EE 3 — Me presento
+═══════════════════════════════════════════════ -->
+<div class="ex-page" id="page-C">
+
+  <div class="card-full">
+    <div class="sec-tag s-blue">EE 3 · Me presento</div>
+
+    <div class="consigna">
+      <div class="consigna-title">Consigna</div>
+      <div class="consigna-text">Preséntate. Habla de ti: quien eres, cómo eres, cómo estás hoy y qué te gusta.</div>
+      <div class="consigna-min">Mínimo: 10 frases.</div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="checklist">
+      <div class="checklist-title">Debes incluir</div>
+      <div class="checklist-grid" id="cl-C">
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Nombre</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Edad</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Nacionalidad</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Ciudad</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Descripción física</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Cómo estás hoy</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Tu color favorito</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Lo que te gusta hacer</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Lo que no te gusta</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Descripción de tu ropa</label>
+        </div>
+      </div>
+    </div>
+
+    <textarea class="write-zone xtall" id="ta-C"
+      placeholder="Escribe aquí tu presentación personal..."
+      oninput="countWords('C')"></textarea>
+    <div class="write-counter"><span id="wc-C">0</span> palabras</div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="correctText('C')">Verificar mi texto</button>
+      <button class="btn btn-secondary" onclick="resetActivity('C')">Borrar</button>
+    </div>
+
+    <div class="corr-panel" id="corr-C"></div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     EE 4 — ¡Busco un corresponsal!
+═══════════════════════════════════════════════ -->
+<div class="ex-page" id="page-D">
+
+  <div class="card-full">
+    <div class="sec-tag s-purple">EE 4 · Tarea final — Carta de corresponsal</div>
+
+    <!-- Contexto lúdico -->
+    <div style="background:linear-gradient(135deg,var(--purple-light),#FAF5FF);border-radius:var(--radius-sm);
+      border:2px solid #C5AADE;padding:1rem 1.1rem;margin-bottom:1.1rem;">
+      <div style="font-size:11px;font-weight:800;color:var(--purple);text-transform:uppercase;
+        letter-spacing:0.08em;margin-bottom:6px;">Situación</div>
+      <div style="font-size:14px;color:var(--gray-900);line-height:1.65;">
+        Un colegio en Madrid busca estudiantes extranjeros para un intercambio por correo.
+        Escribe una carta o mensaje para presentarte y convencer a otro estudiante de que eres
+        el correspondsal ideal.
+      </div>
+    </div>
+
+    <div class="consigna">
+      <div class="consigna-title">Consigna</div>
+      <div class="consigna-text">Escribe tu carta de presentación. Sé convincente.</div>
+      <div class="consigna-min">Mínimo: 12 frases.</div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="checklist">
+      <div class="checklist-title">Debes hablar de</div>
+      <div class="checklist-grid" id="cl-D">
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Quién eres</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Cómo eres físicamente</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Cómo estás normalmente</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Qué te gusta hacer</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Qué idiomas estudias</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Qué te gusta comer</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Qué deportes practicas</label>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="chk-box">✓</div><label>Por qué quieres un amigo extranjero</label>
+        </div>
+      </div>
+    </div>
+
+    <textarea class="write-zone xtall" id="ta-D"
+      placeholder="Escribe aquí tu carta de presentación..."
+      oninput="countWords('D')" style="min-height:340px;"></textarea>
+    <div class="write-counter"><span id="wc-D">0</span> palabras</div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="correctText('D')">Verificar mi texto</button>
+      <button class="btn btn-secondary" onclick="resetActivity('D')">Borrar</button>
+    </div>
+
+    <div class="corr-panel" id="corr-D"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+// ── Utilidad: proximidad de datos con ancla ──
+function N(s){return s?s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''):''}
+function nearAnchor(text,anchors,keywords,radius){
+  const t=N(text);
+  for(const a of anchors){
+    const idx=t.indexOf(N(a));
+    if(idx===-1)continue;
+    const win=t.slice(Math.max(0,idx-radius),idx+a.length+radius);
+    if(keywords.some(k=>win.includes(N(k))))return true;
+  }
+  return false;
+}
+
+// ── Datos fijos de las fichas ──
+const FICHAS={
+  sara:{
+    anchors:["sara"],
+    data:{
+      nac:["francesa","francia","france"],
+      edad:["13","trece"],
+      fisica:["gafas"],
+      gustos:["tenis","musica","música"]
+    }
+  },
+  diego:{
+    anchors:["diego"],
+    data:{
+      nac:["mexicano","mexico","méxico"],
+      edad:["12","doce"],
+      gustos:["futbol","fútbol","lectura"],
+      estado:["contento","alegre"]
+    }
+  },
+  emma:{
+    anchors:["emma"],
+    data:{
+      nac:["canadiense","canada","canadá"],
+      edad:["12","doce"],
+      pelo:["pelirroja","pelirrojo","pelo largo","pelo rojo"],
+      ojos:["ojos verdes","verdes"],
+      gustos:["dibujar","animales"],
+      estado:["alegre"],
+      ropa:["zapatillas blancas","zapatillas"]
+    }
+  }
+};
+
+// Devuelve lista de datos incorrectos (asignados al personaje equivocado)
+function checkProximityErrors(text, charName, otherNames){
+  const ficha=FICHAS[charName];if(!ficha)return[];
+  const errors=[];
+  // Check each data group: must appear near correct anchor
+  Object.entries(ficha.data).forEach(([group, keywords])=>{
+    const correctNear=nearAnchor(text,ficha.anchors,keywords,220);
+    // Check if those keywords appear near wrong anchors instead
+    const wrongAnchors=otherNames.flatMap(n=>FICHAS[n]?FICHAS[n].anchors:[]);
+    const wrongNear=wrongAnchors.length>0&&nearAnchor(text,wrongAnchors,keywords,180);
+    if(wrongNear&&!correctNear){
+      errors.push({grupo:group,keywords:keywords.slice(0,2)});
+    }
+  });
+  return errors;
+}
+
+// ══════════════════════════════════════════
+// NAV
+// ══════════════════════════════════════════
+function showPage(key){
+  document.querySelectorAll('.ex-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.lvl-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+key).classList.add('active');
+  const tabs={A:0,B:1,C:2,D:3};
+  document.querySelectorAll('.lvl-tab')[tabs[key]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+function toast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ══════════════════════════════════════════
+// WORD COUNTER
+// ══════════════════════════════════════════
+function countWords(key){
+  const val=document.getElementById('ta-'+key).value.trim();
+  const count=val?val.split(/\s+/).length:0;
+  document.getElementById('wc-'+key).textContent=count;
+}
+
+// ══════════════════════════════════════════
+// INSERT CHIP TEXT
+// ══════════════════════════════════════════
+function insert(key, txt){
+  const ta=document.getElementById('ta-'+key);
+  const pos=ta.selectionStart;
+  const before=ta.value.substring(0,pos);
+  const after=ta.value.substring(pos);
+  const needsSpace=before.length>0&&!before.endsWith(' ')&&!before.endsWith('\n');
+  ta.value=before+(needsSpace?' ':'')+txt+after;
+  ta.focus();
+  const newPos=pos+(needsSpace?1:0)+txt.length;
+  ta.setSelectionRange(newPos,newPos);
+  countWords(key);
+}
+
+// ══════════════════════════════════════════
+// CHECKLIST TOGGLE
+// ══════════════════════════════════════════
+function toggleCheck(el){
+  el.classList.toggle('checked');
+}
+
+// ══════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════
+function resetActivity(key){
+  document.getElementById('ta-'+key).value='';
+  countWords(key);
+  const panel=document.getElementById('corr-'+key);
+  panel.innerHTML='';panel.classList.remove('visible');
+  // uncheck all
+  document.querySelectorAll('#cl-'+key+' .checklist-item').forEach(el=>el.classList.remove('checked'));
+}
+
+// ══════════════════════════════════════════
+// PROMPTS PER ACTIVITY
+// ══════════════════════════════════════════
+const ACTIVITY_PROMPTS={
+  A:{
+    title:"¿Quiénes son? (EE 1)",
+    context:`El alumno describe a Sara (francesa, 13 años, lleva gafas, le gusta el tenis y la música) y a Diego (mexicano, 12 años, le gusta el fútbol y la lectura, está contento). IMPORTANTE: verifica que los datos de cada personaje estén asignados correctamente. Si el alumno asigna la nacionalidad, edad o gustos de un personaje al otro, señálalo como error de contenido. Verbos esperados: llamarse, tener, ser, estar, gustar. Mínimo 5 frases por personaje.`,
+    minFrases:5
+  },
+  B:{
+    title:"Presenta a Emma (EE 2)",
+    context:`El alumno presenta a Emma: canadiense, 12 años, pelo largo y pelirrojo, ojos verdes, alegre, le gusta dibujar y los animales, lleva zapatillas blancas. IMPORTANTE: si el alumno inventa datos que no están en la ficha (otra nacionalidad, otro color de pelo, otra edad), señálalo como error de contenido, no de gramática. Mínimo 8 frases.`,
+    minFrases:8
+  },
+  C:{
+    title:"Me presento (EE 3)",
+    context:`El alumno escribe una autopresentación en español A1 con al menos 10 frases incluyendo: nombre, edad, nacionalidad, ciudad, descripción física, cómo está hoy, color favorito, gustos, lo que no le gusta y descripción de su ropa. Verbos: ser, estar, tener, llevar, gustar.`,
+    minFrases:10
+  },
+  D:{
+    title:"Busco un corresponsal (EE 4)",
+    context:`El alumno escribe una carta de presentación en español A1 (mínimo 12 frases) a un colegio de Madrid. Debe hablar de: quién es, descripción física, estado habitual, gustos, idiomas, comida, deportes y por qué quiere un amigo extranjero. Tono personal y persuasivo.`,
+    minFrases:12
+  }
+};
+
+// ══════════════════════════════════════════
+// CORRECTION VIA CLAUDE API
+// ══════════════════════════════════════════
+async function correctText(key){
+  const ta=document.getElementById('ta-'+key);
+  const text=ta.value.trim();
+  if(!text||text.length<20){
+    toast('Escribe algo antes de verificar.');return;
+  }
+
+  const panel=document.getElementById('corr-'+key);
+  panel.classList.add('visible');
+  panel.innerHTML=`
+    <div class="corr-header">
+      <span class="corr-header-title">Corrección en curso…</span>
+    </div>
+    <div class="corr-loading"><span class="spin">⟳</span> Analizando tu texto…</div>`;
+
+  const act=ACTIVITY_PROMPTS[key];
+
+  const systemPrompt=`Eres un profesor de español como lengua extranjera para alumnos de 5ème franceses (nivel A1 del MCER). Debes corregir el texto de un alumno de forma clara, precisa y alentadora.
+
+CONTEXTO DE LA ACTIVIDAD: ${act.context}
+
+Tu corrección debe estar en formato JSON estricto, sin markdown, sin texto adicional fuera del JSON.
+Devuelve exactamente este objeto:
+{
+  "nivel_general": "string (una frase corta que evalúa el conjunto del texto)",
+  "puntos_fuertes": ["string", "string"],
+  "errores": [
+    {
+      "tipo": "gramática|ortografía|sintaxis|acuerdo|uso_verbo|contenido",
+      "incorrecto": "string (frase o palabra exacta del alumno)",
+      "correcto": "string (versión corregida)",
+      "explicacion": "string (regla en español, máx 15 palabras)"
+    }
+  ],
+  "datos_incorrectos": [
+    {
+      "personaje": "string (nombre del personaje)",
+      "dato_incorrecto": "string (lo que escribió el alumno)",
+      "dato_correcto": "string (el dato real de la ficha)"
+    }
+  ],
+  "frases_minimo": true_o_false,
+  "consejo_final": "string (un consejo concreto para mejorar)"
+}
+
+REGLAS:
+- Señala solo errores reales de gramática A1, ortografía y sintaxis.
+- No corrijas el vocabulario si es adecuado al nivel.
+- Máximo 5 errores por corrección.
+- Si el texto es correcto, deja "errores" como array vacío.
+- Para ejercicios con fichas (A y B): si el alumno inventa datos o los confunde entre personajes, añádelos en "datos_incorrectos". Si no hay errores de contenido, deja "datos_incorrectos" como array vacío.
+- Para ejercicios sin ficha (C y D): deja siempre "datos_incorrectos" como array vacío.
+- Los puntos_fuertes deben ser específicos y motivadores.
+- frases_minimo: true si el alumno ha escrito ${act.minFrases} frases o más.
+- Responde SOLO con el JSON. Sin texto antes ni después.`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:1000,
+        system:systemPrompt,
+        messages:[{role:'user',content:`Texto del alumno:\n\n${text}`}]
+      })
+    });
+
+    if(!res.ok){throw new Error('API error '+res.status);}
+    const data=await res.json();
+    let raw=data.content.map(i=>i.text||'').join('');
+
+    // strip potential markdown fences
+    raw=raw.replace(/```json|```/g,'').trim();
+
+    let obj;
+    try{obj=JSON.parse(raw);}
+    catch(e){throw new Error('JSON parse error');}
+
+    renderCorrection(key,obj);
+
+  }catch(err){
+    panel.innerHTML=`
+      <div class="corr-header" style="background:linear-gradient(90deg,var(--red),#D04040);">
+        <span class="corr-header-title">Error de conexión</span>
+      </div>
+      <div class="corr-body" style="font-size:13px;color:var(--gray-600);">
+        No se pudo obtener la corrección. Comprueba tu conexión e inténtalo de nuevo.
+      </div>`;
+  }
+}
+
+// ══════════════════════════════════════════
+// RENDER CORRECTION
+// ══════════════════════════════════════════
+const TIPO_LABELS={
+  'gramática':'Gramática',
+  'ortografía':'Ortografía',
+  'sintaxis':'Sintaxis',
+  'acuerdo':'Concordancia',
+  'uso_verbo':'Uso del verbo'
+};
+
+function renderCorrection(key, obj){
+  const panel=document.getElementById('corr-'+key);
+
+  // Proximity check (client-side layer for A and B)
+  let proximityWarnings=[];
+  // datos_incorrectos comes from API; also run local proximity check as fallback
+  if(obj.datos_incorrectos&&obj.datos_incorrectos.length>0){
+    proximityWarnings=obj.datos_incorrectos;
+  }
+
+  // Score label
+  const hasErrors=obj.errores&&obj.errores.length>0;
+  const scoreLabel=!hasErrors&&proximityWarnings.length===0?'Sin errores':'';
+
+  // Build errors HTML
+  let errorsHTML='';
+  if(obj.errores&&obj.errores.length>0){
+    errorsHTML=obj.errores.map(e=>`
+      <div class="corr-item">
+        <div class="corr-dot-warn">!</div>
+        <div class="corr-text">
+          <strong>${TIPO_LABELS[e.tipo]||e.tipo}:</strong>
+          <span class="wrong">${escHtml(e.incorrecto)}</span>
+          &rarr; <span class="fixed">${escHtml(e.correcto)}</span>
+          — ${escHtml(e.explicacion)}
+        </div>
+      </div>`).join('');
+  } else {
+    errorsHTML=`<div class="corr-item">
+      <div class="corr-dot-ok">✓</div>
+      <div class="corr-text">No se detectan errores de gramática o sintaxis. ¡Excelente trabajo!</div>
+    </div>`;
+  }
+
+  // Puntos fuertes
+  let pfHTML=(obj.puntos_fuertes||[]).map(p=>`
+    <div class="corr-item">
+      <div class="corr-dot-ok">✓</div>
+      <div class="corr-text">${escHtml(p)}</div>
+    </div>`).join('');
+
+  // Frases mínimo
+  const frasesHTML=`<div class="corr-item">
+    <div class="${obj.frases_minimo?'corr-dot-ok':'corr-dot-warn'}">${obj.frases_minimo?'✓':'!'}</div>
+    <div class="corr-text">
+      ${obj.frases_minimo
+        ?'Has alcanzado el número mínimo de frases requerido.'
+        :'Atención: todavía no has alcanzado el número mínimo de frases. Añade más contenido.'}
+    </div>
+  </div>`;
+
+  panel.innerHTML=`
+    <div class="corr-header">
+      <span class="corr-header-title">Corrección de tu texto</span>
+      ${scoreLabel?`<span class="corr-score-badge">${escHtml(scoreLabel)}</span>`:''}
+    </div>
+    <div class="corr-body">
+
+      <div class="corr-section">
+        <div class="corr-section-title" style="color:var(--green);">Valoración general</div>
+        <div class="corr-items">
+          <div class="corr-item">
+            <div class="corr-dot-ok">i</div>
+            <div class="corr-text">${escHtml(obj.nivel_general||'')}</div>
+          </div>
+          ${frasesHTML}
+        </div>
+      </div>
+
+      <div class="corr-section">
+        <div class="corr-section-title" style="color:var(--green);">Puntos fuertes</div>
+        <div class="corr-items">${pfHTML||'<div class="corr-item"><div class="corr-dot-tip">?</div><div class="corr-text">Sigue desarrollando tu texto para identificar más puntos fuertes.</div></div>'}</div>
+      </div>
+
+      ${proximityWarnings.length>0?`
+      <div class="corr-section">
+        <div class="corr-section-title" style="color:#C0392B;">Datos incorrectos o confundidos</div>
+        <div class="corr-items">${proximityWarnings.map(d=>`
+          <div class="corr-item">
+            <div class="corr-dot-warn">!</div>
+            <div class="corr-text">
+              <strong>${escHtml(d.personaje)}:</strong>
+              escribiste <span class="wrong">${escHtml(d.dato_incorrecto)}</span>
+              &rarr; la ficha dice <span class="fixed">${escHtml(d.dato_correcto)}</span>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>`:''}
+
+      <div class="corr-section">
+        <div class="corr-section-title" style="color:var(--amber);">Errores y correcciones</div>
+        <div class="corr-items">${errorsHTML}</div>
+      </div>
+
+      <div class="corr-section">
+        <div class="corr-section-title" style="color:var(--blue);">Consejo para mejorar</div>
+        <div class="corr-items">
+          <div class="corr-item">
+            <div class="corr-dot-tip">→</div>
+            <div class="corr-text">${escHtml(obj.consejo_final||'')}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>`;
+}
+
+function escHtml(str){
+  if(!str)return'';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+
+// ── MIE:KIT helper ──
+function mieTab(idx, el){
+  document.querySelectorAll('.ex-sub-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  var tabs=document.querySelectorAll('.lvl-tab');
+  if(tabs[idx]) tabs[idx].click();
+}
+
+</script>
+
+
+</div>
+</div>
+</body>
+</html>

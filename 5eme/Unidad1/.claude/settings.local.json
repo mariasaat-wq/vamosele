@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"/Users/mariasaat/Desktop/Clases de Español/APP/5eme/Unidad1/\" && echo \"---\" && ls \"/Users/mariasaat/Desktop/Clases de Español/APP/5eme/\")"
+    ]
+  }
+}

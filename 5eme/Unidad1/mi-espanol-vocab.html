@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi español — Vocabulaire · LFJM</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-mid:#9B72C8;--purple-dark:#4A2880;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --amber:#C47B1A;--amber-light:#FEF3E0;
+  --red:#B83232;--red-light:#FDEAEA;
+  --green:#1E7A3C;--green-light:#E4F5EB;
+  --gray-50:#F5F7F5;--gray-100:#E8EDE8;--gray-200:#CDD4CC;
+  --gray-400:#8FA08E;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;}
+
+/* ── HEADER ── */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;cursor:pointer;user-select:none;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+/* ── LEVEL BAR ── */
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;min-width:76px;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;box-shadow:0 2px 8px rgba(107,63,160,0.25);}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;margin-top:1px;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+/* ── LAYOUT ── */
+.layout{display:flex;min-height:calc(100vh - 105px);}
+
+/* ── SIDEBAR ── */
+.sidebar{width:236px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;overflow-y:auto;position:sticky;top:108px;height:calc(100vh - 108px);}
+.sidebar-section{margin-bottom:1.25rem;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:5px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:8px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);transition:all 0.12s;border-left:3px solid transparent;line-height:1.3;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.45;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+
+/* exercise tabs inside sidebar */
+.ex-sub{padding:0 0 0 2.2rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);transition:all 0.12s;border-left:2px solid transparent;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub-item .ex-icon{font-size:12px;width:16px;text-align:center;}
+
+/* ── MAIN CONTENT ── */
+.main{flex:1;padding:1.5rem;overflow-y:auto;min-width:0;}
+
+/* page header per exercise */
+.ex-page-header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));border-radius:var(--radius);padding:1.1rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;}
+.ex-page-title{font-family:var(--serif);font-size:18px;color:white;font-style:italic;}
+.ex-page-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+.ex-page-sub{font-size:11px;color:rgba(255,255,255,0.65);margin-top:2px;letter-spacing:0.05em;text-transform:uppercase;}
+
+/* intro card */
+.intro-card{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1.1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:12px;}
+.intro-icon{font-size:24px;flex-shrink:0;}
+.intro-text{font-size:13.5px;color:var(--gray-600);line-height:1.6;}
+.intro-text strong{color:var(--purple);}
+
+/* score bar */
+.score-bar{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:0.9rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:14px;}
+.score-num{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--purple);min-width:48px;}
+.score-label{font-size:12px;color:var(--gray-400);}
+.score-track{flex:1;height:7px;background:var(--gray-100);border-radius:99px;overflow:hidden;}
+.score-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--sage));border-radius:99px;transition:width 0.5s ease;width:0%;}
+.score-msg{font-size:12px;color:var(--gray-600);min-width:110px;text-align:right;}
+
+/* section label */
+.sec-label{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+
+/* shared buttons */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.75rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:linear-gradient(135deg,var(--purple),var(--sage));color:white;border:none;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-ghost{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:white;color:var(--purple);border:1.5px solid var(--purple-mid);border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;}
+.btn-ghost:hover{background:var(--purple-light);}
+.btn-small{padding:5px 13px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--purple),var(--sage));color:white;font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;}
+.btn-small.hidden{display:none;}
+
+/* shared feedback */
+.feedback-ok{background:var(--green-light);color:var(--green);border-left:3px solid var(--green);}
+.feedback-ko{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+.feedback-info{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+
+/* result panel */
+.result-panel{display:none;background:white;border-radius:var(--radius);border:2px solid var(--sage);padding:1.5rem;margin-bottom:1rem;text-align:center;}
+.result-panel.show{display:block;}
+.result-emoji{font-size:44px;margin-bottom:6px;}
+.result-title{font-family:var(--serif);font-size:20px;color:var(--gray-900);margin-bottom:5px;}
+.result-sub{font-size:13px;color:var(--gray-600);line-height:1.5;}
+
+/* shared input */
+.text-input{border:none;border-bottom:2px solid var(--purple-mid);background:transparent;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--purple);outline:none;padding:3px 3px;transition:border-color 0.15s;}
+.text-input:focus{border-bottom-color:var(--purple);}
+.text-input.inp-ok{border-bottom-color:var(--sage);color:var(--sage-dark);}
+.text-input.inp-ko{border-bottom-color:var(--red);color:var(--red);}
+
+/* ── EX1 specific ── */
+.word-pool{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:1.5rem;padding:1.1rem;background:white;border-radius:var(--radius);border:1px solid var(--gray-100);}
+.word-chip{padding:7px 15px;background:var(--purple-light);border:1.5px solid var(--purple-mid);border-radius:99px;font-size:13.5px;font-weight:500;color:var(--purple);cursor:pointer;transition:all 0.18s;user-select:none;}
+.word-chip:hover{background:var(--purple);color:white;transform:translateY(-1px);}
+.word-chip.selected{background:var(--purple);color:white;box-shadow:0 3px 10px rgba(107,63,160,0.3);}
+.word-chip.used-ok{background:var(--sage-light);border-color:var(--sage);color:var(--sage-dark);cursor:default;pointer-events:none;}
+.word-chip.used-ko{background:var(--red-light);border-color:var(--red);color:var(--red);cursor:default;pointer-events:none;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:1rem;}
+.img-card{background:white;border-radius:var(--radius);border:2px solid var(--gray-100);padding:12px 10px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.img-card:hover{border-color:var(--purple-mid);transform:translateY(-2px);box-shadow:0 5px 16px rgba(107,63,160,0.1);}
+.img-card.targeted{border-color:var(--purple);background:var(--purple-light);}
+.img-card.correct{border-color:var(--sage);background:var(--sage-light);cursor:default;pointer-events:none;}
+.img-card.wrong{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.card-visual{height:68px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
+.card-fr{font-size:11.5px;color:var(--gray-400);margin-bottom:4px;}
+.card-answer{font-size:14px;font-weight:600;color:var(--purple);min-height:20px;}
+.img-card.correct .card-answer{color:var(--sage-dark);}
+.card-tick{position:absolute;top:7px;right:9px;font-size:14px;opacity:0;transition:opacity 0.2s;}
+.img-card.correct .card-tick{opacity:1;}
+
+/* ── EX2 specific ── */
+.wb-wrap{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1.1rem;margin-bottom:1.5rem;}
+.cat-row{margin-bottom:10px;}
+.cat-lbl{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{padding:5px 12px;border-radius:99px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.18s;user-select:none;border:1.5px solid;}
+.chip:hover{transform:translateY(-1px);}
+.chip.ch-selected{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.chip.ch-used{opacity:0.28;cursor:default;pointer-events:none;transform:none;}
+.chip.sal{background:#FEF3E0;border-color:#F5C26E;color:#A05A10;}
+.chip.sal.ch-selected{background:#C47B1A;color:white;}
+.chip.col{background:#F0EAF8;border-color:#9B72C8;color:#5A2D8A;}
+.chip.col.ch-selected{background:#6B3FA0;color:white;}
+.chip.num{background:#E4F5EE;border-color:#5CB891;color:#1E6A4A;}
+.chip.num.ch-selected{background:#3A8C6E;color:white;}
+.chip.nac{background:#FDEAEA;border-color:#E08080;color:#8B2020;}
+.chip.nac.ch-selected{background:#B83232;color:white;}
+.sent-list{display:flex;flex-direction:column;gap:9px;margin-bottom:1rem;}
+.sent-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:0.9rem 1.1rem;display:flex;align-items:center;gap:9px;transition:all 0.2s;}
+.sent-card.correct{border-color:var(--sage);background:var(--sage-light);}
+.sent-card.wrong{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.sent-num{font-size:11px;font-weight:700;color:var(--gray-400);min-width:20px;}
+.sent-text{font-size:14px;color:var(--gray-900);line-height:1.5;flex:1;}
+.sent-card.correct .sent-text,.sent-card.correct .sent-num{color:var(--sage-dark);}
+.sent-card.wrong .sent-text{color:var(--red);}
+.blank{display:inline-flex;align-items:center;justify-content:center;min-width:86px;height:26px;border-bottom:2.5px solid var(--purple-mid);background:var(--purple-light);border-radius:4px 4px 0 0;padding:0 7px;font-size:13px;font-weight:600;color:var(--purple);cursor:pointer;transition:all 0.15s;vertical-align:middle;margin:0 2px;}
+.blank:hover{background:var(--purple);color:white;}
+.blank.filled{border-bottom-color:var(--purple);}
+.blank.blank-ok{border-bottom-color:var(--sage);background:var(--sage-light);color:var(--sage-dark);cursor:default;}
+.blank.blank-ko{border-bottom-color:var(--red);background:var(--red-light);color:var(--red);}
+.sent-tick{font-size:15px;opacity:0;flex-shrink:0;}
+.sent-card.correct .sent-tick{opacity:1;}
+
+/* ── EX3 specific ── */
+.syl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px;margin-bottom:1rem;}
+.syl-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.1rem;transition:all 0.2s;}
+.syl-card.correct{border-color:var(--sage);background:var(--sage-light);}
+.syl-card.wrong{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.syl-row{display:flex;align-items:center;gap:4px;margin-bottom:10px;flex-wrap:wrap;}
+.syl{padding:5px 9px;border-radius:var(--radius-sm);font-family:var(--serif);font-size:16px;font-weight:600;background:var(--purple-light);color:var(--purple);border:1.5px solid var(--purple-mid);}
+.syl-card.correct .syl{background:var(--sage-light);color:var(--sage-dark);border-color:var(--sage);}
+.syl-sep{font-size:13px;color:var(--gray-400);}
+.syl-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;margin-bottom:8px;display:inline-block;}
+.sb-sal{background:#FEF3E0;color:#A05A10;}
+.sb-col{background:#F0EAF8;color:#5A2D8A;}
+.sb-num{background:#E4F5EE;color:#1E6A4A;}
+.sb-nac{background:#FDEAEA;color:#8B2020;}
+
+/* ── EX4 specific ── */
+.trans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px;margin-bottom:1rem;}
+.trans-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.1rem;display:flex;flex-direction:column;gap:9px;transition:all 0.2s;}
+.trans-card.correct{border-color:var(--sage);background:var(--sage-light);}
+.trans-card.wrong{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.trans-top{display:flex;align-items:center;gap:7px;}
+.trans-num{font-size:11px;font-weight:700;color:var(--gray-400);}
+.fr-word{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--gray-900);}
+.trans-card.correct .fr-word{color:var(--sage-dark);}
+.ans-line{font-size:12px;font-weight:600;color:var(--sage-dark);display:none;}
+.trans-card.correct .ans-line{display:block;}
+
+/* ── EX5 specific ── */
+.def-list{display:flex;flex-direction:column;gap:11px;margin-bottom:1rem;}
+.def-card{background:white;border-radius:var(--radius);border:1.5px solid var(--gray-100);padding:1.1rem 1.25rem;display:grid;grid-template-columns:auto 1fr auto;gap:10px 14px;align-items:start;transition:all 0.2s;}
+.def-card.correct{border-color:var(--sage);background:var(--sage-light);}
+.def-card.wrong{border-color:var(--red);background:var(--red-light);animation:shake 0.35s ease;}
+.def-left{display:flex;flex-direction:column;align-items:center;gap:5px;padding-top:2px;}
+.def-num{font-size:11px;font-weight:700;color:var(--gray-400);}
+.cat-dot{width:9px;height:9px;border-radius:50%;}
+.dot-sal{background:#C47B1A;}
+.dot-col{background:#6B3FA0;}
+.dot-num{background:#3A8C6E;}
+.dot-nac{background:#B83232;}
+.def-text{font-size:14px;color:var(--gray-900);line-height:1.65;margin-bottom:8px;}
+.def-card.correct .def-text{color:var(--sage-dark);}
+.def-blank{display:inline-block;min-width:90px;padding:2px 6px;border-bottom:2.5px solid var(--purple-mid);background:var(--purple-light);border-radius:4px 4px 0 0;color:var(--purple);font-weight:600;font-size:14px;vertical-align:middle;}
+.def-card.correct .def-blank{border-bottom-color:var(--sage);background:var(--sage-light);color:var(--sage-dark);}
+.def-visual{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--gray-100);background:var(--gray-50);}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1rem;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--gray-600);}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ── shared animations ── */
+@keyframes shake{0%,100%{transform:translateX(0)}30%{transform:translateX(-5px)}70%{transform:translateX(5px)}}
+
+/* ── toast ── */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── PAGE VISIBILITY ── */
+.ex-page{display:none;}
+.ex-page.active{display:block;}
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="showToast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="showToast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="showToast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="showToast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="showToast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 1 · ¡Hola, España!</div>
+    <div class="seq-item active"><div class="seq-dot"></div>Vocabulario</div>
+    <div class="ex-sub">
+      <div class="ex-sub-item active" id="nav-ex1" onclick="showEx('ex1')">Ex.1 · Association</div>
+      <div class="ex-sub-item" id="nav-ex2" onclick="showEx('ex2')">Ex.2 · Frases</div>
+      <div class="ex-sub-item" id="nav-ex3" onclick="showEx('ex3')">Ex.3 · Sílabas</div>
+      <div class="ex-sub-item" id="nav-ex4" onclick="showEx('ex4')">Ex.4 · Traducción</div>
+      <div class="ex-sub-item" id="nav-ex5" onclick="showEx('ex5')">Ex.5 · Definiciones</div>
+    </div>
+    <a class="seq-item" href="mi-espanol-gram.html"><div class="seq-dot"></div>Gramática</a>
+    <a class="seq-item" href="comprension-lectora.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="comprension-oral-1.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <a class="seq-item" href="expresion-escrita.html"><div class="seq-dot"></div>Expresión escrita</a>
+    <a class="seq-item" href="expresion-oral.html"><div class="seq-dot"></div>Expresión oral</a>
+    <a class="seq-item" href="evaluaciones.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main">
+
+<!-- ═══════════════════════════════════════════════════
+     EXERCICE 1 — Association image/mot
+═══════════════════════════════════════════════════ -->
+<div class="ex-page active" id="ex1">
+  <div class="ex-page-header">
+    <div>
+      <div class="ex-page-sub">5ème · A1 · ¡Hola, España!</div>
+      <div class="ex-page-title">Vocabulaire — Exercice 1</div>
+    </div>
+    <div class="ex-page-badge">🔤 Association</div>
+  </div>
+  <div class="intro-card">
+    <div class="intro-icon">🎯</div>
+    <div class="intro-text"><strong>Comment jouer :</strong> Clique sur un mot espagnol, puis sur l'image correspondante. Les mots sont dans le désordre !</div>
+  </div>
+  <div class="score-bar">
+    <div><div class="score-num" id="e1-score">0/18</div><div class="score-label">trouvés</div></div>
+    <div class="score-track"><div class="score-fill" id="e1-fill"></div></div>
+    <div class="score-msg" id="e1-msg">Commence !</div>
+  </div>
+  <div class="sec-label">Mots espagnols — clique pour sélectionner</div>
+  <div class="word-pool" id="e1-pool">
+    <div class="word-chip" data-word="hola" onclick="e1_selectWord(this)">¡Hola!</div>
+    <div class="word-chip" data-word="adios" onclick="e1_selectWord(this)">¡Adiós!</div>
+    <div class="word-chip" data-word="buenos-dias" onclick="e1_selectWord(this)">¡Buenos días!</div>
+    <div class="word-chip" data-word="buenas-tardes" onclick="e1_selectWord(this)">¡Buenas tardes!</div>
+    <div class="word-chip" data-word="buenas-noches" onclick="e1_selectWord(this)">¡Buenas noches!</div>
+    <div class="word-chip" data-word="hasta-luego" onclick="e1_selectWord(this)">¡Hasta luego!</div>
+    <div class="word-chip" data-word="rojo" onclick="e1_selectWord(this)">rojo</div>
+    <div class="word-chip" data-word="azul" onclick="e1_selectWord(this)">azul</div>
+    <div class="word-chip" data-word="verde" onclick="e1_selectWord(this)">verde</div>
+    <div class="word-chip" data-word="amarillo" onclick="e1_selectWord(this)">amarillo</div>
+    <div class="word-chip" data-word="negro" onclick="e1_selectWord(this)">negro</div>
+    <div class="word-chip" data-word="blanco" onclick="e1_selectWord(this)">blanco</div>
+    <div class="word-chip" data-word="espanol" onclick="e1_selectWord(this)">español(a)</div>
+    <div class="word-chip" data-word="mexicano" onclick="e1_selectWord(this)">mexicano(a)</div>
+    <div class="word-chip" data-word="argentino" onclick="e1_selectWord(this)">argentino(a)</div>
+    <div class="word-chip" data-word="colombiano" onclick="e1_selectWord(this)">colombiano(a)</div>
+    <div class="word-chip" data-word="peruano" onclick="e1_selectWord(this)">peruano(a)</div>
+    <div class="word-chip" data-word="cubano" onclick="e1_selectWord(this)">cubano(a)</div>
+  </div>
+  <div class="sec-label">Images — trouve celle qui correspond au mot sélectionné</div>
+  <div class="cards-grid" id="e1-grid">
+    <!-- SALUDOS -->
+    <div class="img-card" data-target="hola" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="32" cy="18" rx="20" ry="13" fill="#EAE8F8"/><polygon points="18,28 14,36 24,28" fill="#EAE8F8"/><text x="32" y="23" text-anchor="middle" font-size="14" fill="#6B3FA0" font-family="serif" font-style="italic">¡Hi!</text><path d="M28 42 Q26 36 30 34 Q32 33 34 35 Q36 33 38 35 Q40 33 42 36 Q40 44 36 46 Q32 48 28 42Z" fill="#F5D5A8"/><path d="M34 35 L34 28 Q34 26 36 26 Q38 26 38 28 L38 35" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/><path d="M38 35 L38 27 Q38 25 40 25 Q42 25 42 27 L42 36" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/><path d="M30 34 L30 30 Q30 28 32 28 Q34 28 34 30 L34 35" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/></svg></div>
+      <div class="card-fr">Salut !</div><div class="card-answer" id="e1-ans-hola"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="adios" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M22 46 Q20 38 24 35 Q26 33 28 36 Q30 33 32 35 Q34 33 36 36 Q36 44 32 48 Q28 50 22 46Z" fill="#F5D5A8"/><path d="M28 36 L26 28 Q26 26 28 26 Q30 26 30 28 L30 36" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/><path d="M32 35 L32 26 Q32 24 34 24 Q36 24 36 26 L36 36" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/><path d="M24 35 L23 29 Q23 27 25 27 Q27 27 27 29 L28 36" fill="#F5D5A8" stroke="#E0A870" stroke-width="0.5"/><path d="M38 22 Q42 18 44 22" stroke="#9B72C8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/></svg></div>
+      <div class="card-fr">Au revoir !</div><div class="card-answer" id="e1-ans-adios"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="buenos-dias" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" fill="#FCD34D" opacity="0.9"/><circle cx="30" cy="28" r="10" fill="#FBBF24"/><line x1="30" y1="10" x2="30" y2="6" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="14" x2="47" y2="11" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/><line x1="48" y1="28" x2="52" y2="28" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="14" x2="13" y2="11" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="28" x2="8" y2="28" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/><text x="30" y="56" text-anchor="middle" font-size="9" fill="#8FA08E" font-family="sans-serif">matin</text></svg></div>
+      <div class="card-fr">Bonjour ! (matin)</div><div class="card-answer" id="e1-ans-buenos-dias"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="buenas-tardes" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="30" width="48" height="22" rx="4" fill="#FED7AA" opacity="0.4"/><circle cx="30" cy="34" r="12" fill="#FB923C" opacity="0.85"/><line x1="30" y1="18" x2="30" y2="14" stroke="#F97316" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="22" x2="47" y2="19" stroke="#F97316" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="34" x2="50" y2="34" stroke="#F97316" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="22" x2="13" y2="19" stroke="#F97316" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="34" x2="10" y2="34" stroke="#F97316" stroke-width="2" stroke-linecap="round"/><text x="30" y="56" text-anchor="middle" font-size="9" fill="#8FA08E" font-family="sans-serif">après-midi</text></svg></div>
+      <div class="card-fr">Bonjour ! (après-midi)</div><div class="card-answer" id="e1-ans-buenas-tardes"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="buenas-noches" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="8" width="48" height="44" rx="6" fill="#1E1B4B" opacity="0.85"/><path d="M34 16 Q26 18 24 26 Q22 34 28 40 Q20 38 18 30 Q16 20 24 14 Q29 10 34 16Z" fill="#E0E7FF"/><circle cx="40" cy="16" r="1.5" fill="white"/><circle cx="44" cy="24" r="1" fill="white" opacity="0.8"/><circle cx="46" cy="34" r="1.5" fill="white"/><text x="30" y="58" text-anchor="middle" font-size="9" fill="#8FA08E" font-family="sans-serif">soir</text></svg></div>
+      <div class="card-fr">Bonsoir / Bonne nuit</div><div class="card-answer" id="e1-ans-buenas-noches"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="hasta-luego" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="20" fill="white" stroke="#9B72C8" stroke-width="2.5"/><circle cx="30" cy="30" r="17" fill="#F0EAF8"/><line x1="30" y1="30" x2="30" y2="16" stroke="#6B3FA0" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="30" x2="40" y2="36" stroke="#6B3FA0" stroke-width="2" stroke-linecap="round"/><circle cx="30" cy="30" r="2.5" fill="#6B3FA0"/><text x="30" y="14" text-anchor="middle" font-size="7" fill="#9B72C8" font-weight="600">12</text><text x="46" y="33" text-anchor="middle" font-size="7" fill="#9B72C8">3</text><text x="30" y="50" text-anchor="middle" font-size="7" fill="#9B72C8">6</text><text x="14" y="33" text-anchor="middle" font-size="7" fill="#9B72C8">9</text></svg></div>
+      <div class="card-fr">À plus tard !</div><div class="card-answer" id="e1-ans-hasta-luego"></div><div class="card-tick">✓</div>
+    </div>
+    <!-- COLORES -->
+    <div class="img-card" data-target="rojo" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#EF4444"/><circle cx="30" cy="30" r="16" fill="#DC2626"/><circle cx="24" cy="24" r="5" fill="#FCA5A5" opacity="0.4"/></svg></div>
+      <div class="card-fr">rouge</div><div class="card-answer" id="e1-ans-rojo"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="azul" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#3B82F6"/><circle cx="30" cy="30" r="16" fill="#2563EB"/><circle cx="24" cy="24" r="5" fill="#93C5FD" opacity="0.4"/></svg></div>
+      <div class="card-fr">bleu</div><div class="card-answer" id="e1-ans-azul"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="verde" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#22C55E"/><circle cx="30" cy="30" r="16" fill="#16A34A"/><circle cx="24" cy="24" r="5" fill="#86EFAC" opacity="0.4"/></svg></div>
+      <div class="card-fr">vert</div><div class="card-answer" id="e1-ans-verde"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="amarillo" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#EAB308"/><circle cx="30" cy="30" r="16" fill="#CA8A04"/><circle cx="24" cy="24" r="5" fill="#FDE047" opacity="0.5"/></svg></div>
+      <div class="card-fr">jaune</div><div class="card-answer" id="e1-ans-amarillo"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="negro" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#1F2937"/><circle cx="30" cy="30" r="16" fill="#111827"/><circle cx="24" cy="24" r="5" fill="#4B5563" opacity="0.6"/></svg></div>
+      <div class="card-fr">noir</div><div class="card-answer" id="e1-ans-negro"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="blanco" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="white" stroke="#CDD4CC" stroke-width="2"/><circle cx="30" cy="30" r="16" fill="#F9FAFB" stroke="#CDD4CC" stroke-width="1"/><circle cx="24" cy="24" r="5" fill="#E5E7EB" opacity="0.6"/></svg></div>
+      <div class="card-fr">blanc</div><div class="card-answer" id="e1-ans-blanco"></div><div class="card-tick">✓</div>
+    </div>
+    <!-- NACIONALIDADES -->
+    <div class="img-card" data-target="espanol" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="72" height="50" fill="#AA151B"/><rect y="12" width="72" height="26" fill="#F1BF00"/><rect x="26" y="17" width="10" height="16" rx="1" fill="#AA151B" opacity="0.6"/></svg></div>
+      <div class="card-fr">espagnol(e)</div><div class="card-answer" id="e1-ans-espanol"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="mexicano" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="24" height="50" fill="#006847"/><rect x="24" width="24" height="50" fill="white"/><rect x="48" width="24" height="50" fill="#CE1126"/><circle cx="36" cy="25" r="7" fill="none" stroke="#8B6914" stroke-width="1.2"/><circle cx="36" cy="25" r="3" fill="#8B6914"/></svg></div>
+      <div class="card-fr">mexicain(e)</div><div class="card-answer" id="e1-ans-mexicano"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="argentino" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="72" height="50" fill="#74ACDF"/><rect y="16" width="72" height="18" fill="white"/><circle cx="36" cy="25" r="6" fill="#F6B40E"/><line x1="36" y1="16" x2="36" y2="13" stroke="#F6B40E" stroke-width="1.5"/><line x1="36" y1="34" x2="36" y2="37" stroke="#F6B40E" stroke-width="1.5"/><line x1="27" y1="25" x2="24" y2="25" stroke="#F6B40E" stroke-width="1.5"/><line x1="45" y1="25" x2="48" y2="25" stroke="#F6B40E" stroke-width="1.5"/></svg></div>
+      <div class="card-fr">argentin(e)</div><div class="card-answer" id="e1-ans-argentino"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="colombiano" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="72" height="50" fill="#FCD116"/><rect y="25" width="72" height="14" fill="#003087"/><rect y="39" width="72" height="11" fill="#CE1126"/></svg></div>
+      <div class="card-fr">colombien(ne)</div><div class="card-answer" id="e1-ans-colombiano"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="peruano" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="72" height="50" fill="white"/><rect width="24" height="50" fill="#D91023"/><rect x="48" width="24" height="50" fill="#D91023"/></svg></div>
+      <div class="card-fr">péruvien(ne)</div><div class="card-answer" id="e1-ans-peruano"></div><div class="card-tick">✓</div>
+    </div>
+    <div class="img-card" data-target="cubano" onclick="e1_matchCard(this)">
+      <div class="card-visual"><svg width="72" height="50" viewBox="0 0 72 50" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.15)"><rect width="72" height="10" fill="#002A8F"/><rect y="10" width="72" height="10" fill="white"/><rect y="20" width="72" height="10" fill="#002A8F"/><rect y="30" width="72" height="10" fill="white"/><rect y="40" width="72" height="10" fill="#002A8F"/><polygon points="0,0 0,50 30,25" fill="#CF142B"/><polygon points="12,25 14,19 16,25 10,21 18,21" fill="white" transform="translate(-2,0)"/></svg></div>
+      <div class="card-fr">cubain(e)</div><div class="card-answer" id="e1-ans-cubano"></div><div class="card-tick">✓</div>
+    </div>
+  </div>
+  <div class="result-panel" id="e1-result">
+    <div class="result-emoji" id="e1-r-emoji">🎉</div>
+    <div class="result-title" id="e1-r-title"></div>
+    <div class="result-sub" id="e1-r-sub"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-primary" onclick="e1_reset()">🔄 Recommencer</button></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" onclick="e1_reset()">🔄 Recommencer</button><button class="btn-ghost" onclick="e1_hint()">💡 Indice</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXERCICE 2 — Frases incompletas
+═══════════════════════════════════════════════════ -->
+<div class="ex-page" id="ex2">
+  <div class="ex-page-header">
+    <div>
+      <div class="ex-page-sub">5ème · A1 · ¡Hola, España!</div>
+      <div class="ex-page-title">Vocabulaire — Exercice 2</div>
+    </div>
+    <div class="ex-page-badge">✏️ Frases incompletas</div>
+  </div>
+  <div class="intro-card">
+    <div class="intro-icon">💡</div>
+    <div class="intro-text"><strong>Comment jouer :</strong> Clique sur un mot dans la banque, puis clique sur le blanc dans la phrase. Toutes les catégories sont mélangées !</div>
+  </div>
+  <div class="score-bar">
+    <div><div class="score-num" id="e2-score">0/18</div><div class="score-label">complétées</div></div>
+    <div class="score-track"><div class="score-fill" id="e2-fill"></div></div>
+    <div class="score-msg" id="e2-msg">Sélectionne un mot !</div>
+  </div>
+  <div class="sec-label">Banque de mots</div>
+  <div class="wb-wrap">
+    <div class="cat-row"><div class="cat-lbl">🗣 Saludos</div><div class="chips" id="e2-sal"></div></div>
+    <div class="cat-row"><div class="cat-lbl">🎨 Colores</div><div class="chips" id="e2-col"></div></div>
+    <div class="cat-row"><div class="cat-lbl">🔢 Números</div><div class="chips" id="e2-num"></div></div>
+    <div class="cat-row"><div class="cat-lbl">🌍 Nacionalidades</div><div class="chips" id="e2-nac"></div></div>
+  </div>
+  <div class="sec-label">Frases — complète les blancs</div>
+  <div class="sent-list" id="e2-sents"></div>
+  <div class="result-panel" id="e2-result">
+    <div class="result-emoji" id="e2-r-emoji">🎉</div>
+    <div class="result-title" id="e2-r-title"></div>
+    <div class="result-sub" id="e2-r-sub"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-primary" onclick="e2_reset()">🔄 Recommencer</button></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" onclick="e2_reset()">🔄 Recommencer</button><button class="btn-ghost" onclick="e2_removeSelected()">↩ Enlever</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXERCICE 3 — Sílabas
+═══════════════════════════════════════════════════ -->
+<div class="ex-page" id="ex3">
+  <div class="ex-page-header">
+    <div><div class="ex-page-sub">5ème · A1 · ¡Hola, España!</div><div class="ex-page-title">Vocabulaire — Exercice 3</div></div>
+    <div class="ex-page-badge">🧩 Sílabas</div>
+  </div>
+  <div class="intro-card">
+    <div class="intro-icon">🧩</div>
+    <div class="intro-text"><strong>Comment jouer :</strong> Les syllabes sont dans le désordre. Réécris le mot complet. Seulement la catégorie t'aide — pas de traduction !</div>
+  </div>
+  <div class="score-bar">
+    <div><div class="score-num" id="e3-score">0/20</div><div class="score-label">trouvés</div></div>
+    <div class="score-track"><div class="score-fill" id="e3-fill"></div></div>
+    <div class="score-msg" id="e3-msg">Commence !</div>
+  </div>
+  <div class="sec-label">Reconstruye las palabras</div>
+  <div class="syl-grid" id="e3-grid"></div>
+  <div class="result-panel" id="e3-result">
+    <div class="result-emoji" id="e3-r-emoji">🎉</div>
+    <div class="result-title" id="e3-r-title"></div>
+    <div class="result-sub" id="e3-r-sub"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-primary" onclick="e3_reset()">🔄 Recommencer</button></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" onclick="e3_reset()">🔄 Recommencer</button><button class="btn-ghost" onclick="e3_checkAll()">✓ Tout vérifier</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXERCICE 4 — Traducción FR→ES
+═══════════════════════════════════════════════════ -->
+<div class="ex-page" id="ex4">
+  <div class="ex-page-header">
+    <div><div class="ex-page-sub">5ème · A1 · ¡Hola, España!</div><div class="ex-page-title">Vocabulaire — Exercice 4</div></div>
+    <div class="ex-page-badge">🔁 Traduction</div>
+  </div>
+  <div class="intro-card">
+    <div class="intro-icon">🔁</div>
+    <div class="intro-text"><strong>Comment jouer :</strong> Un mot en français est affiché. Écris sa traduction en espagnol et appuie sur <strong>OK</strong> ou <kbd style="background:var(--gray-100);padding:1px 5px;border-radius:3px;font-size:11px;">Entrée</kbd>.</div>
+  </div>
+  <div class="score-bar">
+    <div><div class="score-num" id="e4-score">0/20</div><div class="score-label">traduits</div></div>
+    <div class="score-track"><div class="score-fill" id="e4-fill"></div></div>
+    <div class="score-msg" id="e4-msg">Commence !</div>
+  </div>
+  <div class="sec-label">Traduis en español</div>
+  <div class="trans-grid" id="e4-grid"></div>
+  <div class="result-panel" id="e4-result">
+    <div class="result-emoji" id="e4-r-emoji">🎉</div>
+    <div class="result-title" id="e4-r-title"></div>
+    <div class="result-sub" id="e4-r-sub"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-primary" onclick="e4_reset()">🔄 Recommencer</button></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" onclick="e4_reset()">🔄 Recommencer</button><button class="btn-ghost" onclick="e4_checkAll()">✓ Tout vérifier</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     EXERCICE 5 — Definiciones
+═══════════════════════════════════════════════════ -->
+<div class="ex-page" id="ex5">
+  <div class="ex-page-header">
+    <div><div class="ex-page-sub">5ème · A1 · ¡Hola, España!</div><div class="ex-page-title">Vocabulaire — Exercice 5</div></div>
+    <div class="ex-page-badge">🧠 Définitions</div>
+  </div>
+  <div class="intro-card">
+    <div class="intro-icon">🧠</div>
+    <div class="intro-text"><strong>Comment jouer :</strong> Lis la définition contextuelle en espagnol et écris le mot correspondant. Pas de traduction — il faut réfléchir !</div>
+  </div>
+  <div class="score-bar">
+    <div><div class="score-num" id="e5-score">0/20</div><div class="score-label">trouvés</div></div>
+    <div class="score-track"><div class="score-fill" id="e5-fill"></div></div>
+    <div class="score-msg" id="e5-msg">¡Piensa bien!</div>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#C47B1A"></div>Saludo</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#6B3FA0"></div>Color</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#3A8C6E"></div>Número</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#B83232"></div>Nacionalidad</div>
+  </div>
+  <div class="sec-label">Lee la definición y escribe la palabra</div>
+  <div class="def-list" id="e5-list"></div>
+  <div class="result-panel" id="e5-result">
+    <div class="result-emoji" id="e5-r-emoji">🎉</div>
+    <div class="result-title" id="e5-r-title"></div>
+    <div class="result-sub" id="e5-r-sub"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:1rem;"><button class="btn-primary" onclick="e5_reset()">🔄 Recommencer</button></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" onclick="e5_reset()">🔄 Recommencer</button><button class="btn-ghost" onclick="e5_checkAll()">✓ Tout vérifier</button></div>
+</div>
+
+
+</div><!-- end main -->
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// ══════════════════════════════════════════
+// SHARED UTILITIES
+// ══════════════════════════════════════════
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[¡!¿?()]/g,'').replace(/\s+/g,' ').trim();}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400);}
+function showResult(panelId,emojiId,titleId,subId,score,total,errors){
+  const msgs={perfect:{e:'🌟',t:'¡Perfecto! '+score+'/'+total,s:'Aucune erreur ! Excellent travail !'},
+    good:{e:'😊',t:'¡Muy bien!',s:'Seulement '+errors+' erreur(s). Quelques mots à revoir.'},
+    ok:{e:'👍',t:'¡Bien!',s:errors+' erreur(s). Recommence pour t\'améliorer !'},
+    retry:{e:'💪',t:'¡Ánimo!',s:'Recommence pour mémoriser le vocabulaire !'}};
+  const r=errors===0?'perfect':errors<=4?'good':errors<=9?'ok':'retry';
+  document.getElementById(emojiId).textContent=msgs[r].e;
+  document.getElementById(titleId).textContent=msgs[r].t;
+  document.getElementById(subId).textContent=msgs[r].s;
+  const panel=document.getElementById(panelId);
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth'});
+}
+function updateScoreBar(numId,fillId,msgId,score,total){
+  document.getElementById(numId).textContent=score+'/'+total;
+  document.getElementById(fillId).style.width=(score/total*100)+'%';
+  const m=['Commence !','Bien parti(e) !','Continue !','Très bien !','Presque fini !','¡Perfecto!'];
+  document.getElementById(msgId).textContent=m[Math.min(Math.floor(score/total*5),5)];
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+let logoClicks=0,logoTimer=null,evalUnlocked=false;
+function handleLogoClick(){
+  logoClicks++;clearTimeout(logoTimer);
+  logoTimer=setTimeout(()=>logoClicks=0,800);
+  if(logoClicks>=3){evalUnlocked=!evalUnlocked;logoClicks=0;showToast(evalUnlocked?'🔓 Mode prof activé':'🔒 Mode prof désactivé');}
+}
+function setLevel(el,cl,nv){
+  document.querySelectorAll('.level-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('nivel-badge').textContent=cl+' · '+nv;
+  showToast('Niveau : '+cl+' · '+nv);
+}
+function showEx(id){
+  document.querySelectorAll('.ex-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.ex-sub-item').forEach(i=>i.classList.remove('active'));
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleSeq(id,el){
+  document.querySelectorAll('.seq-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  ['seq1','seq2','seq3','seq4'].forEach(s=>{
+    const sub=document.getElementById('sub-'+s);
+    if(sub)sub.style.display=s===id?'':'none';
+  });
+}
+
+// ══════════════════════════════════════════
+// EXERCISE 1 — Image association
+// ══════════════════════════════════════════
+const E1_ANSWERS={'hola':'¡Hola!','adios':'¡Adiós!','buenos-dias':'¡Buenos días!','buenas-tardes':'¡Buenas tardes!','buenas-noches':'¡Buenas noches!','hasta-luego':'¡Hasta luego!','rojo':'rojo','azul':'azul','verde':'verde','amarillo':'amarillo','negro':'negro','blanco':'blanco','espanol':'español(a)','mexicano':'mexicano(a)','argentino':'argentino(a)','colombiano':'colombiano(a)','peruano':'peruano(a)','cubano':'cubano(a)'};
+let e1_selected=null,e1_score=0,e1_errors=0;
+function e1_init(){
+  e1_score=0;e1_errors=0;e1_selected=null;
+  // shuffle chips
+  const pool=document.getElementById('e1-pool');
+  const chips=[...pool.querySelectorAll('.word-chip')];
+  shuffle(chips).forEach(c=>pool.appendChild(c));
+}
+function e1_selectWord(el){
+  if(el.classList.contains('used-ok')||el.classList.contains('used-ko'))return;
+  document.querySelectorAll('#e1-pool .word-chip.selected').forEach(c=>c.classList.remove('selected'));
+  if(e1_selected===el){e1_selected=null;return;}
+  el.classList.add('selected');e1_selected=el;
+  showToast('Maintenant clique sur la bonne image !');
+}
+function e1_matchCard(card){
+  if(!e1_selected){showToast('Sélectionne d\'abord un mot !');return;}
+  if(card.classList.contains('correct'))return;
+  const key=e1_selected.dataset.word,target=card.dataset.target;
+  if(key===target){
+    card.classList.add('correct');
+    card.querySelector('.card-answer').textContent=E1_ANSWERS[key];
+    e1_selected.classList.remove('selected');e1_selected.classList.add('used-ok');e1_selected=null;
+    e1_score++;updateScoreBar('e1-score','e1-fill','e1-msg',e1_score,18);
+    showToast('✓ ¡Muy bien! '+E1_ANSWERS[key]);
+    if(e1_score===18)setTimeout(()=>showResult('e1-result','e1-r-emoji','e1-r-title','e1-r-sub',e1_score,18,e1_errors),600);
+  }else{
+    e1_errors++;card.classList.add('wrong');showToast('✗ Pas tout à fait !');
+    setTimeout(()=>card.classList.remove('wrong'),500);
+  }
+}
+function e1_hint(){
+  const chips=[...document.querySelectorAll('#e1-pool .word-chip:not(.used-ok):not(.used-ko)')];
+  if(!chips.length){showToast('Tous les mots sont trouvés !');return;}
+  const c=chips[Math.floor(Math.random()*chips.length)],k=c.dataset.word;
+  const card=document.querySelector(`#e1-grid .img-card[data-target="${k}"]`);
+  if(card&&!card.classList.contains('correct')){
+    card.style.boxShadow='0 0 0 3px rgba(107,63,160,0.4)';
+    setTimeout(()=>card.style.boxShadow='',1500);
+    showToast('💡 '+E1_ANSWERS[k]);
+  }
+}
+function e1_reset(){
+  document.getElementById('e1-result').classList.remove('show');
+  document.querySelectorAll('#e1-pool .word-chip').forEach(c=>{c.className='word-chip';c.onclick=function(){e1_selectWord(this);};});
+  document.querySelectorAll('#e1-grid .img-card').forEach(c=>{c.className='img-card';c.querySelector('.card-answer').textContent='';});
+  e1_init();updateScoreBar('e1-score','e1-fill','e1-msg',0,18);
+}
+
+// ══════════════════════════════════════════
+// EXERCISE 2 — Fill in the blank
+// ══════════════════════════════════════════
+const E2_VOCAB={sal:[{word:'¡Hola!',key:'hola'},{word:'¡Adiós!',key:'adios'},{word:'¡Buenos días!',key:'buenos-dias'},{word:'¡Buenas tardes!',key:'buenas-tardes'},{word:'¡Buenas noches!',key:'buenas-noches'},{word:'¡Hasta luego!',key:'hasta-luego'}],col:[{word:'rojo',key:'rojo'},{word:'azul',key:'azul'},{word:'verde',key:'verde'},{word:'amarillo',key:'amarillo'},{word:'negro',key:'negro'},{word:'blanco',key:'blanco'},{word:'marrón',key:'marron'},{word:'naranja',key:'naranja'}],num:[{word:'uno',key:'uno'},{word:'dos',key:'dos'},{word:'tres',key:'tres'},{word:'cuatro',key:'cuatro'},{word:'cinco',key:'cinco'},{word:'seis',key:'seis'},{word:'siete',key:'siete'},{word:'ocho',key:'ocho'},{word:'nueve',key:'nueve'},{word:'diez',key:'diez'},{word:'once',key:'once'},{word:'doce',key:'doce'},{word:'trece',key:'trece'},{word:'catorce',key:'catorce'},{word:'quince',key:'quince'},{word:'veinte',key:'veinte'}],nac:[{word:'español(a)',key:'espanol'},{word:'mexicano(a)',key:'mexicano'},{word:'argentino(a)',key:'argentino'},{word:'colombiano(a)',key:'colombiano'},{word:'peruano(a)',key:'peruano'},{word:'cubano(a)',key:'cubano'},{word:'chileno(a)',key:'chileno'},{word:'venezolano(a)',key:'venezolano'}]};
+const E2_SENTS_RAW=[
+  {cat:'sal',before:'— ',after:' ¿Cómo te llamas?',hint:'salutation universelle',answer:'hola'},
+  {cat:'col',before:'El cielo es ',after:' y las nubes son blancas.',hint:'couleur du ciel',answer:'azul'},
+  {cat:'nac',before:'Soy de España, soy ',after:'. Me llamo Lucía.',hint:'de España',answer:'espanol'},
+  {cat:'num',before:'Tengo ',after:' años. Soy de España.',hint:'11 ans',answer:'once'},
+  {cat:'sal',before:'Son las 8 de la mañana. El profesor dice: «',after:'»',hint:'le matin',answer:'buenos-dias'},
+  {cat:'col',before:'La hierba y los árboles son de color ',after:'.',hint:'couleur de la nature',answer:'verde'},
+  {cat:'nac',before:'Diego es de México, es ',after:'. Vive en Guadalajara.',hint:'de México',answer:'mexicano'},
+  {cat:'num',before:'En mi clase hay ',after:' estudiantes.',hint:'15 élèves',answer:'quince'},
+  {cat:'sal',before:'La clase termina. Ana dice: «',after:' ¡Hasta mañana!»',hint:'à plus tard',answer:'hasta-luego'},
+  {cat:'col',before:'El sol es ',after:' y muy brillante.',hint:'couleur du soleil',answer:'amarillo'},
+  {cat:'nac',before:'Sofía es de Argentina, es ',after:'. Vive en Buenos Aires.',hint:'de Argentina — féminin !',answer:'argentino'},
+  {cat:'num',before:'Pedro tiene ',after:' años y vive en Madrid.',hint:'12 ans',answer:'doce'},
+  {cat:'sal',before:'Son las 9 de la noche. Mamá dice: «',after:'! Duerme bien.»',hint:'bonne nuit',answer:'buenas-noches'},
+  {cat:'col',before:'La bandera de Cuba es ',after:', blanca y azul.',hint:'couleur du sang',answer:'rojo'},
+  {cat:'nac',before:'Mi amigo Carlos es de Colombia, es ',after:'.',hint:'de Colombia',answer:'colombiano'},
+  {cat:'num',before:'Dos semanas tienen ',after:' días.',hint:'14 jours',answer:'catorce'},
+  {cat:'sal',before:'Carlos sale del colegio y dice: «',after:' ¡Hasta el lunes!»',hint:'au revoir',answer:'adios'},
+  {cat:'col',before:'El chocolate es de color ',after:' y muy rico.',hint:'couleur du chocolat',answer:'marron'},
+];
+let e2_selected=null,e2_score=0,e2_errors=0,e2_blankState={},e2_items=[];
+function e2_build(){
+  e2_items=shuffle(E2_SENTS_RAW).map((s,i)=>({...s,id:i+1,solved:false}));
+  // build chips
+  Object.entries(E2_VOCAB).forEach(([cat,words])=>{
+    const cont=document.getElementById('e2-'+cat);
+    cont.innerHTML='';
+    shuffle(words).forEach(w=>{
+      const c=document.createElement('div');
+      c.className='chip '+cat;
+      c.dataset.key=w.key;c.textContent=w.word;
+      c.onclick=()=>e2_selectChip(c);
+      cont.appendChild(c);
+    });
+  });
+  // build sentences
+  const list=document.getElementById('e2-sents');list.innerHTML='';
+  e2_items.forEach(s=>{
+    const card=document.createElement('div');card.className='sent-card';card.id='sc-'+s.id;
+    const num=document.createElement('div');num.className='sent-num';num.textContent=s.id+'.';
+    const txt=document.createElement('div');txt.className='sent-text';
+    txt.innerHTML=esc(s.before)+`<span class="blank" id="bl-${s.id}" data-sid="${s.id}" onclick="e2_fillBlank(${s.id})">___</span>`+esc(s.after);
+    const tick=document.createElement('div');tick.className='sent-tick';tick.textContent='✓';
+    card.appendChild(num);card.appendChild(txt);card.appendChild(tick);list.appendChild(card);
+  });
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function e2_selectChip(chip){
+  if(chip.classList.contains('ch-used'))return;
+  document.querySelectorAll('.chip.ch-selected').forEach(c=>c.classList.remove('ch-selected'));
+  if(e2_selected===chip){e2_selected=null;return;}
+  chip.classList.add('ch-selected');e2_selected=chip;
+  showToast('Maintenant clique sur le blanc !');
+}
+function e2_fillBlank(sid){
+  if(!e2_selected){showToast('Sélectionne d\'abord un mot !');return;}
+  const s=e2_items.find(x=>x.id===sid);
+  const blank=document.getElementById('bl-'+sid);
+  const card=document.getElementById('sc-'+sid);
+  if(!s||!blank||card.classList.contains('correct'))return;
+  if(e2_blankState[sid]){e2_blankState[sid].classList.remove('ch-used');}
+  const key=e2_selected.dataset.key;
+  e2_blankState[sid]=e2_selected;
+  e2_selected.classList.add('ch-used');e2_selected.classList.remove('ch-selected');
+  blank.textContent=e2_selected.textContent;blank.classList.add('filled');
+  e2_selected=null;
+  const ok=norm(s.answer)===norm(key)||norm(s.answer+'a')===norm(key)||norm(s.answer.replace('o','a'))===norm(key);
+  const realOk=(norm(key)===norm(s.answer));
+  if(realOk){
+    blank.classList.add('blank-ok');card.classList.add('correct');
+    e2_score++;updateScoreBar('e2-score','e2-fill','e2-msg',e2_score,18);
+    showToast('✓ ¡Muy bien!');s.solved=true;
+    if(e2_score===18)setTimeout(()=>showResult('e2-result','e2-r-emoji','e2-r-title','e2-r-sub',e2_score,18,e2_errors),600);
+  }else{
+    blank.classList.add('blank-ko');card.classList.add('wrong');e2_errors++;
+    showToast('✗ Pas tout à fait !');
+    setTimeout(()=>{
+      card.classList.remove('wrong');blank.classList.remove('blank-ko','filled');blank.textContent='___';
+      if(e2_blankState[sid]){e2_blankState[sid].classList.remove('ch-used');delete e2_blankState[sid];}
+    },700);
+  }
+}
+function e2_removeSelected(){
+  const filled=[...document.querySelectorAll('.blank.filled:not(.blank-ok)')];
+  if(!filled.length){showToast('Aucun mot à enlever.');return;}
+  const last=filled[filled.length-1];const sid=parseInt(last.dataset.sid);
+  if(e2_blankState[sid]){e2_blankState[sid].classList.remove('ch-used');delete e2_blankState[sid];}
+  last.classList.remove('filled','blank-ko');last.textContent='___';
+}
+function e2_reset(){
+  e2_score=0;e2_errors=0;e2_selected=null;e2_blankState={};
+  document.getElementById('e2-result').classList.remove('show');
+  e2_build();updateScoreBar('e2-score','e2-fill','e2-msg',0,18);
+}
+
+// ══════════════════════════════════════════
+// EXERCISE 3 — Syllables
+// ══════════════════════════════════════════
+const E3_WORDS=[
+  {word:'hola',syl:['ho','la'],cat:'sal'},{word:'adiós',syl:['a','diós'],cat:'sal'},
+  {word:'buenas noches',syl:['bue','nas','no','ches'],cat:'sal'},{word:'hasta luego',syl:['has','ta','lue','go'],cat:'sal'},
+  {word:'buenos días',syl:['bue','nos','dí','as'],cat:'sal'},
+  {word:'amarillo',syl:['a','ma','ri','llo'],cat:'col'},{word:'rojo',syl:['ro','jo'],cat:'col'},
+  {word:'azul',syl:['a','zul'],cat:'col'},{word:'verde',syl:['ver','de'],cat:'col'},{word:'negro',syl:['ne','gro'],cat:'col'},
+  {word:'once',syl:['on','ce'],cat:'num'},{word:'doce',syl:['do','ce'],cat:'num'},
+  {word:'trece',syl:['tre','ce'],cat:'num'},{word:'catorce',syl:['ca','tor','ce'],cat:'num'},{word:'quince',syl:['quin','ce'],cat:'num'},
+  {word:'español',syl:['es','pa','ñol'],cat:'nac'},{word:'mexicano',syl:['me','xi','ca','no'],cat:'nac'},
+  {word:'argentino',syl:['ar','gen','ti','no'],cat:'nac'},{word:'colombiano',syl:['co','lom','bia','no'],cat:'nac'},
+  {word:'peruano',syl:['pe','rua','no'],cat:'nac'}
+];
+const E3_BADGE={sal:{lbl:'🗣 Saludo',cls:'sb-sal'},col:{lbl:'🎨 Color',cls:'sb-col'},num:{lbl:'🔢 Número',cls:'sb-num'},nac:{lbl:'🌍 Nacionalidad',cls:'sb-nac'}};
+let e3_items=[],e3_score=0,e3_errors=0;
+function e3_build(){
+  e3_items=shuffle(E3_WORDS).map((w,i)=>({...w,id:i+1,solved:false}));
+  const grid=document.getElementById('e3-grid');grid.innerHTML='';
+  e3_items.forEach(w=>{
+    const card=document.createElement('div');card.className='syl-card';card.id='e3c-'+w.id;
+    const b=E3_BADGE[w.cat];
+    const badge=document.createElement('span');badge.className='syl-badge '+b.cls;badge.textContent=b.lbl;
+    const sylRow=document.createElement('div');sylRow.className='syl-row';
+    shuffle(w.syl).forEach((s,i,arr)=>{
+      const sp=document.createElement('span');sp.className='syl';sp.textContent=s;sylRow.appendChild(sp);
+      if(i<arr.length-1){const sep=document.createElement('span');sep.className='syl-sep';sep.textContent='/';sylRow.appendChild(sep);}
+    });
+    const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;';
+    const inp=document.createElement('input');inp.type='text';inp.className='text-input';inp.placeholder='Écris le mot...';inp.style.flex='1';inp.autocomplete='off';inp.spellcheck=false;
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')e3_check(w.id);});
+    const btn=document.createElement('button');btn.className='btn-small';btn.textContent='OK';btn.onclick=()=>e3_check(w.id);
+    row.appendChild(inp);row.appendChild(btn);
+    card.appendChild(badge);card.appendChild(sylRow);card.appendChild(row);
+    grid.appendChild(card);
+    w._input=inp;w._btn=btn;
+  });
+}
+function e3_check(id){
+  const w=e3_items.find(x=>x.id===id);if(!w||w.solved)return;
+  const val=w._input.value;if(!val.trim()){showToast('Écris le mot !');return;}
+  const ok=norm(val)===norm(w.word);
+  if(ok){
+    w.solved=true;w._input.value=w.word;w._input.classList.add('inp-ok');
+    document.getElementById('e3c-'+id).classList.add('correct');w._btn.classList.add('hidden');
+    e3_score++;updateScoreBar('e3-score','e3-fill','e3-msg',e3_score,20);showToast('✓ ¡Perfecto! '+w.word);
+    if(e3_score===20)setTimeout(()=>showResult('e3-result','e3-r-emoji','e3-r-title','e3-r-sub',e3_score,20,e3_errors),600);
+  }else{
+    e3_errors++;w._input.classList.add('inp-ko');document.getElementById('e3c-'+id).classList.add('wrong');showToast('✗ Réessaie !');
+    setTimeout(()=>{document.getElementById('e3c-'+id).classList.remove('wrong');w._input.classList.remove('inp-ko');w._input.value='';w._input.focus();},600);
+  }
+}
+function e3_checkAll(){e3_items.forEach(w=>{if(!w.solved&&w._input&&w._input.value.trim())e3_check(w.id);});}
+function e3_reset(){e3_score=0;e3_errors=0;document.getElementById('e3-result').classList.remove('show');e3_build();updateScoreBar('e3-score','e3-fill','e3-msg',0,20);}
+
+// ══════════════════════════════════════════
+// EXERCISE 4 — Translation FR→ES
+// ══════════════════════════════════════════
+const E4_WORDS=[
+  {fr:'Salut !',ans:['hola','¡hola!'],cat:'sal'},{fr:'Au revoir !',ans:['adiós','adios'],cat:'sal'},
+  {fr:'Bonjour ! (matin)',ans:['buenos días','buenos dias'],cat:'sal'},{fr:'Bonne nuit',ans:['buenas noches'],cat:'sal'},
+  {fr:'À plus tard !',ans:['hasta luego'],cat:'sal'},
+  {fr:'rouge',ans:['rojo'],cat:'col'},{fr:'bleu',ans:['azul'],cat:'col'},
+  {fr:'vert',ans:['verde'],cat:'col'},{fr:'jaune',ans:['amarillo'],cat:'col'},{fr:'noir',ans:['negro'],cat:'col'},
+  {fr:'onze (11)',ans:['once'],cat:'num'},{fr:'douze (12)',ans:['doce'],cat:'num'},
+  {fr:'treize (13)',ans:['trece'],cat:'num'},{fr:'quatorze (14)',ans:['catorce'],cat:'num'},{fr:'quinze (15)',ans:['quince'],cat:'num'},
+  {fr:'espagnol(e)',ans:['español','española','espanol'],cat:'nac'},{fr:'mexicain(e)',ans:['mexicano','mexicana'],cat:'nac'},
+  {fr:'argentin(e)',ans:['argentino','argentina'],cat:'nac'},{fr:'colombien(ne)',ans:['colombiano','colombiana'],cat:'nac'},
+  {fr:'péruvien(ne)',ans:['peruano','peruana'],cat:'nac'}
+];
+const E4_BADGE={sal:{lbl:'🗣 Saludo',cls:'sb-sal'},col:{lbl:'🎨 Color',cls:'sb-col'},num:{lbl:'🔢 Número',cls:'sb-num'},nac:{lbl:'🌍 Nacionalidad',cls:'sb-nac'}};
+let e4_items=[],e4_score=0,e4_errors=0;
+function e4_build(){
+  e4_items=shuffle(E4_WORDS).map((w,i)=>({...w,id:i+1,solved:false}));
+  const grid=document.getElementById('e4-grid');grid.innerHTML='';
+  e4_items.forEach(w=>{
+    const b=E4_BADGE[w.cat];
+    const card=document.createElement('div');card.className='trans-card';card.id='e4c-'+w.id;
+    const top=document.createElement('div');top.className='trans-top';
+    const num=document.createElement('span');num.className='trans-num';num.textContent=w.id+'.';
+    const badge=document.createElement('span');badge.className='syl-badge '+b.cls;badge.textContent=b.lbl;
+    top.appendChild(num);top.appendChild(badge);
+    const frw=document.createElement('div');frw.className='fr-word';frw.innerHTML=w.fr;
+    const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;';
+    const inp=document.createElement('input');inp.type='text';inp.className='text-input';inp.placeholder='en español...';inp.style.flex='1';inp.autocomplete='off';inp.spellcheck=false;
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')e4_check(w.id);});
+    const btn=document.createElement('button');btn.className='btn-small';btn.textContent='OK';btn.onclick=()=>e4_check(w.id);
+    row.appendChild(inp);row.appendChild(btn);
+    const ans=document.createElement('div');ans.className='ans-line';ans.textContent='🇪🇸 '+w.ans[0];
+    card.appendChild(top);card.appendChild(frw);card.appendChild(row);card.appendChild(ans);
+    grid.appendChild(card);
+    w._input=inp;w._btn=btn;
+  });
+}
+function e4_check(id){
+  const w=e4_items.find(x=>x.id===id);if(!w||w.solved)return;
+  const val=w._input.value;if(!val.trim()){showToast('Écris ta traduction !');return;}
+  const ok=w.ans.some(a=>norm(a)===norm(val));
+  if(ok){
+    w.solved=true;w._input.value=w.ans[0];w._input.classList.add('inp-ok');
+    document.getElementById('e4c-'+id).classList.add('correct');w._btn.classList.add('hidden');
+    e4_score++;updateScoreBar('e4-score','e4-fill','e4-msg',e4_score,20);showToast('✓ ¡Perfecto! '+w.ans[0]);
+    if(e4_score===20)setTimeout(()=>showResult('e4-result','e4-r-emoji','e4-r-title','e4-r-sub',e4_score,20,e4_errors),600);
+  }else{
+    e4_errors++;w._input.classList.add('inp-ko');document.getElementById('e4c-'+id).classList.add('wrong');showToast('✗ Réessaie !');
+    setTimeout(()=>{document.getElementById('e4c-'+id).classList.remove('wrong');w._input.classList.remove('inp-ko');w._input.value='';w._input.focus();},600);
+  }
+}
+function e4_checkAll(){e4_items.forEach(w=>{if(!w.solved&&w._input&&w._input.value.trim())e4_check(w.id);});}
+function e4_reset(){e4_score=0;e4_errors=0;document.getElementById('e4-result').classList.remove('show');e4_build();updateScoreBar('e4-score','e4-fill','e4-msg',0,20);}
+
+// ══════════════════════════════════════════
+// EXERCISE 5 — Contextual definitions
+// ══════════════════════════════════════════
+const E5_DEFS=[
+  {def:'Son las 7 de la mañana. Llegas al colegio y ves a tu profesor. Le dices: «¡_______!»',visual:'☀️',ans:['buenos días','buenos dias'],cat:'sal'},
+  {def:'Tu amiga Ana entra a la clase. La saludas con una palabra corta y simpática: «¡_______!»',visual:'👋',ans:['hola'],cat:'sal'},
+  {def:'La clase termina. Sales del colegio. Le dices a tu profesor: «¡_______!»',visual:'🚶',ans:['adiós','adios'],cat:'sal'},
+  {def:'Son las 10 de la noche. Te vas a dormir y le dices a tu mamá: «¡_______!»',visual:'🌙',ans:['buenas noches'],cat:'sal'},
+  {def:'Tu amigo sale pero vuelve pronto. Le dices: «¡_______!»',visual:'🕐',ans:['hasta luego'],cat:'sal'},
+  {def:'Soy una rosa 🌹. Las rosas son de color _______.',visual:'🌹',ans:['rojo'],cat:'col'},
+  {def:'Soy el cielo en un día de verano sin nubes. Soy de color _______.',visual:'🌤️',ans:['azul'],cat:'col'},
+  {def:'Soy la hierba del parque y las hojas de los árboles en primavera. Soy de color _______.',visual:'🌿',ans:['verde'],cat:'col'},
+  {def:'Soy el sol ☀️ y los girasoles 🌻. Mi color es el _______.',visual:'🌻',ans:['amarillo'],cat:'col'},
+  {def:'Soy la noche 🌑 y el carbón. No tengo luz. Mi color es el _______.',visual:'🌑',ans:['negro'],cat:'col'},
+  {def:'Soy la nieve ❄️ y las nubes. Soy muy claro. Soy el _______.',visual:'❄️',ans:['blanco'],cat:'col'},
+  {def:'Después del número diez (10), sigue el _______.',visual:'1️⃣1️⃣',ans:['once'],cat:'num'},
+  {def:'Un año tiene _______ meses.',visual:'📅',ans:['doce'],cat:'num'},
+  {def:'Es el número entre doce y catorce. ¿Cuál es? _______.',visual:'🔢',ans:['trece'],cat:'num'},
+  {def:'Después del 13 de febrero, el día siguiente es el _______ de febrero.',visual:'💝',ans:['catorce'],cat:'num'},
+  {def:'En el calendario, hay _______ días en dos semanas.',visual:'📆',ans:['catorce'],cat:'num'},
+  {def:'Soy de España. Mi capital es Madrid. Hablo español. Soy _______.',visual:'🇪🇸',ans:['español','española','espanol'],cat:'nac'},
+  {def:'Soy de México. Me gustan los tacos. Mi capital es Ciudad de México. Soy _______.',visual:'🇲🇽',ans:['mexicano','mexicana'],cat:'nac'},
+  {def:'Soy de Argentina. Me encanta el tango. Mi capital es Buenos Aires. Soy _______.',visual:'🇦🇷',ans:['argentino','argentina'],cat:'nac'},
+  {def:'Soy de Colombia. Mi capital es Bogotá. Somos famosos por el café. Soy _______.',visual:'🇨🇴',ans:['colombiano','colombiana'],cat:'nac'},
+];
+const E5_DOT={sal:'dot-sal',col:'dot-col',num:'dot-num',nac:'dot-nac'};
+let e5_items=[],e5_score=0,e5_errors=0;
+function e5_build(){
+  e5_items=shuffle(E5_DEFS).map((d,i)=>({...d,id:i+1,solved:false}));
+  const list=document.getElementById('e5-list');list.innerHTML='';
+  e5_items.forEach(d=>{
+    const card=document.createElement('div');card.className='def-card';card.id='e5c-'+d.id;
+    const left=document.createElement('div');left.className='def-left';
+    const num=document.createElement('div');num.className='def-num';num.textContent=d.id;
+    const dot=document.createElement('div');dot.className='cat-dot '+E5_DOT[d.cat];
+    left.appendChild(num);left.appendChild(dot);
+    const center=document.createElement('div');center.className='def-center';
+    const txt=document.createElement('div');txt.className='def-text';
+    txt.innerHTML=d.def.replace(/_______/g,'<span class="def-blank">_______</span>');
+    const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;margin-top:6px;';
+    const inp=document.createElement('input');inp.type='text';inp.className='text-input';inp.placeholder='La palabra es...';inp.style.minWidth='140px';inp.autocomplete='off';inp.spellcheck=false;
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')e5_check(d.id);});
+    const btn=document.createElement('button');btn.className='btn-small';btn.textContent='OK';btn.onclick=()=>e5_check(d.id);
+    row.appendChild(inp);row.appendChild(btn);
+    center.appendChild(txt);center.appendChild(row);
+    const vis=document.createElement('div');vis.className='def-visual';vis.textContent=d.visual;
+    card.appendChild(left);card.appendChild(center);card.appendChild(vis);
+    list.appendChild(card);
+    d._input=inp;d._btn=btn;
+  });
+}
+function e5_check(id){
+  const d=e5_items.find(x=>x.id===id);if(!d||d.solved)return;
+  const val=d._input.value;if(!val.trim()){showToast('Écris ta réponse !');return;}
+  const ok=d.ans.some(a=>norm(a)===norm(val));
+  if(ok){
+    d.solved=true;d._input.value=d.ans[0];d._input.classList.add('inp-ok');
+    const card=document.getElementById('e5c-'+id);card.classList.add('correct');
+    card.querySelectorAll('.def-blank').forEach(b=>b.textContent=d.ans[0]);
+    d._btn.classList.add('hidden');
+    e5_score++;updateScoreBar('e5-score','e5-fill','e5-msg',e5_score,20);showToast('✓ ¡Muy bien! '+d.ans[0]);
+    if(e5_score===20)setTimeout(()=>showResult('e5-result','e5-r-emoji','e5-r-title','e5-r-sub',e5_score,20,e5_errors),600);
+  }else{
+    e5_errors++;d._input.classList.add('inp-ko');document.getElementById('e5c-'+id).classList.add('wrong');showToast('✗ Relis bien la définition !');
+    setTimeout(()=>{document.getElementById('e5c-'+id).classList.remove('wrong');d._input.classList.remove('inp-ko');d._input.value='';d._input.focus();},650);
+  }
+}
+function e5_checkAll(){e5_items.forEach(d=>{if(!d.solved&&d._input&&d._input.value.trim())e5_check(d.id);});}
+function e5_reset(){e5_score=0;e5_errors=0;document.getElementById('e5-result').classList.remove('show');e5_build();updateScoreBar('e5-score','e5-fill','e5-msg',0,20);}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+e1_init();
+e2_build();
+e3_build();
+e4_build();
+e5_build();
+
+
+// ══════════════════════════════════════════════════════
+</script>
+</body>
+</html>

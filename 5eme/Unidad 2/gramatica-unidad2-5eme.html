@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gramática · Unidad 2 · 5ème</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0;--purple-light:#F0EAF8;--purple-dark:#4A2880;
+  --sage:#3A8C6E;--sage-light:#E4F5EE;--sage-mid:#5CB891;--sage-dark:#276650;
+  --blue:#1E5FA8;--blue-light:#E6EEF9;--blue-dark:#15467F;
+  --teal:#0D7A6E;--teal-light:#E0F4F1;
+  --amber:#C47B1A;--amber-light:#FEF3E0;--amber-dark:#9A5E10;
+  --pink:#C0306A;--pink-light:#FBE7EF;--pink-dark:#92214E;
+  --red:#B83232;--red-light:#FDEAEA;
+  --green:#1E7A3C;--green-light:#E4F5EB;
+  --gray-50:#F5F7F5;--gray-100:#E8EDE8;--gray-200:#CDD4CC;--gray-300:#B4BDB3;
+  --gray-400:#8FA08E;--gray-600:#546053;--gray-900:#1A1F19;
+  --serif:'Fraunces',Georgia,serif;--sans:'DM Sans',sans-serif;
+  --radius:14px;--radius-sm:9px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--gray-50);color:var(--gray-900);min-height:100vh;line-height:1.45;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 45%,var(--sage) 100%);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(107,63,160,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:5px 12px;border-radius:99px;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.28);}
+
+/* SEQUENCE STRIP */
+.seq-strip{background:white;border-bottom:1px solid var(--gray-100);padding:1.1rem 1.5rem;}
+.seq-strip-inner{max-width:920px;margin:0 auto;}
+.seq-eyebrow{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:0.14em;text-transform:uppercase;}
+.seq-title{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--gray-900);margin-top:2px;}
+.seq-sub{font-size:13.5px;color:var(--gray-600);margin-top:3px;}
+
+/* TABS */
+.tabs-wrap{background:white;border-bottom:1px solid var(--gray-100);position:sticky;top:54px;z-index:90;}
+.tabs{max-width:920px;margin:0 auto;display:flex;gap:6px;padding:0.65rem 1.5rem;overflow-x:auto;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{flex-shrink:0;display:flex;align-items:center;gap:9px;padding:9px 15px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;font-family:var(--sans);}
+.tab:hover{border-color:var(--gray-300);background:var(--gray-50);}
+.tab-num{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+.tab-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;}
+.tab-name{font-size:13.5px;font-weight:600;color:var(--gray-900);}
+.tab-diff{font-size:10px;color:var(--gray-400);font-weight:500;}
+.tab.active{border-color:transparent;color:white;}
+.tab.active .tab-name,.tab.active .tab-diff{color:white;}
+.tab.active .tab-diff{opacity:0.85;}
+.tab.active .tab-num{background:rgba(255,255,255,0.25)!important;}
+
+.tab[data-c="1"] .tab-num{background:var(--sage);}
+.tab[data-c="2"] .tab-num{background:var(--amber);}
+.tab[data-c="3"] .tab-num{background:var(--blue);}
+.tab[data-c="4"] .tab-num{background:var(--pink);}
+.tab[data-c="1"].active{background:var(--sage);}
+.tab[data-c="2"].active{background:var(--amber);}
+.tab[data-c="3"].active{background:var(--blue);}
+.tab[data-c="4"].active{background:var(--pink);}
+
+/* MAIN */
+.main{max-width:920px;margin:0 auto;padding:1.5rem;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fade 0.25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ACTIVITY HEAD */
+.act-head{display:flex;align-items:center;gap:14px;margin-bottom:1.1rem;}
+.act-badge{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:700;color:white;flex-shrink:0;}
+.act-titles h2{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--gray-900);line-height:1.1;}
+.act-titles p{font-size:12.5px;color:var(--gray-400);margin-top:2px;}
+.diff-dots{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle;}
+.diff-dots i{width:7px;height:7px;border-radius:50%;background:var(--gray-200);display:inline-block;}
+
+.c1 .act-badge{background:var(--sage);} .c1 .diff-dots i.on{background:var(--sage);}
+.c2 .act-badge{background:var(--amber);} .c2 .diff-dots i.on{background:var(--amber);}
+.c3 .act-badge{background:var(--blue);} .c3 .diff-dots i.on{background:var(--blue);}
+.c4 .act-badge{background:var(--pink);} .c4 .diff-dots i.on{background:var(--pink);}
+
+/* RECUERDA */
+.recuerda{border-radius:var(--radius);padding:1.1rem 1.25rem;margin-bottom:1.25rem;border:1.5px solid;}
+.recuerda-tag{font-family:var(--serif);font-style:italic;font-size:15px;font-weight:600;margin-bottom:8px;}
+.recuerda p{font-size:13.5px;line-height:1.6;}
+.c1 .recuerda{background:var(--sage-light);border-color:var(--sage-mid);} .c1 .recuerda-tag,.c1 .recuerda strong{color:var(--sage-dark);}
+.c2 .recuerda{background:var(--amber-light);border-color:#EFC788;} .c2 .recuerda-tag,.c2 .recuerda strong{color:var(--amber-dark);}
+.c3 .recuerda{background:var(--blue-light);border-color:#A9C4E6;} .c3 .recuerda-tag,.c3 .recuerda strong{color:var(--blue-dark);}
+.c4 .recuerda{background:var(--pink-light);border-color:#EDB3C9;} .c4 .recuerda-tag,.c4 .recuerda strong{color:var(--pink-dark);}
+
+/* tables in recuerda */
+.conj-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px;background:white;border-radius:var(--radius-sm);overflow:hidden;}
+.conj-table th{font-family:var(--sans);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:white;padding:8px 10px;text-align:left;}
+.conj-table td{padding:7px 10px;border-top:1px solid var(--gray-100);}
+.conj-table td:first-child{color:var(--gray-600);}
+.conj-table td.f{font-weight:600;}
+.c1 .conj-table th{background:var(--sage);} .c1 .conj-table td.f{color:var(--sage-dark);}
+
+.end-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
+.end-col{background:white;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--gray-100);}
+.end-col h4{font-family:var(--sans);font-size:12px;font-weight:700;color:white;padding:7px 10px;letter-spacing:0.03em;}
+.end-col.ar h4{background:var(--blue);}
+.end-col.er h4{background:var(--sage);}
+.end-col.ir h4{background:var(--purple);}
+.end-col ul{list-style:none;padding:6px 10px 8px;}
+.end-col li{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;border-bottom:1px solid var(--gray-50);}
+.end-col li:last-child{border-bottom:none;}
+.end-col li span:first-child{color:var(--gray-400);}
+.end-col.ar li span:last-child{color:var(--blue-dark);font-weight:700;}
+.end-col.er li span:last-child{color:var(--sage-dark);font-weight:700;}
+.end-col.ir li span:last-child{color:var(--purple);font-weight:700;}
+
+.gen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px;margin-top:8px;font-size:14px;}
+.gen-grid div{background:white;border-radius:var(--radius-sm);padding:7px 12px;border:1px solid var(--gray-100);}
+.gen-grid b{color:var(--pink-dark);}
+.gen-grid .arrow{color:var(--gray-400);margin:0 6px;}
+
+.serestar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.se-box{background:white;border-radius:var(--radius-sm);padding:10px 14px;border:1px solid var(--gray-100);}
+.se-box h4{font-family:var(--serif);font-size:16px;font-weight:600;margin-bottom:5px;}
+.se-box.ser h4{color:var(--amber-dark);}
+.se-box.estar h4{color:var(--sage-dark);}
+.se-box ul{list-style:none;font-size:13px;color:var(--gray-600);}
+.se-box li{padding:2px 0;}
+.se-box li::before{content:"·";font-weight:700;margin-right:6px;color:var(--gray-300);}
+
+/* EXERCISE CARD */
+.ex-card{background:white;border-radius:var(--radius);border:1px solid var(--gray-100);padding:1.4rem;margin-bottom:1.1rem;}
+.ex-num{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+.ex-instr{font-size:13.5px;color:var(--gray-600);margin-bottom:1.1rem;}
+.c1 .ex-num{color:var(--sage-dark);}
+.c2 .ex-num{color:var(--amber-dark);}
+.c3 .ex-num{color:var(--blue-dark);}
+.c4 .ex-num{color:var(--pink-dark);}
+.bank{display:inline-block;background:var(--gray-50);border:1.5px dashed var(--gray-200);border-radius:99px;padding:5px 16px;font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:1rem;}
+
+/* item rows */
+.q-list{display:grid;gap:11px;}
+@media(min-width:640px){.q-list.two{grid-template-columns:1fr 1fr;gap:11px 26px;}}
+.q-item{display:flex;align-items:baseline;gap:9px;font-size:15px;line-height:1.7;}
+.q-n{font-size:12px;font-weight:700;color:var(--gray-300);min-width:18px;text-align:right;flex-shrink:0;padding-top:2px;}
+.q-body{flex:1;}
+.q-body .cue{color:var(--gray-400);font-style:italic;font-size:13px;}
+
+.fill{display:inline-block;border:none;border-bottom:2px solid var(--gray-300);background:transparent;font-family:var(--sans);font-size:15px;color:var(--purple);width:120px;text-align:center;outline:none;padding:2px 4px;transition:border-color 0.15s;}
+.fill:focus{border-color:var(--purple);}
+.fill.ok{border-color:var(--green);color:var(--green);}
+.fill.ko{border-color:var(--red);color:var(--red);}
+.fill.wide{width:100%;display:block;text-align:left;margin-top:5px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:9px 12px;background:var(--gray-50);}
+.fill.wide:focus{border-color:var(--purple);background:white;}
+.fill.wide.ok{border-color:var(--green);}
+.fill.wide.ko{border-color:var(--red);}
+
+.status{font-size:12.5px;margin-top:3px;display:none;}
+.status.show{display:block;}
+.status.ok{color:var(--green);}
+.status.ko{color:var(--red);}
+.mark{display:inline-block;width:15px;height:15px;vertical-align:-2px;margin-right:4px;}
+
+/* choice */
+.choice{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;}
+.opt{padding:7px 18px;border-radius:99px;border:1.5px solid var(--gray-200);background:var(--gray-50);cursor:pointer;font-family:var(--sans);font-size:14px;color:var(--gray-900);transition:all 0.13s;}
+.opt:hover{border-color:var(--gray-300);}
+.opt.sel{border-color:var(--purple);background:var(--purple-light);color:var(--purple-dark);font-weight:600;}
+.opt.ok{border-color:var(--green);background:var(--green-light);color:var(--green);font-weight:600;}
+.opt.ko{border-color:var(--red);background:var(--red-light);color:var(--red);}
+
+/* buttons + banner */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:1.2rem;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border:none;border-radius:99px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;color:white;}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05);}
+.c1 .btn-go{background:var(--sage);} .c2 .btn-go{background:var(--amber);} .c3 .btn-go{background:var(--blue);} .c4 .btn-go{background:var(--pink);}
+.btn-ghost{background:transparent;color:var(--gray-600);border:1.5px solid var(--gray-200);}
+.btn-ghost:hover{background:var(--gray-50);transform:none;}
+.banner{font-size:14px;font-weight:600;padding:10px 18px;border-radius:99px;display:none;}
+.banner.show{display:inline-block;}
+.banner.good{background:var(--green-light);color:var(--green);}
+.banner.mid{background:var(--amber-light);color:var(--amber-dark);}
+.banner.low{background:var(--red-light);color:var(--red);}
+
+.next-row{display:flex;justify-content:flex-end;margin-top:1.4rem;}
+.btn-next{background:var(--gray-900);}
+
+.footer{text-align:center;padding:2rem 1.5rem;font-size:12px;color:var(--gray-400);border-top:1px solid var(--gray-100);margin-top:1rem;}
+.footer strong{color:var(--sage-dark);}
+
+@media(max-width:560px){
+  .seq-title{font-size:21px;}
+  .tabs-wrap{top:52px;}
+  .q-list.two{grid-template-columns:1fr;}
+  .serestar-grid{grid-template-columns:1fr;}
+  .end-grid{grid-template-columns:1fr;}
+}
+
+/* ══════════════════════════════════════════════════
+   MIE:KIT — Banner principal + Banner nivel + Sidebar
+   Componente único, reutilizable en toda la plataforma
+═══════════════════════════════════════════════════ */
+.header{background:linear-gradient(135deg,var(--purple-dark),var(--purple) 50%,var(--sage));padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(75,40,128,0.18);}
+.header-logo{font-family:var(--serif);font-size:20px;color:white;letter-spacing:-0.02em;text-decoration:none;}
+.header-logo span{color:#C8F5E8;font-style:italic;}
+.nivel-badge{background:rgba(255,255,255,0.18);color:white;font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,0.25);}
+
+.level-bar{background:white;border-bottom:1px solid var(--gray-100);padding:0.55rem 1.25rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:52px;z-index:190;}
+.level-bar::-webkit-scrollbar{display:none;}
+.level-pill{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:8px;border:1.5px solid var(--gray-200);background:white;cursor:pointer;transition:all 0.15s;white-space:nowrap;min-width:76px;}
+.level-pill:hover{border-color:var(--sage-mid);background:var(--sage-light);}
+.level-pill.active{background:linear-gradient(135deg,var(--purple),var(--sage));border-color:transparent;color:white;box-shadow:0 2px 8px rgba(107,63,160,0.25);}
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+.pill-clase{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.2;}
+.pill-nivel{font-size:10px;color:var(--gray-400);font-weight:500;margin-top:1px;}
+.level-pill.active .pill-clase,.level-pill.active .pill-nivel{color:white;}
+
+.layout{display:flex;min-height:calc(100vh - 105px);align-items:flex-start;}
+
+.sidebar{width:236px;flex-shrink:0;background:white;border-right:1px solid var(--gray-100);padding:1rem 0;overflow-y:auto;position:sticky;top:108px;height:calc(100vh - 108px);}
+.sidebar-section{margin-bottom:1.25rem;}
+.sidebar-title{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:0.1em;text-transform:uppercase;padding:0 1.1rem;margin-bottom:5px;}
+.seq-item{display:flex;align-items:center;gap:9px;padding:8px 1.1rem;cursor:pointer;font-size:13px;color:var(--gray-600);transition:all 0.12s;border-left:3px solid transparent;line-height:1.3;text-decoration:none;}
+.seq-item:hover{background:var(--gray-50);color:var(--gray-900);}
+.seq-item.active{background:var(--sage-light);color:var(--sage-dark);border-left-color:var(--sage);font-weight:600;cursor:default;}
+.seq-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0.45;flex-shrink:0;}
+.seq-item.active .seq-dot{opacity:1;}
+
+.ex-sub{padding:0 0 4px 2.2rem;}
+.ex-sub-item{display:flex;align-items:center;gap:7px;padding:5px 1rem 5px 0;cursor:pointer;font-size:12px;color:var(--gray-500);transition:all 0.12s;border-left:2px solid transparent;text-decoration:none;}
+.ex-sub-item:hover{color:var(--purple);}
+.ex-sub-item.active{color:var(--purple);border-left-color:var(--purple);font-weight:600;}
+.ex-sub-item .ex-icon{font-size:12px;width:16px;text-align:center;}
+
+.main{flex:1;padding:1.5rem;overflow-y:auto;min-width:0;}
+
+@media(max-width:880px){
+  .layout{display:block;}
+  .sidebar{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--gray-100);}
+}
+
+.level-pill.disabled{opacity:0.42;cursor:not-allowed;}
+.level-pill.disabled:hover{border-color:var(--gray-200);background:white;}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-logo" href="index.html">mi <span>español</span></a>
+  <div class="nivel-badge">5ème · A1</div>
+</div>
+<div class="level-bar">
+  <div class="level-pill active"><span class="pill-clase">5ème</span><span class="pill-nivel">A1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">4ème</span><span class="pill-nivel">A1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">3ème</span><span class="pill-nivel">A2</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">2nde</span><span class="pill-nivel">A2+/B1</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">1ère</span><span class="pill-nivel">B1/B1+</span></div>
+  <div class="level-pill disabled" onclick="toast('Próximamente — todavía no disponible')"><span class="pill-clase">Tle</span><span class="pill-nivel">B1+/B2</span></div>
+</div>
+<div class="layout">
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Séquence 2 · ¿Quién soy? ¿Cómo soy?</div>
+    <a class="seq-item" href="u2-vocabulario.html"><div class="seq-dot"></div>Vocabulario</a>
+    <div class="seq-item active"><div class="seq-dot"></div>Gramática</div>
+    <div class="ex-sub">
+      <a class="ex-sub-item active" href="javascript:void(0)" onclick="mieTabGram(1,this)">1 · El verbo estar</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTabGram(2,this)">2 · Ser o estar</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTabGram(3,this)">3 · Verbos regulares</a>
+      <a class="ex-sub-item" href="javascript:void(0)" onclick="mieTabGram(4,this)">4 · Femenino y masculino</a>
+    </div>
+    <a class="seq-item" href="ce-uni2-5eme.html"><div class="seq-dot"></div>Comprensión lectora</a>
+    <a class="seq-item" href="CO1-Uni2-5eme.html"><div class="seq-dot"></div>Comprensión oral</a>
+    <a class="seq-item" href="expresion-escrita-Uni2.html"><div class="seq-dot"></div>Expresión escrita</a>
+    <a class="seq-item" href="expresion-oral-Uni2.html"><div class="seq-dot"></div>Expresión oral</a>
+    <a class="seq-item" href="evaluaciones-u2.html"><div class="seq-dot"></div>Evaluaciones</a>
+  </div>
+</div>
+<div class="main">
+
+<div class="seq-strip">
+  <div class="seq-strip-inner">
+    <div class="seq-eyebrow">Unidad 2 · Gramática · ¿Quién soy? ¿Cómo soy?</div>
+    <div class="seq-title">Practica y mejora tu español</div>
+    <div class="seq-sub">Cuatro actividades ordenadas de la más sencilla a la más completa. Trabaja cada una, comprueba tus respuestas y pasa a la siguiente.</div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" data-c="1" onclick="goTab(1)">
+      <span class="tab-num">1</span>
+      <span class="tab-text"><span class="tab-name">El verbo estar</span><span class="tab-diff">Nivel: fácil</span></span>
+    </button>
+    <button class="tab" data-c="2" onclick="goTab(2)">
+      <span class="tab-num">2</span>
+      <span class="tab-text"><span class="tab-name">Ser o estar</span><span class="tab-diff">Nivel: medio</span></span>
+    </button>
+    <button class="tab" data-c="3" onclick="goTab(3)">
+      <span class="tab-num">3</span>
+      <span class="tab-text"><span class="tab-name">Verbos regulares</span><span class="tab-diff">Nivel: medio-alto</span></span>
+    </button>
+    <button class="tab" data-c="4" onclick="goTab(4)">
+      <span class="tab-num">4</span>
+      <span class="tab-text"><span class="tab-name">Femenino y masculino</span><span class="tab-diff">Nivel: medio</span></span>
+    </button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ============ ACTIVIDAD 1 ============ -->
+<section class="tab-panel active c1" id="panel-1">
+  <div class="act-head">
+    <div class="act-badge">1</div>
+    <div class="act-titles">
+      <h2>El verbo estar<span class="diff-dots"><i class="on"></i><i></i><i></i><i></i></span></h2>
+      <p>Se usa para hablar de estados, emociones y ubicación.</p>
+    </div>
+  </div>
+
+  <div class="recuerda">
+    <div class="recuerda-tag">¡Recuerda!</div>
+    <p>El verbo <strong>estar</strong> habla de estados, emociones y dónde están las cosas. Se conjuga así:</p>
+    <table class="conj-table">
+      <tr><th>Pronombre</th><th>Estar</th></tr>
+      <tr><td>yo</td><td class="f">estoy</td></tr>
+      <tr><td>tú</td><td class="f">estás</td></tr>
+      <tr><td>él / ella / usted</td><td class="f">está</td></tr>
+      <tr><td>nosotros / as</td><td class="f">estamos</td></tr>
+      <tr><td>vosotros / as</td><td class="f">estáis</td></tr>
+      <tr><td>ellos / ellas / ustedes</td><td class="f">están</td></tr>
+    </table>
+  </div>
+
+  <!-- 1A -->
+  <div class="ex-card">
+    <div class="ex-num">A · Conjuga el verbo estar</div>
+    <div class="ex-instr">Completa las frases con la forma correcta de <strong>estar</strong>.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Yo <input class="fill" data-answer="estoy"> contento.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Tú <input class="fill" data-answer="estas"> cansado.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Él <input class="fill" data-answer="esta"> en casa.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Nosotros <input class="fill" data-answer="estamos"> en clase.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Vosotras <input class="fill" data-answer="estais"> nerviosas.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Ellos <input class="fill" data-answer="estan"> muy felices.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Mi hermana <input class="fill" data-answer="esta"> estudiando.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Mi perro <input class="fill" data-answer="esta"> en el jardín.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">Yo <input class="fill" data-answer="estoy"> de vacaciones.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Ustedes <input class="fill" data-answer="estan"> en el teatro.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a1a')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a1a')">Ver solución</button>
+      <span class="banner" id="bn-a1a"></span>
+    </div>
+  </div>
+
+  <!-- 1B -->
+  <div class="ex-card">
+    <div class="ex-num">B · Elige la forma correcta</div>
+    <div class="ex-instr">Marca la opción correcta de <strong>estar</strong> en cada frase.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Mi hermana ___ feliz.<div class="choice" data-correct="esta"><button class="opt">está</button><button class="opt">están</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Nosotros ___ en clase.<div class="choice" data-correct="estamos"><button class="opt">estoy</button><button class="opt">estamos</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Vosotros ___ nerviosos.<div class="choice" data-correct="estais"><button class="opt">estás</button><button class="opt">estáis</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">El gato ___ dormido.<div class="choice" data-correct="esta"><button class="opt">está</button><button class="opt">están</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Yo ___ en casa.<div class="choice" data-correct="estoy"><button class="opt">está</button><button class="opt">estoy</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Ellos ___ en el parque.<div class="choice" data-correct="estan"><button class="opt">estamos</button><button class="opt">están</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Tú ___ listo.<div class="choice" data-correct="estas"><button class="opt">estás</button><button class="opt">estáis</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Mi amiga ___ en París.<div class="choice" data-correct="esta"><button class="opt">estoy</button><button class="opt">está</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">La película ___ interesante.<div class="choice" data-correct="esta"><button class="opt">está</button><button class="opt">están</button></div><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Ustedes ___ aquí.<div class="choice" data-correct="estan"><button class="opt">estáis</button><button class="opt">están</button></div><div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a1b')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a1b')">Ver solución</button>
+      <span class="banner" id="bn-a1b"></span>
+    </div>
+  </div>
+
+  <div class="next-row"><button class="btn btn-next" onclick="goTab(2)">Siguiente: Ser o estar</button></div>
+</section>
+
+<!-- ============ ACTIVIDAD 2 ============ -->
+<section class="tab-panel c2" id="panel-2">
+  <div class="act-head">
+    <div class="act-badge">2</div>
+    <div class="act-titles">
+      <h2>Ser o estar<span class="diff-dots"><i class="on"></i><i class="on"></i><i></i><i></i></span></h2>
+      <p>Distingue cuándo usar ser y cuándo usar estar.</p>
+    </div>
+  </div>
+
+  <div class="recuerda">
+    <div class="recuerda-tag">¡Recuerda!</div>
+    <div class="serestar-grid">
+      <div class="se-box ser"><h4>Ser</h4><ul><li>identidad</li><li>origen</li><li>profesión</li><li>descripción física o de personalidad</li></ul></div>
+      <div class="se-box estar"><h4>Estar</h4><ul><li>estado</li><li>emociones</li><li>ubicación</li><li>acciones en desarrollo</li></ul></div>
+    </div>
+  </div>
+
+  <!-- 2A -->
+  <div class="ex-card">
+    <div class="ex-num">A · Elige ser o estar</div>
+    <div class="ex-instr">Completa las frases con <strong>ser</strong> o <strong>estar</strong> en la forma correcta.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Marta <input class="fill" data-answer="es"> española.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Yo <input class="fill" data-answer="estoy"> cansado hoy.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Mis padres <input class="fill" data-answer="son"> profesores.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">El libro <input class="fill" data-answer="esta"> en la mesa.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Pedro <input class="fill" data-answer="es"> alto y moreno.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Nosotros <input class="fill" data-answer="estamos"> en el cine.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">La fiesta <input class="fill" data-answer="es"> divertida.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Ella <input class="fill" data-answer="es"> de Argentina.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">El tiempo hoy <input class="fill" data-answer="esta"> soleado.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Los niños <input class="fill" data-answer="estan"> jugando.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a2a')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a2a')">Ver solución</button>
+      <span class="banner" id="bn-a2a"></span>
+    </div>
+  </div>
+
+  <!-- 2B -->
+  <div class="ex-card">
+    <div class="ex-num">B · Encuentra y corrige el error</div>
+    <div class="ex-instr">Cada frase tiene un error. Escríbela correctamente en el recuadro.</div>
+    <div class="q-list">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Yo soy cansado.<input class="fill wide" data-answer="yo estoy cansado" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Mi hermana está francesa.<input class="fill wide" data-answer="mi hermana es francesa" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Ustedes soy de México.<input class="fill wide" data-answer="ustedes son de mexico" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">El perro son grande.<input class="fill wide" data-answer="el perro es grande" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Estamos muy simpático.<input class="fill wide" data-answer="somos muy simpaticos" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Mi libro está interesante.<input class="fill wide" data-answer="mi libro es interesante" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Yo estoy profesor.<input class="fill wide" data-answer="yo soy profesor" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Ellos son en el parque.<input class="fill wide" data-answer="ellos estan en el parque" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">La comida está deliciosa.<input class="fill wide" data-answer="la comida es deliciosa|la comida esta deliciosa" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Tú eres triste hoy.<input class="fill wide" data-answer="tu estas triste hoy" placeholder="Escribe la frase corregida"><div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a2b')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a2b')">Ver solución</button>
+      <span class="banner" id="bn-a2b"></span>
+    </div>
+  </div>
+
+  <div class="next-row"><button class="btn btn-next" onclick="goTab(3)">Siguiente: Verbos regulares</button></div>
+</section>
+
+<!-- ============ ACTIVIDAD 3 ============ -->
+<section class="tab-panel c3" id="panel-3">
+  <div class="act-head">
+    <div class="act-badge">3</div>
+    <div class="act-titles">
+      <h2>Presente de los verbos regulares<span class="diff-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></h2>
+      <p>Conjuga verbos en -ar, -er e -ir para hablar de lo que hacemos cada día.</p>
+    </div>
+  </div>
+
+  <div class="recuerda">
+    <div class="recuerda-tag">¡Recuerda! — Solo las terminaciones</div>
+    <p>En presente, los verbos regulares terminan así:</p>
+    <div class="end-grid">
+      <div class="end-col ar">
+        <h4>Verbos en -ar</h4>
+        <ul>
+          <li><span>yo</span><span>-o</span></li>
+          <li><span>tú</span><span>-as</span></li>
+          <li><span>él / ella</span><span>-a</span></li>
+          <li><span>nosotros</span><span>-amos</span></li>
+          <li><span>vosotros</span><span>-áis</span></li>
+          <li><span>ellos</span><span>-an</span></li>
+        </ul>
+      </div>
+      <div class="end-col er">
+        <h4>Verbos en -er</h4>
+        <ul>
+          <li><span>yo</span><span>-o</span></li>
+          <li><span>tú</span><span>-es</span></li>
+          <li><span>él / ella</span><span>-e</span></li>
+          <li><span>nosotros</span><span>-emos</span></li>
+          <li><span>vosotros</span><span>-éis</span></li>
+          <li><span>ellos</span><span>-en</span></li>
+        </ul>
+      </div>
+      <div class="end-col ir">
+        <h4>Verbos en -ir</h4>
+        <ul>
+          <li><span>yo</span><span>-o</span></li>
+          <li><span>tú</span><span>-es</span></li>
+          <li><span>él / ella</span><span>-e</span></li>
+          <li><span>nosotros</span><span>-imos</span></li>
+          <li><span>vosotros</span><span>-ís</span></li>
+          <li><span>ellos</span><span>-en</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3A -->
+  <div class="ex-card">
+    <div class="ex-num">A · Conjuga los verbos entre paréntesis</div>
+    <div class="ex-instr">Completa las frases con la forma correcta del verbo en presente.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Yo <input class="fill" data-answer="hablo"> <span class="cue">(hablar)</span> español.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Tú <input class="fill" data-answer="comes"> <span class="cue">(comer)</span> pizza.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Él <input class="fill" data-answer="vive"> <span class="cue">(vivir)</span> en Madrid.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Nosotros <input class="fill" data-answer="hablamos"> <span class="cue">(hablar)</span> francés.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Vosotros <input class="fill" data-answer="comeis"> <span class="cue">(comer)</span> fruta.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Ellos <input class="fill" data-answer="viven"> <span class="cue">(vivir)</span> en Sevilla.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Mi hermana <input class="fill" data-answer="habla"> <span class="cue">(hablar)</span> con sus amigas.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Yo <input class="fill" data-answer="como"> <span class="cue">(comer)</span> en la cantina.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">Usted <input class="fill" data-answer="vive"> <span class="cue">(vivir)</span> cerca del colegio.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Mis amigos <input class="fill" data-answer="hablan"> <span class="cue">(hablar)</span> mucho.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a3a')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a3a')">Ver solución</button>
+      <span class="banner" id="bn-a3a"></span>
+    </div>
+  </div>
+
+  <!-- 3B -->
+  <div class="ex-card">
+    <div class="ex-num">B · Elige el verbo correcto</div>
+    <div class="ex-instr">Escribe el verbo correcto en la forma adecuada.</div>
+    <span class="bank">hablar — comer — vivir</span>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Mi familia <input class="fill" data-answer="vive"> en Valencia.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Yo <input class="fill" data-answer="hablo"> francés y español.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Nosotros <input class="fill" data-answer="comemos"> paella los domingos.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Ellos <input class="fill" data-answer="viven"> en un piso pequeño.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Tú <input class="fill" data-answer="hablas"> mucho en clase.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Mis amigos y yo <input class="fill" data-answer="vivimos"> juntos.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Usted <input class="fill" data-answer="habla"> muy bien.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">¿Qué <input class="fill" data-answer="comes"> tú para comer?<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">Mis padres <input class="fill" data-answer="comen"> en el hospital.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Yo <input class="fill" data-answer="hablo"> con mi mejor amiga.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a3b')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a3b')">Ver solución</button>
+      <span class="banner" id="bn-a3b"></span>
+    </div>
+  </div>
+
+  <!-- 3C -->
+  <div class="ex-card">
+    <div class="ex-num">C · Conjuga con variedad de verbos</div>
+    <div class="ex-instr">Completa con la forma correcta del verbo entre paréntesis.</div>
+    <div class="q-list">
+      <div class="q-item"><span class="q-n">0</span><div class="q-body">Yo <input class="fill" data-answer="amo"> a mi familia y a mis amigos. <span class="cue">(amar)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Tú <input class="fill" data-answer="corres"> muy rápido en el parque después del colegio. <span class="cue">(correr)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Él <input class="fill" data-answer="baila"> salsa muy bien porque le gusta la música. <span class="cue">(bailar)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">Nosotros <input class="fill" data-answer="trabajamos"> en una empresa internacional de Madrid. <span class="cue">(trabajar)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Vosotros <input class="fill" data-answer="escribis"> una postal a vuestro corresponsal español. <span class="cue">(escribir)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">Ellas <input class="fill" data-answer="beben"> agua durante la clase de deporte. <span class="cue">(beber)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Yo <input class="fill" data-answer="decido"> participar en el programa de intercambio este año. <span class="cue">(decidir)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Tú <input class="fill" data-answer="vendes"> ropa en una tienda del centro comercial. <span class="cue">(vender)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Ella <input class="fill" data-answer="ama"> a sus abuelos todos los fines de semana. <span class="cue">(amar)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">Nosotros <input class="fill" data-answer="escribimos"> una descripción física de nuestro mejor amigo. <span class="cue">(escribir)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Vosotras <input class="fill" data-answer="trabajais"> en una academia de danza porque os gusta mucho bailar. <span class="cue">(trabajar)</span><div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">11</span><div class="q-body">Ellos <input class="fill" data-answer="deciden"> beber más agua cuando hace calor. <span class="cue">(decidir)</span><div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a3c')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a3c')">Ver solución</button>
+      <span class="banner" id="bn-a3c"></span>
+    </div>
+  </div>
+
+  <div class="next-row"><button class="btn btn-next" onclick="goTab(4)">Siguiente: Femenino y masculino</button></div>
+</section>
+
+<!-- ============ ACTIVIDAD 4 ============ -->
+<section class="tab-panel c4" id="panel-4">
+  <div class="act-head">
+    <div class="act-badge">4</div>
+    <div class="act-titles">
+      <h2>Femenino y masculino<span class="diff-dots"><i class="on"></i><i class="on"></i><i></i><i></i></span></h2>
+      <p>Adjetivos y sustantivos que cambian según el género.</p>
+    </div>
+  </div>
+
+  <div class="recuerda">
+    <div class="recuerda-tag">¡Recuerda!</div>
+    <p>Muchos adjetivos y sustantivos cambian para el femenino:</p>
+    <div class="gen-grid">
+      <div>alto <span class="arrow">→</span> <b>alta</b></div>
+      <div>rubio <span class="arrow">→</span> <b>rubia</b></div>
+      <div>español <span class="arrow">→</span> <b>española</b></div>
+      <div>trabajador <span class="arrow">→</span> <b>trabajadora</b></div>
+    </div>
+    <p style="margin-top:8px;font-size:12.5px;">Atención: algunos no cambian: <b>joven</b>, <b>grande</b>, <b>amable</b>, <b>inteligente</b>.</p>
+  </div>
+
+  <!-- 4A -->
+  <div class="ex-card">
+    <div class="ex-num">A · Escribe el femenino o el masculino</div>
+    <div class="ex-instr">Completa con la forma femenina o masculina de la palabra entre paréntesis.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">La actriz es muy <span class="cue">(simpático)</span> <input class="fill" data-answer="simpatica">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Mi profesora es <span class="cue">(francés)</span> <input class="fill" data-answer="francesa">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">El chico es <span class="cue">(rubia)</span> <input class="fill" data-answer="rubio">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Mi prima es <span class="cue">(moreno)</span> <input class="fill" data-answer="morena">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">El hombre <span class="cue">(bajo)</span> <input class="fill" data-answer="bajo"> es mi tío.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Ella es muy <span class="cue">(trabajador)</span> <input class="fill" data-answer="trabajadora">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">Él está <span class="cue">(contenta)</span> <input class="fill" data-answer="contento"> hoy.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Mi vecino es <span class="cue">(alemana)</span> <input class="fill" data-answer="aleman">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">Mi hermano es <span class="cue">(alto)</span> <input class="fill" data-answer="alto">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">La <span class="cue">(joven)</span> <input class="fill" data-answer="joven"> es mi hermana.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a4a')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a4a')">Ver solución</button>
+      <span class="banner" id="bn-a4a"></span>
+    </div>
+  </div>
+
+  <!-- 4B -->
+  <div class="ex-card">
+    <div class="ex-num">B · Completa las frases</div>
+    <div class="ex-instr">Completa con la forma adecuada del adjetivo o sustantivo.</div>
+    <div class="q-list two">
+      <div class="q-item"><span class="q-n">1</span><div class="q-body">Pablo es alto y María es <input class="fill" data-answer="alta">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">2</span><div class="q-body">Mi abuelo es español y mi abuela es <input class="fill" data-answer="espanola">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">3</span><div class="q-body">El chico es rubio y la chica es <input class="fill" data-answer="rubia">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">4</span><div class="q-body">Mi amigo es simpático y mi amiga es <input class="fill" data-answer="simpatica">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">5</span><div class="q-body">El profesor es trabajador y la profesora es <input class="fill" data-answer="trabajadora">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">6</span><div class="q-body">Mi hermano es moreno y mi hermana es <input class="fill" data-answer="morena">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">7</span><div class="q-body">El niño es bajo y la niña es <input class="fill" data-answer="baja">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">8</span><div class="q-body">Mi tío es joven y mi tía es <input class="fill" data-answer="joven">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">9</span><div class="q-body">El gato es grande y la gata es <input class="fill" data-answer="grande">.<div class="status"></div></div></div>
+      <div class="q-item"><span class="q-n">10</span><div class="q-body">Mi primo es francés y mi prima es <input class="fill" data-answer="francesa">.<div class="status"></div></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn btn-go" onclick="check('a4b')">Comprobar</button>
+      <button class="btn btn-ghost" onclick="solve('a4b')">Ver solución</button>
+      <span class="banner" id="bn-a4b"></span>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="footer">
+  <strong>mi español</strong> · Lycée Français Jean Mermoz · Unidad 2 · 5ème · A1<br>
+  <span style="font-size:11px;margin-top:4px;display:block;">Gramática · ¿Quién soy? ¿Cómo soy? · Funciona sin conexión una vez cargado</span>
+</div>
+
+<script>
+// mapa de paneles A/B -> id del contenedor de tarjeta
+const CARD = {
+  a1a:'panel-1', a1b:'panel-1', a2a:'panel-2', a2b:'panel-2',
+  a3a:'panel-3', a3b:'panel-3', a3c:'panel-3', a4a:'panel-4', a4b:'panel-4'
+};
+
+function goTab(n){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('.tab[data-c="'+n+'"]').classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function norm(s){
+  return s.trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[.,;:¿?¡!]/g,'')
+    .replace(/\s+/g,' ');
+}
+
+const SVG_OK='<svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+const SVG_KO='<svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+
+// localiza la tarjeta concreta a partir del id del boton
+function cardOf(id){
+  const panel=document.getElementById(CARD[id]);
+  // las tarjetas estan en orden A,B dentro del panel; usamos el banner para ubicarla
+  return document.getElementById('bn-'+id).closest('.ex-card');
+}
+
+function accepted(el){
+  return (el.getAttribute('data-answer')||'').split('|').map(norm);
+}
+
+function check(id){
+  const card=cardOf(id);
+  let total=0, ok=0;
+
+  // inputs de rellenar
+  card.querySelectorAll('.fill').forEach(inp=>{
+    total++;
+    const st=inp.parentElement.querySelector('.status');
+    const val=norm(inp.value);
+    const good=val!=='' && accepted(inp).includes(val);
+    inp.classList.remove('ok','ko');
+    if(good){
+      ok++; inp.classList.add('ok');
+      st.className='status show ok'; st.innerHTML=SVG_OK+'Correcto';
+    } else {
+      inp.classList.add('ko');
+      st.className='status show ko'; st.innerHTML=SVG_KO+(val===''?'Falta tu respuesta':'Revisa esta respuesta');
+    }
+  });
+
+  // opciones (elegir)
+  card.querySelectorAll('.choice').forEach(ch=>{
+    total++;
+    const st=ch.parentElement.querySelector('.status');
+    const correct=norm(ch.getAttribute('data-correct'));
+    const sel=ch.querySelector('.opt.sel');
+    ch.querySelectorAll('.opt').forEach(o=>o.classList.remove('ok','ko'));
+    if(sel && norm(sel.textContent)===correct){
+      ok++; sel.classList.add('ok');
+      st.className='status show ok'; st.innerHTML=SVG_OK+'Correcto';
+    } else {
+      if(sel) sel.classList.add('ko');
+      st.className='status show ko'; st.innerHTML=SVG_KO+(sel?'Revisa tu elección':'Elige una opción');
+    }
+  });
+
+  banner(id, ok, total);
+}
+
+function solve(id){
+  const card=cardOf(id);
+  card.querySelectorAll('.fill').forEach(inp=>{
+    const first=(inp.getAttribute('data-answer')||'').split('|')[0];
+    inp.value=first;
+    inp.classList.remove('ko'); inp.classList.add('ok');
+    const st=inp.parentElement.querySelector('.status');
+    st.className='status show ok'; st.innerHTML=SVG_OK+'Solución';
+  });
+  card.querySelectorAll('.choice').forEach(ch=>{
+    const correct=norm(ch.getAttribute('data-correct'));
+    ch.querySelectorAll('.opt').forEach(o=>{
+      o.classList.remove('sel','ko','ok');
+      if(norm(o.textContent)===correct) o.classList.add('ok');
+    });
+    const st=ch.parentElement.querySelector('.status');
+    st.className='status show ok'; st.innerHTML=SVG_OK+'Solución';
+  });
+  const bn=document.getElementById('bn-'+id);
+  bn.className='banner show mid'; bn.textContent='Solución mostrada';
+}
+
+function banner(id, ok, total){
+  const bn=document.getElementById('bn-'+id);
+  bn.classList.add('show');
+  bn.classList.remove('good','mid','low');
+  const pct=ok/total;
+  if(ok===total) bn.classList.add('good');
+  else if(pct>=0.5) bn.classList.add('mid');
+  else bn.classList.add('low');
+  bn.textContent=ok+' / '+total+' correctas';
+}
+
+// seleccion de opciones
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('opt')){
+    const ch=e.target.parentElement;
+    ch.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel','ok','ko'));
+    e.target.classList.add('sel');
+    const st=ch.parentElement.querySelector('.status');
+    if(st) st.className='status';
+  }
+});
+
+// limpiar estado al editar un input
+document.querySelectorAll('.fill').forEach(inp=>{
+  inp.addEventListener('input',()=>{
+    inp.classList.remove('ok','ko');
+    const st=inp.parentElement.querySelector('.status');
+    if(st) st.className='status';
+  });
+});
+
+// ── MIE:KIT helpers ──
+function mieTabGram(n, el){
+  document.querySelectorAll('.ex-sub-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  goTab(n);
+}
+function toast(m){var t=document.getElementById('mie-toast');if(!t){var d=document.createElement('div');d.id='mie-toast';d.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:#1A1F19;color:white;padding:9px 18px;border-radius:99px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap;';document.body.appendChild(d);}var el=document.getElementById('mie-toast');el.textContent=m;el.style.opacity='1';el.style.transform='translateX(-50%) translateY(0)';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';el.style.transform='translateX(-50%) translateY(12px)';},2500);}
+
+</script>
+
+</div>
+</div>
+</body>
+</html>
